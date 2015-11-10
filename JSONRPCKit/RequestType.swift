@@ -21,6 +21,7 @@ public protocol RequestType {
 }
 
 public extension RequestType {
+    
     var params: AnyObject? {
         return nil
     }

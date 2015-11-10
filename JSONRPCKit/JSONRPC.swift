@@ -10,6 +10,7 @@ import Foundation
 import Result
 
 public class JSONRPC {
+    
     public let version = "2.0"
     
     private var requests: [[String: AnyObject]] = []

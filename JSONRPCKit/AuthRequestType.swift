@@ -9,6 +9,7 @@
 import Foundation
 
 public protocol AuthRequestType : RequestType {
+    
     var auth: String? { get }
 }
 
