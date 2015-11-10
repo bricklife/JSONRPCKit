@@ -4,3 +4,4 @@ JSONRPCKit is a JSON-RPC 2.0 library purely written in Swift. This library is hi
 ## ToDo
 - Add ID Generator
 - Add JSONRPCHTTPClient
+- Add Tests
