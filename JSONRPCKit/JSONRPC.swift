@@ -43,15 +43,9 @@ public class JSONRPC {
     }
     
     private func buildJSONFromRequest<T: RequestType>(request: T, id: String? = nil) -> [String: AnyObject] {
-        var json: [String: AnyObject] = [:]
+        var json: [String: AnyObject] = request.buildJSON()
         
         json["jsonrpc"] = self.version
-        
-        json["method"] = request.method
-        
-        if let params = request.params {
-            json["params"] = params
-        }
         
         if let id = id {
             json["id"] = id

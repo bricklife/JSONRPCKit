@@ -15,11 +15,25 @@ public protocol RequestType {
     
     var params: AnyObject? { get }
     
+    func buildJSON() -> [String: AnyObject]
+    
     func responseFromObject(object: AnyObject) -> Response?
 }
 
 public extension RequestType {
     var params: AnyObject? {
         return nil
+    }
+    
+    func buildJSON() -> [String: AnyObject] {
+        var json: [String: AnyObject] = [:]
+        
+        json["method"] = self.method
+        
+        if let params = self.params {
+            json["params"] = params
+        }
+        
+        return json
     }
 }

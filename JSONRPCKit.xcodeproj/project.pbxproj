@@ -8,16 +8,54 @@
 
 /* Begin PBXBuildFile section */
 		CB0079C91BF202400011DE14 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = CB0079C81BF202400011DE14 /* Cartfile */; };
-		CB82B9E01BF0C52200756CB1 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB82B9DF1BF0C52200756CB1 /* Result.framework */; };
+		CB36EB061BF241B2003A4BCA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB36EB051BF241B2003A4BCA /* AppDelegate.swift */; };
+		CB36EB081BF241B2003A4BCA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB36EB071BF241B2003A4BCA /* ViewController.swift */; };
+		CB36EB0B1BF241B2003A4BCA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB36EB091BF241B2003A4BCA /* Main.storyboard */; };
+		CB36EB0D1BF241B2003A4BCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB36EB0C1BF241B2003A4BCA /* Assets.xcassets */; };
+		CB36EB101BF241B2003A4BCA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB36EB0E1BF241B2003A4BCA /* LaunchScreen.storyboard */; };
+		CB36EB161BF242F4003A4BCA /* Cartfile.private in Resources */ = {isa = PBXBuildFile; fileRef = CB36EB151BF242F4003A4BCA /* Cartfile.private */; };
+		CB36EB191BF243C7003A4BCA /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB36EB171BF243C7003A4BCA /* Alamofire.framework */; };
+		CB36EB1A1BF243C7003A4BCA /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CB36EB171BF243C7003A4BCA /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CB36EB1B1BF243C7003A4BCA /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB36EB181BF243C7003A4BCA /* Result.framework */; };
+		CB36EB1C1BF243C7003A4BCA /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CB36EB181BF243C7003A4BCA /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CB36EB1E1BF243E9003A4BCA /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB36EB181BF243C7003A4BCA /* Result.framework */; };
+		CB36EB201BF24497003A4BCA /* MathService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB36EB1F1BF24497003A4BCA /* MathService.swift */; };
+		CB36EB221BF24F1E003A4BCA /* AuthRequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB36EB211BF24F1E003A4BCA /* AuthRequestType.swift */; };
 		CB82B9E21BF0C5CE00756CB1 /* JSONRPCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB82B9E11BF0C5CE00756CB1 /* JSONRPCError.swift */; };
 		CBB0C3521BF0B1D6006A7D41 /* JSONRPCKit.h in Headers */ = {isa = PBXBuildFile; fileRef = CBB0C3511BF0B1D6006A7D41 /* JSONRPCKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CBB0C35A1BF0B2D3006A7D41 /* RequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB0C3591BF0B2D3006A7D41 /* RequestType.swift */; };
 		CBB0C35C1BF0B6FD006A7D41 /* JSONRPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB0C35B1BF0B6FD006A7D41 /* JSONRPC.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		CB36EB1D1BF243C7003A4BCA /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				CB36EB1A1BF243C7003A4BCA /* Alamofire.framework in Embed Frameworks */,
+				CB36EB1C1BF243C7003A4BCA /* Result.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		CB0079C81BF202400011DE14 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
-		CB82B9DF1BF0C52200756CB1 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
+		CB36EB031BF241B2003A4BCA /* iOS Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB36EB051BF241B2003A4BCA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CB36EB071BF241B2003A4BCA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CB36EB0A1BF241B2003A4BCA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CB36EB0C1BF241B2003A4BCA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CB36EB0F1BF241B2003A4BCA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CB36EB111BF241B2003A4BCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CB36EB151BF242F4003A4BCA /* Cartfile.private */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile.private; sourceTree = "<group>"; };
+		CB36EB171BF243C7003A4BCA /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		CB36EB181BF243C7003A4BCA /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
+		CB36EB1F1BF24497003A4BCA /* MathService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathService.swift; sourceTree = "<group>"; };
+		CB36EB211BF24F1E003A4BCA /* AuthRequestType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthRequestType.swift; sourceTree = "<group>"; };
 		CB82B9E11BF0C5CE00756CB1 /* JSONRPCError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONRPCError.swift; sourceTree = "<group>"; };
 		CBB0C34E1BF0B1D6006A7D41 /* JSONRPCKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JSONRPCKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBB0C3511BF0B1D6006A7D41 /* JSONRPCKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONRPCKit.h; sourceTree = "<group>"; };
@@ -27,11 +65,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		CB36EB001BF241B2003A4BCA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB36EB191BF243C7003A4BCA /* Alamofire.framework in Frameworks */,
+				CB36EB1B1BF243C7003A4BCA /* Result.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CBB0C34A1BF0B1D6006A7D41 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB82B9E01BF0C52200756CB1 /* Result.framework in Frameworks */,
+				CB36EB1E1BF243E9003A4BCA /* Result.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,9 +89,25 @@
 			isa = PBXGroup;
 			children = (
 				CB0079C81BF202400011DE14 /* Cartfile */,
-				CB82B9DF1BF0C52200756CB1 /* Result.framework */,
+				CB36EB151BF242F4003A4BCA /* Cartfile.private */,
+				CB36EB171BF243C7003A4BCA /* Alamofire.framework */,
+				CB36EB181BF243C7003A4BCA /* Result.framework */,
 			);
 			name = Carthage;
+			sourceTree = "<group>";
+		};
+		CB36EB041BF241B2003A4BCA /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				CB36EB051BF241B2003A4BCA /* AppDelegate.swift */,
+				CB36EB071BF241B2003A4BCA /* ViewController.swift */,
+				CB36EB1F1BF24497003A4BCA /* MathService.swift */,
+				CB36EB091BF241B2003A4BCA /* Main.storyboard */,
+				CB36EB0C1BF241B2003A4BCA /* Assets.xcassets */,
+				CB36EB0E1BF241B2003A4BCA /* LaunchScreen.storyboard */,
+				CB36EB111BF241B2003A4BCA /* Info.plist */,
+			);
+			path = Example;
 			sourceTree = "<group>";
 		};
 		CBB0C3441BF0B1D5006A7D41 = {
@@ -52,6 +115,7 @@
 			children = (
 				CB0079C71BF202300011DE14 /* Carthage */,
 				CBB0C3501BF0B1D6006A7D41 /* JSONRPCKit */,
+				CB36EB041BF241B2003A4BCA /* Example */,
 				CBB0C34F1BF0B1D6006A7D41 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -60,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				CBB0C34E1BF0B1D6006A7D41 /* JSONRPCKit.framework */,
+				CB36EB031BF241B2003A4BCA /* iOS Example.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -69,6 +134,7 @@
 			children = (
 				CBB0C3511BF0B1D6006A7D41 /* JSONRPCKit.h */,
 				CBB0C3591BF0B2D3006A7D41 /* RequestType.swift */,
+				CB36EB211BF24F1E003A4BCA /* AuthRequestType.swift */,
 				CBB0C35B1BF0B6FD006A7D41 /* JSONRPC.swift */,
 				CB82B9E11BF0C5CE00756CB1 /* JSONRPCError.swift */,
 				CBB0C3531BF0B1D7006A7D41 /* Info.plist */,
@@ -90,6 +156,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		CB36EB021BF241B2003A4BCA /* iOS Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CB36EB141BF241B2003A4BCA /* Build configuration list for PBXNativeTarget "iOS Example" */;
+			buildPhases = (
+				CB36EAFF1BF241B2003A4BCA /* Sources */,
+				CB36EB001BF241B2003A4BCA /* Frameworks */,
+				CB36EB011BF241B2003A4BCA /* Resources */,
+				CB36EB1D1BF243C7003A4BCA /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "iOS Example";
+			productName = "iOS Example";
+			productReference = CB36EB031BF241B2003A4BCA /* iOS Example.app */;
+			productType = "com.apple.product-type.application";
+		};
 		CBB0C34D1BF0B1D6006A7D41 /* JSONRPCKit-iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CBB0C3561BF0B1D7006A7D41 /* Build configuration list for PBXNativeTarget "JSONRPCKit-iOS" */;
@@ -118,6 +202,9 @@
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Shinichiro Oba";
 				TargetAttributes = {
+					CB36EB021BF241B2003A4BCA = {
+						CreatedOnToolsVersion = 7.1;
+					};
 					CBB0C34D1BF0B1D6006A7D41 = {
 						CreatedOnToolsVersion = 7.1;
 					};
@@ -137,27 +224,50 @@
 			projectRoot = "";
 			targets = (
 				CBB0C34D1BF0B1D6006A7D41 /* JSONRPCKit-iOS */,
+				CB36EB021BF241B2003A4BCA /* iOS Example */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		CB36EB011BF241B2003A4BCA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB36EB101BF241B2003A4BCA /* LaunchScreen.storyboard in Resources */,
+				CB36EB0D1BF241B2003A4BCA /* Assets.xcassets in Resources */,
+				CB36EB0B1BF241B2003A4BCA /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CBB0C34C1BF0B1D6006A7D41 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				CB0079C91BF202400011DE14 /* Cartfile in Resources */,
+				CB36EB161BF242F4003A4BCA /* Cartfile.private in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		CB36EAFF1BF241B2003A4BCA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB36EB201BF24497003A4BCA /* MathService.swift in Sources */,
+				CB36EB081BF241B2003A4BCA /* ViewController.swift in Sources */,
+				CB36EB061BF241B2003A4BCA /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CBB0C3491BF0B1D6006A7D41 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				CB82B9E21BF0C5CE00756CB1 /* JSONRPCError.swift in Sources */,
+				CB36EB221BF24F1E003A4BCA /* AuthRequestType.swift in Sources */,
 				CBB0C35A1BF0B2D3006A7D41 /* RequestType.swift in Sources */,
 				CBB0C35C1BF0B6FD006A7D41 /* JSONRPC.swift in Sources */,
 			);
@@ -165,7 +275,58 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXVariantGroup section */
+		CB36EB091BF241B2003A4BCA /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CB36EB0A1BF241B2003A4BCA /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		CB36EB0E1BF241B2003A4BCA /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CB36EB0F1BF241B2003A4BCA /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		CB36EB121BF241B2003A4BCA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Example/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bricklife.ios.iOS-Example";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		CB36EB131BF241B2003A4BCA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Example/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bricklife.ios.iOS-Example";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		CBB0C3541BF0B1D7006A7D41 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -301,6 +462,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		CB36EB141BF241B2003A4BCA /* Build configuration list for PBXNativeTarget "iOS Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CB36EB121BF241B2003A4BCA /* Debug */,
+				CB36EB131BF241B2003A4BCA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		CBB0C3481BF0B1D6006A7D41 /* Build configuration list for PBXProject "JSONRPCKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
