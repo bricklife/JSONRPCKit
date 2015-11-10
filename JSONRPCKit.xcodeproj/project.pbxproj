@@ -21,11 +21,23 @@
 		CB36EB1E1BF243E9003A4BCA /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB36EB181BF243C7003A4BCA /* Result.framework */; };
 		CB36EB201BF24497003A4BCA /* MathService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB36EB1F1BF24497003A4BCA /* MathService.swift */; };
 		CB36EB221BF24F1E003A4BCA /* AuthRequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB36EB211BF24F1E003A4BCA /* AuthRequestType.swift */; };
+		CB36EB231BF25F45003A4BCA /* JSONRPCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB0C34E1BF0B1D6006A7D41 /* JSONRPCKit.framework */; };
+		CB36EB241BF25F45003A4BCA /* JSONRPCKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CBB0C34E1BF0B1D6006A7D41 /* JSONRPCKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CB82B9E21BF0C5CE00756CB1 /* JSONRPCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB82B9E11BF0C5CE00756CB1 /* JSONRPCError.swift */; };
 		CBB0C3521BF0B1D6006A7D41 /* JSONRPCKit.h in Headers */ = {isa = PBXBuildFile; fileRef = CBB0C3511BF0B1D6006A7D41 /* JSONRPCKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CBB0C35A1BF0B2D3006A7D41 /* RequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB0C3591BF0B2D3006A7D41 /* RequestType.swift */; };
 		CBB0C35C1BF0B6FD006A7D41 /* JSONRPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB0C35B1BF0B6FD006A7D41 /* JSONRPC.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CB36EB251BF25F45003A4BCA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CBB0C3451BF0B1D6006A7D41 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CBB0C34D1BF0B1D6006A7D41;
+			remoteInfo = "JSONRPCKit-iOS";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		CB36EB1D1BF243C7003A4BCA /* Embed Frameworks */ = {
@@ -34,6 +46,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				CB36EB241BF25F45003A4BCA /* JSONRPCKit.framework in Embed Frameworks */,
 				CB36EB1A1BF243C7003A4BCA /* Alamofire.framework in Embed Frameworks */,
 				CB36EB1C1BF243C7003A4BCA /* Result.framework in Embed Frameworks */,
 			);
@@ -69,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB36EB231BF25F45003A4BCA /* JSONRPCKit.framework in Frameworks */,
 				CB36EB191BF243C7003A4BCA /* Alamofire.framework in Frameworks */,
 				CB36EB1B1BF243C7003A4BCA /* Result.framework in Frameworks */,
 			);
@@ -168,6 +182,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				CB36EB261BF25F45003A4BCA /* PBXTargetDependency */,
 			);
 			name = "iOS Example";
 			productName = "iOS Example";
@@ -275,6 +290,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		CB36EB261BF25F45003A4BCA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CBB0C34D1BF0B1D6006A7D41 /* JSONRPCKit-iOS */;
+			targetProxy = CB36EB251BF25F45003A4BCA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		CB36EB091BF241B2003A4BCA /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -299,12 +322,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Example/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bricklife.ios.iOS-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -315,12 +338,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Example/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bricklife.ios.iOS-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
