@@ -14,18 +14,14 @@ public protocol RequestIdentifierGenerator {
     func next() -> IdentifierType
 }
 
-public class NumberIdentifierGenerator: RequestIdentifierGenerator {
+public struct RequestIdentifierGeneratorBox<T: Hashable>: RequestIdentifierGenerator {
+    private let _next: () -> T
     
-    private var identifier = 1
-    
-    public func next() -> Int {
-        return self.identifier++
+    public init<P: RequestIdentifierGenerator where P.IdentifierType == T>(_ generator: P) {
+        _next = generator.next
     }
-}
-
-public class GUIDGenerator: RequestIdentifierGenerator {
     
-    public func next() -> String {
-        return NSUUID().UUIDString
+    public func next() -> T {
+        return _next()
     }
 }

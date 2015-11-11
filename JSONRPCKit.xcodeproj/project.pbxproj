@@ -29,6 +29,7 @@
 		CBB0C35C1BF0B6FD006A7D41 /* JSONRPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB0C35B1BF0B6FD006A7D41 /* JSONRPC.swift */; };
 		CBB4161A1BF3541F00B4DB0E /* BatchRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB416181BF3534A00B4DB0E /* BatchRequestViewController.swift */; };
 		CBB4161C1BF3599D00B4DB0E /* RequestIdentifierGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB4161B1BF3599D00B4DB0E /* RequestIdentifierGenerator.swift */; };
+		CBB4161E1BF370EA00B4DB0E /* NumberIdentifierGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB4161D1BF370EA00B4DB0E /* NumberIdentifierGenerator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		CBB0C35B1BF0B6FD006A7D41 /* JSONRPC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONRPC.swift; sourceTree = "<group>"; };
 		CBB416181BF3534A00B4DB0E /* BatchRequestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchRequestViewController.swift; sourceTree = "<group>"; };
 		CBB4161B1BF3599D00B4DB0E /* RequestIdentifierGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestIdentifierGenerator.swift; sourceTree = "<group>"; };
+		CBB4161D1BF370EA00B4DB0E /* NumberIdentifierGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberIdentifierGenerator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +159,7 @@
 				CBB0C35B1BF0B6FD006A7D41 /* JSONRPC.swift */,
 				CB82B9E11BF0C5CE00756CB1 /* JSONRPCError.swift */,
 				CBB4161B1BF3599D00B4DB0E /* RequestIdentifierGenerator.swift */,
+				CBB4161D1BF370EA00B4DB0E /* NumberIdentifierGenerator.swift */,
 				CBB0C3531BF0B1D7006A7D41 /* Info.plist */,
 			);
 			path = JSONRPCKit;
@@ -289,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB82B9E21BF0C5CE00756CB1 /* JSONRPCError.swift in Sources */,
+				CBB4161E1BF370EA00B4DB0E /* NumberIdentifierGenerator.swift in Sources */,
 				CBB4161C1BF3599D00B4DB0E /* RequestIdentifierGenerator.swift in Sources */,
 				CB36EB221BF24F1E003A4BCA /* AuthRequestType.swift in Sources */,
 				CBB0C35A1BF0B2D3006A7D41 /* RequestType.swift in Sources */,
