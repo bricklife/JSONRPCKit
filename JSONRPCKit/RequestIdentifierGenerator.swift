@@ -9,19 +9,5 @@
 import Foundation
 
 public protocol RequestIdentifierGenerator {
-    typealias IdentifierType: Hashable
-    
-    func next() -> IdentifierType
-}
-
-public struct RequestIdentifierGeneratorBox<T: Hashable>: RequestIdentifierGenerator {
-    private let _next: () -> T
-    
-    public init<P: RequestIdentifierGenerator where P.IdentifierType == T>(_ generator: P) {
-        _next = generator.next
-    }
-    
-    public func next() -> T {
-        return _next()
-    }
+    func next() -> RequestIdentifier
 }
