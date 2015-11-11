@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		CB0079C91BF202400011DE14 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = CB0079C81BF202400011DE14 /* Cartfile */; };
 		CB36EB061BF241B2003A4BCA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB36EB051BF241B2003A4BCA /* AppDelegate.swift */; };
-		CB36EB081BF241B2003A4BCA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB36EB071BF241B2003A4BCA /* ViewController.swift */; };
+		CB36EB081BF241B2003A4BCA /* SingleRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB36EB071BF241B2003A4BCA /* SingleRequestViewController.swift */; };
 		CB36EB0B1BF241B2003A4BCA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB36EB091BF241B2003A4BCA /* Main.storyboard */; };
 		CB36EB0D1BF241B2003A4BCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB36EB0C1BF241B2003A4BCA /* Assets.xcassets */; };
 		CB36EB101BF241B2003A4BCA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB36EB0E1BF241B2003A4BCA /* LaunchScreen.storyboard */; };
@@ -27,6 +27,7 @@
 		CBB0C3521BF0B1D6006A7D41 /* JSONRPCKit.h in Headers */ = {isa = PBXBuildFile; fileRef = CBB0C3511BF0B1D6006A7D41 /* JSONRPCKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CBB0C35A1BF0B2D3006A7D41 /* RequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB0C3591BF0B2D3006A7D41 /* RequestType.swift */; };
 		CBB0C35C1BF0B6FD006A7D41 /* JSONRPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB0C35B1BF0B6FD006A7D41 /* JSONRPC.swift */; };
+		CBB4161A1BF3541F00B4DB0E /* BatchRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB416181BF3534A00B4DB0E /* BatchRequestViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,7 +60,7 @@
 		CB0079C81BF202400011DE14 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		CB36EB031BF241B2003A4BCA /* iOS Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB36EB051BF241B2003A4BCA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CB36EB071BF241B2003A4BCA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CB36EB071BF241B2003A4BCA /* SingleRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRequestViewController.swift; sourceTree = "<group>"; };
 		CB36EB0A1BF241B2003A4BCA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CB36EB0C1BF241B2003A4BCA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CB36EB0F1BF241B2003A4BCA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -75,6 +76,7 @@
 		CBB0C3531BF0B1D7006A7D41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CBB0C3591BF0B2D3006A7D41 /* RequestType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestType.swift; sourceTree = "<group>"; };
 		CBB0C35B1BF0B6FD006A7D41 /* JSONRPC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONRPC.swift; sourceTree = "<group>"; };
+		CBB416181BF3534A00B4DB0E /* BatchRequestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchRequestViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,7 +116,8 @@
 			isa = PBXGroup;
 			children = (
 				CB36EB051BF241B2003A4BCA /* AppDelegate.swift */,
-				CB36EB071BF241B2003A4BCA /* ViewController.swift */,
+				CB36EB071BF241B2003A4BCA /* SingleRequestViewController.swift */,
+				CBB416181BF3534A00B4DB0E /* BatchRequestViewController.swift */,
 				CB36EB1F1BF24497003A4BCA /* MathService.swift */,
 				CB36EB091BF241B2003A4BCA /* Main.storyboard */,
 				CB36EB0C1BF241B2003A4BCA /* Assets.xcassets */,
@@ -127,9 +130,9 @@
 		CBB0C3441BF0B1D5006A7D41 = {
 			isa = PBXGroup;
 			children = (
-				CB0079C71BF202300011DE14 /* Carthage */,
 				CBB0C3501BF0B1D6006A7D41 /* JSONRPCKit */,
 				CB36EB041BF241B2003A4BCA /* Example */,
+				CB0079C71BF202300011DE14 /* Carthage */,
 				CBB0C34F1BF0B1D6006A7D41 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -272,7 +275,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB36EB201BF24497003A4BCA /* MathService.swift in Sources */,
-				CB36EB081BF241B2003A4BCA /* ViewController.swift in Sources */,
+				CB36EB081BF241B2003A4BCA /* SingleRequestViewController.swift in Sources */,
+				CBB4161A1BF3541F00B4DB0E /* BatchRequestViewController.swift in Sources */,
 				CB36EB061BF241B2003A4BCA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -492,6 +496,7 @@
 				CB36EB131BF241B2003A4BCA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CBB0C3481BF0B1D6006A7D41 /* Build configuration list for PBXProject "JSONRPCKit" */ = {
 			isa = XCConfigurationList;

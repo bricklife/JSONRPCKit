@@ -8,14 +8,46 @@
 
 import Foundation
 import JSONRPCKit
+import Alamofire
 
 // https://jsonrpcx.org/AuthX/Cookbook
+
+class MathServiceAPI {
+    
+    static let userName = "jenolan"
+    static let APIKey = "qIQlg9S28mbK2Iolm8yffr97Yp6zMxiF"
+    
+    static func request(jsonrpc: JSONRPC) {
+        guard let requestJSON = try? jsonrpc.buildRequestJSON() else {
+            return
+        }
+        
+        print("request:")
+        print(requestJSON)
+        
+        let URLRequest = NSMutableURLRequest()
+        URLRequest.URL = NSURL(string: "https://jsonrpcx.org/api/authUserServer.php")!
+        URLRequest.HTTPMethod = "POST"
+        URLRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        URLRequest.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(requestJSON, options: [])
+        
+        Alamofire.request(URLRequest)
+            .responseJSON { response in
+                if let responseJSON = response.result.value {
+                    print("response:")
+                    print(responseJSON)
+                    try! jsonrpc.parseResponseJSON(responseJSON)
+                }
+        }
+    }
+}
 
 struct Subtract: AuthRequestType {
     typealias Response = Int
     
     let userName: String
     let APIKey: String
+    
     let minuend: Int
     let subtrahend: Int
     
@@ -25,6 +57,32 @@ struct Subtract: AuthRequestType {
     
     var params: AnyObject? {
         return [self.minuend, self.subtrahend]
+    }
+    
+    var auth: String? {
+        return "\(self.userName)|\(self.APIKey)"
+    }
+    
+    func responseFromObject(object: AnyObject) -> Response? {
+        return object as? Int
+    }
+}
+
+struct Multiply: AuthRequestType {
+    typealias Response = Int
+    
+    let userName: String
+    let APIKey: String
+    
+    let multiplicand: Int
+    let multiplier: Int
+    
+    var method: String {
+        return "multiply"
+    }
+    
+    var params: AnyObject? {
+        return [self.multiplicand, self.multiplier]
     }
     
     var auth: String? {
