@@ -9,6 +9,16 @@
 import UIKit
 import JSONRPCKit
 
+public class StringIdentifierGenerator: RequestIdentifierGenerator {
+    
+    private var currentIdentifier = 1
+    
+    public func next() -> RequestIdentifier {
+        return .StringType("\(self.currentIdentifier++)")
+    }
+}
+
+
 class SingleRequestViewController: UIViewController {
     
     @IBOutlet weak var firstTextField: UITextField!
@@ -16,7 +26,7 @@ class SingleRequestViewController: UIViewController {
     @IBOutlet weak var subtractAnswerLabel: UILabel!
     
     func subtract(first: Int, _ second: Int) {
-        let jsonrpc = JSONRPC()
+        let jsonrpc = JSONRPC(identifierGenerator: StringIdentifierGenerator())
         
         let subtractRequest = Subtract(
             userName: MathServiceAPI.userName,

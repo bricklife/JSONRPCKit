@@ -23,11 +23,14 @@
 		CB36EB221BF24F1E003A4BCA /* AuthRequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB36EB211BF24F1E003A4BCA /* AuthRequestType.swift */; };
 		CB36EB231BF25F45003A4BCA /* JSONRPCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB0C34E1BF0B1D6006A7D41 /* JSONRPCKit.framework */; };
 		CB36EB241BF25F45003A4BCA /* JSONRPCKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CBB0C34E1BF0B1D6006A7D41 /* JSONRPCKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CB36EB281BF39028003A4BCA /* RequestIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB36EB271BF39028003A4BCA /* RequestIdentifier.swift */; };
 		CB82B9E21BF0C5CE00756CB1 /* JSONRPCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB82B9E11BF0C5CE00756CB1 /* JSONRPCError.swift */; };
 		CBB0C3521BF0B1D6006A7D41 /* JSONRPCKit.h in Headers */ = {isa = PBXBuildFile; fileRef = CBB0C3511BF0B1D6006A7D41 /* JSONRPCKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CBB0C35A1BF0B2D3006A7D41 /* RequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB0C3591BF0B2D3006A7D41 /* RequestType.swift */; };
 		CBB0C35C1BF0B6FD006A7D41 /* JSONRPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB0C35B1BF0B6FD006A7D41 /* JSONRPC.swift */; };
 		CBB4161A1BF3541F00B4DB0E /* BatchRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB416181BF3534A00B4DB0E /* BatchRequestViewController.swift */; };
+		CBB4161C1BF3599D00B4DB0E /* RequestIdentifierGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB4161B1BF3599D00B4DB0E /* RequestIdentifierGenerator.swift */; };
+		CBB4161E1BF370EA00B4DB0E /* NumberIdentifierGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB4161D1BF370EA00B4DB0E /* NumberIdentifierGenerator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +73,7 @@
 		CB36EB181BF243C7003A4BCA /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		CB36EB1F1BF24497003A4BCA /* MathService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathService.swift; sourceTree = "<group>"; };
 		CB36EB211BF24F1E003A4BCA /* AuthRequestType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthRequestType.swift; sourceTree = "<group>"; };
+		CB36EB271BF39028003A4BCA /* RequestIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestIdentifier.swift; sourceTree = "<group>"; };
 		CB82B9E11BF0C5CE00756CB1 /* JSONRPCError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONRPCError.swift; sourceTree = "<group>"; };
 		CBB0C34E1BF0B1D6006A7D41 /* JSONRPCKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JSONRPCKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBB0C3511BF0B1D6006A7D41 /* JSONRPCKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONRPCKit.h; sourceTree = "<group>"; };
@@ -77,6 +81,8 @@
 		CBB0C3591BF0B2D3006A7D41 /* RequestType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestType.swift; sourceTree = "<group>"; };
 		CBB0C35B1BF0B6FD006A7D41 /* JSONRPC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONRPC.swift; sourceTree = "<group>"; };
 		CBB416181BF3534A00B4DB0E /* BatchRequestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchRequestViewController.swift; sourceTree = "<group>"; };
+		CBB4161B1BF3599D00B4DB0E /* RequestIdentifierGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestIdentifierGenerator.swift; sourceTree = "<group>"; };
+		CBB4161D1BF370EA00B4DB0E /* NumberIdentifierGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberIdentifierGenerator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +160,9 @@
 				CB36EB211BF24F1E003A4BCA /* AuthRequestType.swift */,
 				CBB0C35B1BF0B6FD006A7D41 /* JSONRPC.swift */,
 				CB82B9E11BF0C5CE00756CB1 /* JSONRPCError.swift */,
+				CB36EB271BF39028003A4BCA /* RequestIdentifier.swift */,
+				CBB4161B1BF3599D00B4DB0E /* RequestIdentifierGenerator.swift */,
+				CBB4161D1BF370EA00B4DB0E /* NumberIdentifierGenerator.swift */,
 				CBB0C3531BF0B1D7006A7D41 /* Info.plist */,
 			);
 			path = JSONRPCKit;
@@ -286,6 +295,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB82B9E21BF0C5CE00756CB1 /* JSONRPCError.swift in Sources */,
+				CBB4161E1BF370EA00B4DB0E /* NumberIdentifierGenerator.swift in Sources */,
+				CB36EB281BF39028003A4BCA /* RequestIdentifier.swift in Sources */,
+				CBB4161C1BF3599D00B4DB0E /* RequestIdentifierGenerator.swift in Sources */,
 				CB36EB221BF24F1E003A4BCA /* AuthRequestType.swift in Sources */,
 				CBB0C35A1BF0B2D3006A7D41 /* RequestType.swift in Sources */,
 				CBB0C35C1BF0B6FD006A7D41 /* JSONRPC.swift in Sources */,
