@@ -9,5 +9,6 @@
 import Foundation
 
 public protocol RequestIdentifierGenerator {
+    
     func next() -> RequestIdentifier
 }
