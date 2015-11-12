@@ -14,7 +14,7 @@ public class StringIdentifierGenerator: RequestIdentifierGenerator {
     private var currentIdentifier = 1
     
     public func next() -> RequestIdentifier {
-        return .StringType("\(self.currentIdentifier++)")
+        return .StringIdentifier("id\(self.currentIdentifier++)")
     }
 }
 

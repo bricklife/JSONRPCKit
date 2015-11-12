@@ -27,21 +27,21 @@ public class JSONRPC {
     }
 
     public func addRequest<T: RequestType>(request: T, handler: (Result<T.Response, JSONRPCError>) -> Void) {
-        let id = self.identifierGenerator.next()
+        let identifier = self.identifierGenerator.next()
         
-        self.requests.append(self.buildJSONFromRequest(request, id: id))
+        self.requests.append(self.buildJSONFromRequest(request, identifier: identifier))
         
-        self.handlers[id] = { (json: [String: AnyObject]) -> Void in
+        self.handlers[identifier] = { (json: [String: AnyObject]) -> Void in
             if let result = json["result"] {
                 if let response = request.responseFromObject(result) {
                     handler(.Success(response))
                 } else {
-                    handler(.Failure(JSONRPCError.InvalidResult(result)))
+                    handler(.Failure(.InvalidResult(result)))
                 }
             } else if let error = json["error"] {
-                handler(.Failure(JSONRPCError.ErrorRequest(error)))
+                handler(.Failure(.ErrorRequest(error)))
             } else {
-                handler(.Failure(JSONRPCError.InvalidResponse(json)))
+                handler(.Failure(.InvalidResponse(json)))
             }
         }
     }
@@ -50,18 +50,13 @@ public class JSONRPC {
         self.requests.append(self.buildJSONFromRequest(request))
     }
     
-    private func buildJSONFromRequest<T: RequestType>(request: T, id: RequestIdentifier? = nil) -> [String: AnyObject] {
+    private func buildJSONFromRequest<T: RequestType>(request: T, identifier: RequestIdentifier? = nil) -> [String: AnyObject] {
         var json: [String: AnyObject] = request.buildJSON()
         
         json["jsonrpc"] = self.version
         
-        if let id = id {
-            switch id {
-            case .StringType(let string):
-                json["id"] = string
-            case .NumberType(let number):
-                json["id"] = number
-            }
+        if let identifier = identifier {
+            json["id"] = identifier.value
         }
         
         return json
@@ -90,10 +85,11 @@ public class JSONRPC {
             throw JSONRPCError.UnsupportedVersion(version)
         }
         
-        if let id = json["id"] as? String, handle = self.handlers[.StringType(id)] {
-            handle(json)
+        guard let id = json["id"] else {
+            return
         }
-        if let id = json["id"] as? Int, handle = self.handlers[.NumberType(id)] {
+        
+        if let identifier = RequestIdentifier(value: id), handle = self.handlers[identifier] {
             handle(json)
         }
     }

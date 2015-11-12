@@ -13,6 +13,6 @@ public class NumberIdentifierGenerator: RequestIdentifierGenerator {
     private var currentIdentifier = 1
     
     public func next() -> RequestIdentifier {
-        return .NumberType(self.currentIdentifier++)
+        return .NumberIdentifier(self.currentIdentifier++)
     }
 }

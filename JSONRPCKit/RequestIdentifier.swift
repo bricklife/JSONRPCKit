@@ -8,27 +8,61 @@
 
 import Foundation
 
-public enum RequestIdentifier: Hashable {
-    case NumberType(Int)
-    case StringType(String)
+public enum RequestIdentifier {
+    case NumberIdentifier(Int)
+    case StringIdentifier(String)
+}
+
+extension RequestIdentifier {
+    
+    public init(string: String) {
+        self = .StringIdentifier(string)
+    }
+
+    public init(number: Int) {
+        self = .NumberIdentifier(number)
+    }
+    
+    public init?(value: AnyObject) {
+        switch value {
+        case let string as String:
+            self = .StringIdentifier(string)
+        case let number as Int:
+            self = .NumberIdentifier(number)
+        default:
+            return nil
+        }
+    }
+    
+    public var value: AnyObject {
+        switch self {
+        case NumberIdentifier(let number):
+            return number
+        case StringIdentifier(let string):
+            return string
+        }
+    }
+}
+
+extension RequestIdentifier: Hashable {
     
     public var hashValue: Int {
         switch self {
-        case NumberType(let number):
+        case NumberIdentifier(let number):
             return number
-        case StringType(let string):
+        case StringIdentifier(let string):
             return string.hashValue
         }
     }
 }
 
 public func ==(lhs: RequestIdentifier, rhs: RequestIdentifier) -> Bool {
-    if case let (.NumberType(lnumber), .NumberType(rnumber)) = (lhs, rhs) {
-        return lnumber == rnumber
+    if case let (.NumberIdentifier(left), .NumberIdentifier(right)) = (lhs, rhs) {
+        return left == right
     }
     
-    if case let (.StringType(lstring), .StringType(rstring)) = (lhs, rhs) {
-        return lstring == rstring
+    if case let (.StringIdentifier(left), .StringIdentifier(right)) = (lhs, rhs) {
+        return left == right
     }
     
     return false
