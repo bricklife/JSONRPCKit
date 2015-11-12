@@ -15,20 +15,20 @@ public enum RequestIdentifier {
 
 extension RequestIdentifier {
     
-    public init(string: String) {
-        self = .StringIdentifier(string)
-    }
-
     public init(number: Int) {
         self = .NumberIdentifier(number)
     }
     
+    public init(string: String) {
+        self = .StringIdentifier(string)
+    }
+
     public init?(value: AnyObject) {
         switch value {
-        case let string as String:
-            self = .StringIdentifier(string)
         case let number as Int:
             self = .NumberIdentifier(number)
+        case let string as String:
+            self = .StringIdentifier(string)
         default:
             return nil
         }
