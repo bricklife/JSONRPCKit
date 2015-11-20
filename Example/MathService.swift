@@ -17,13 +17,12 @@ class MathServiceAPI {
     static let userName = "jenolan"
     static let APIKey = "qIQlg9S28mbK2Iolm8yffr97Yp6zMxiF"
     
-    static func request(jsonrpc: JSONRPC) {
+    static func request(jsonrpc: JSONRPC, errorHandler: ((error: NSError) -> Void)? = nil) {
         guard let requestJSON = try? jsonrpc.buildRequestJSON() else {
             return
         }
         
-        print("request:")
-        print(requestJSON)
+        print("request:", requestJSON, separator: "\n")
         
         let URLRequest = NSMutableURLRequest()
         URLRequest.URL = NSURL(string: "https://jsonrpcx.org/api/authUserServer.php")!
@@ -33,10 +32,20 @@ class MathServiceAPI {
         
         Alamofire.request(URLRequest)
             .responseJSON { response in
-                if let responseJSON = response.result.value {
-                    print("response:")
-                    print(responseJSON)
-                    try! jsonrpc.parseResponseJSON(responseJSON)
+                switch response.result {
+                case .Success(let responseJSON):
+                    print("response:", responseJSON, separator: "\n")
+                    
+                    do {
+                        try jsonrpc.parseResponseJSON(responseJSON)
+                    } catch {}
+                    
+                case .Failure(let error):
+                    print("error:", error, separator: "\n")
+                    
+                    if let errorHandler = errorHandler {
+                        errorHandler(error: error)
+                    }
                 }
         }
     }

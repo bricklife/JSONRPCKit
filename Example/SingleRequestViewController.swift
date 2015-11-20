@@ -50,7 +50,11 @@ class SingleRequestViewController: UIViewController {
             }
         }
         
-        MathServiceAPI.request(jsonrpc)
+        MathServiceAPI.request(jsonrpc) { [weak self] error in
+            let alert = UIAlertController(title: error.localizedDescription, message: error.localizedRecoverySuggestion, preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            self?.presentViewController(alert, animated: true, completion: nil)
+        }
     }
     
     @IBAction func didPush(sender: AnyObject) {
