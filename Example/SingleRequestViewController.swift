@@ -28,19 +28,25 @@ class SingleRequestViewController: UIViewController {
     func subtract(first: Int, _ second: Int) {
         let jsonrpc = JSONRPC(identifierGenerator: StringIdentifierGenerator())
         
-        let subtractRequest = Subtract(
+        let subtractRequest = Divide(
             userName: MathServiceAPI.userName,
             APIKey: MathServiceAPI.APIKey,
-            minuend: first,
-            subtrahend: second
+            dividend: first,
+            divisor: second
         )
         
         jsonrpc.addRequest(subtractRequest) { [weak self] result in
             switch result {
             case .Success(let answer):
                 self?.subtractAnswerLabel.text = "\(answer)"
-            case .Failure:
+                
+            case .Failure(let error):
                 self?.subtractAnswerLabel.text = "?"
+                if case .RequestError(_, let message, let data as String) = error {
+                    let alert = UIAlertController(title: message, message: data, preferredStyle: .Alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                    self?.presentViewController(alert, animated: true, completion: nil)
+                }
             }
         }
         

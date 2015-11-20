@@ -64,7 +64,7 @@ struct Subtract: AuthRequestType {
     }
     
     func responseFromObject(object: AnyObject) -> Response? {
-        return object as? Int
+        return object as? Response
     }
 }
 
@@ -90,6 +90,32 @@ struct Multiply: AuthRequestType {
     }
     
     func responseFromObject(object: AnyObject) -> Response? {
-        return object as? Int
+        return object as? Response
+    }
+}
+
+struct Divide: AuthRequestType {
+    typealias Response = Float
+    
+    let userName: String
+    let APIKey: String
+    
+    let dividend: Int
+    let divisor: Int
+    
+    var method: String {
+        return "divide"
+    }
+    
+    var params: AnyObject? {
+        return [self.dividend, self.divisor]
+    }
+    
+    var auth: String? {
+        return "\(self.userName)|\(self.APIKey)"
+    }
+    
+    func responseFromObject(object: AnyObject) -> Response? {
+        return object as? Response
     }
 }
