@@ -14,5 +14,5 @@ public enum JSONRPCError: ErrorType {
     case InvalidResponse(AnyObject)
     case InvalidResult(AnyObject)
     case UnsupportedVersion(String)
-    case ErrorRequest(AnyObject)
+    case RequestError(Int, String, AnyObject?)
 }

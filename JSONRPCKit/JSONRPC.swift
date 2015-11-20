@@ -33,16 +33,26 @@ public class JSONRPC {
         
         self.handlers[identifier] = { (json: [String: AnyObject]) -> Void in
             if let result = json["result"] {
-                if let response = request.responseFromObject(result) {
-                    handler(.Success(response))
-                } else {
+                guard let response = request.responseFromObject(result) else {
                     handler(.Failure(.InvalidResult(result)))
+                    return
                 }
-            } else if let error = json["error"] {
-                handler(.Failure(.ErrorRequest(error)))
-            } else {
-                handler(.Failure(.InvalidResponse(json)))
+                
+                handler(.Success(response))
+                return
             }
+            
+            if let error = json["error"] as? [String: AnyObject] {
+                guard let code = error["code"] as? Int, message = error["message"] as? String else {
+                    handler(.Failure(.InvalidResponse(json)))
+                    return
+                }
+                
+                handler(.Failure(.RequestError(code, message, error["data"])))
+                return
+            }
+            
+            handler(.Failure(.InvalidResponse(json)))
         }
     }
     
