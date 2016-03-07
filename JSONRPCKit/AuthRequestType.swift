@@ -18,13 +18,13 @@ public extension AuthRequestType {
     func buildJSON() -> [String: AnyObject] {
         var json: [String: AnyObject] = [:]
         
-        json["method"] = self.method
+        json["method"] = method
         
-        if let params = self.params {
+        if let params = params {
             json["params"] = params
         }
         
-        if let auth = self.auth {
+        if let auth = auth {
             json["auth"] = auth
         }
         

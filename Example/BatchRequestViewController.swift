@@ -59,12 +59,12 @@ class BatchRequestViewController: UIViewController {
     }
     
     @IBAction func didPush(sender: AnyObject) {
-        guard let first = Int(self.firstTextField.text!), second = Int(self.secondTextField.text!) else {
-            self.subtractAnswerLabel.text = "?"
-            self.multiplyAnswerLabel.text = "?"
+        guard let first = Int(firstTextField.text!), second = Int(secondTextField.text!) else {
+            subtractAnswerLabel.text = "?"
+            multiplyAnswerLabel.text = "?"
             return
         }
         
-        self.subtractAndmultiply(first, second)
+        subtractAndmultiply(first, second)
     }
 }

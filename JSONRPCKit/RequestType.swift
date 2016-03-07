@@ -29,9 +29,9 @@ public extension RequestType {
     func buildJSON() -> [String: AnyObject] {
         var json: [String: AnyObject] = [:]
         
-        json["method"] = self.method
+        json["method"] = method
         
-        if let params = self.params {
+        if let params = params {
             json["params"] = params
         }
         

@@ -65,11 +65,11 @@ struct Subtract: AuthRequestType {
     }
     
     var params: AnyObject? {
-        return [self.minuend, self.subtrahend]
+        return [minuend, subtrahend]
     }
     
     var auth: String? {
-        return "\(self.userName)|\(self.APIKey)"
+        return "\(userName)|\(APIKey)"
     }
     
     func responseFromObject(object: AnyObject) -> Response? {
@@ -91,11 +91,11 @@ struct Multiply: AuthRequestType {
     }
     
     var params: AnyObject? {
-        return [self.multiplicand, self.multiplier]
+        return [multiplicand, multiplier]
     }
     
     var auth: String? {
-        return "\(self.userName)|\(self.APIKey)"
+        return "\(userName)|\(APIKey)"
     }
     
     func responseFromObject(object: AnyObject) -> Response? {
@@ -117,11 +117,11 @@ struct Divide: AuthRequestType {
     }
     
     var params: AnyObject? {
-        return [self.dividend, self.divisor]
+        return [dividend, divisor]
     }
     
     var auth: String? {
-        return "\(self.userName)|\(self.APIKey)"
+        return "\(userName)|\(APIKey)"
     }
     
     func responseFromObject(object: AnyObject) -> Response? {

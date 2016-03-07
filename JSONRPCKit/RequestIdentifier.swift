@@ -15,14 +15,6 @@ public enum RequestIdentifier {
 
 extension RequestIdentifier {
     
-    public init(number: Int) {
-        self = .NumberIdentifier(number)
-    }
-    
-    public init(string: String) {
-        self = .StringIdentifier(string)
-    }
-
     public init?(value: AnyObject) {
         switch value {
         case let number as Int:

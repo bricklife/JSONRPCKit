@@ -27,11 +27,11 @@ public class JSONRPC {
     }
 
     public func addRequest<T: RequestType>(request: T, handler: (Result<T.Response, JSONRPCError>) -> Void) {
-        let identifier = self.identifierGenerator.next()
+        let identifier = identifierGenerator.next()
         
-        self.requests.append(self.buildJSONFromRequest(request, identifier: identifier))
+        requests.append(buildJSONFromRequest(request, identifier: identifier))
         
-        self.handlers[identifier] = { (json: [String: AnyObject]) -> Void in
+        handlers[identifier] = { (json: [String: AnyObject]) -> Void in
             if let result = json["result"] {
                 guard let response = request.responseFromObject(result) else {
                     handler(.Failure(.InvalidResult(result)))
@@ -57,13 +57,13 @@ public class JSONRPC {
     }
     
     public func addNotification<T: RequestType>(request: T) {
-        self.requests.append(self.buildJSONFromRequest(request))
+        requests.append(buildJSONFromRequest(request))
     }
     
     private func buildJSONFromRequest<T: RequestType>(request: T, identifier: RequestIdentifier? = nil) -> [String: AnyObject] {
         var json: [String: AnyObject] = request.buildJSON()
         
-        json["jsonrpc"] = self.version
+        json["jsonrpc"] = version
         
         if let identifier = identifier {
             json["id"] = identifier.value
@@ -73,11 +73,11 @@ public class JSONRPC {
     }
     
     public func buildRequestJSON() throws -> AnyObject {
-        guard self.requests.count > 0 else {
+        guard requests.count > 0 else {
             throw JSONRPCError.NoRequest
         }
         
-        let json: AnyObject = (self.requests.count == 1) ? self.requests[0] : self.requests
+        let json: AnyObject = (requests.count == 1) ? requests[0] : requests
         
         guard NSJSONSerialization.isValidJSONObject(json) else {
             throw JSONRPCError.InvalidRequest(json)
@@ -95,23 +95,19 @@ public class JSONRPC {
             throw JSONRPCError.UnsupportedVersion(version)
         }
         
-        guard let id = json["id"] else {
-            return
-        }
-        
-        if let identifier = RequestIdentifier(value: id), handle = self.handlers[identifier] {
-            handle(json)
+        if let identifier = json["id"].flatMap(RequestIdentifier.init) {
+            handlers[identifier]?(json)
         }
     }
     
     public func parseResponseJSON(json: AnyObject) throws {
         switch json {
         case let response as [String: AnyObject]:
-            try self.handleResponse(response)
+            try handleResponse(response)
 
         case let responses as [[String: AnyObject]]:
             for response in responses {
-                try self.handleResponse(response)
+                try handleResponse(response)
             }
             
         default:
