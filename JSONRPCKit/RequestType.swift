@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol RequestType {
-    typealias Response
+    associatedtype Response
     
     var method: String { get }
     
