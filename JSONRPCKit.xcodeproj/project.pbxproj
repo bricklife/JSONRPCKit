@@ -21,7 +21,7 @@
 /* Begin PBXFileReference section */
 		CB36EB211BF24F1E003A4BCA /* AuthRequestType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthRequestType.swift; sourceTree = "<group>"; };
 		CB36EB271BF39028003A4BCA /* RequestIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestIdentifier.swift; sourceTree = "<group>"; };
-		CB63E2371CE22F6C00E22B5C /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = "../../Library/Developer/Xcode/DerivedData/JSONRPCKit-eyjczmxjmkkuomguooskjadkjyrr/Build/Products/Debug-iphoneos/Result.framework"; sourceTree = "<group>"; };
+		CB63E2371CE22F6C00E22B5C /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Result.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB82B9E11BF0C5CE00756CB1 /* JSONRPCError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONRPCError.swift; sourceTree = "<group>"; };
 		CBB0C34E1BF0B1D6006A7D41 /* JSONRPCKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JSONRPCKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBB0C3511BF0B1D6006A7D41 /* JSONRPCKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONRPCKit.h; sourceTree = "<group>"; };
