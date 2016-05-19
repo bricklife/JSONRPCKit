@@ -20,8 +20,6 @@ class BatchRequestViewController: UIViewController {
         let jsonrpc = JSONRPC()
         
         let subtractRequest = Subtract(
-            userName: MathServiceAPI.userName,
-            APIKey: MathServiceAPI.APIKey,
             minuend: first,
             subtrahend: second
         )
@@ -36,8 +34,6 @@ class BatchRequestViewController: UIViewController {
         }
         
         let multiplyRequest = Multiply(
-            userName: MathServiceAPI.userName,
-            APIKey: MathServiceAPI.APIKey,
             multiplicand: first,
             multiplier: second
         )

@@ -33,8 +33,6 @@ class SingleRequestViewController: UIViewController {
         let jsonrpc = JSONRPC(identifierGenerator: StringIdentifierGenerator())
         
         let subtractRequest = Divide(
-            userName: MathServiceAPI.userName,
-            APIKey: MathServiceAPI.APIKey,
             dividend: first,
             divisor: second
         )

@@ -10,12 +10,9 @@ import Foundation
 import JSONRPCKit
 import Alamofire
 
-// https://jsonrpcx.org/AuthX/Cookbook
+// use https://github.com/jenolan/jsonrpcx-php/blob/master/examples/server.php
 
 class MathServiceAPI {
-    
-    static let userName = "jenolan"
-    static let APIKey = "qIQlg9S28mbK2Iolm8yffr97Yp6zMxiF"
     
     static func request(jsonrpc: JSONRPC, errorHandler: ((error: NSError) -> Void)? = nil) {
         guard let requestJSON = try? jsonrpc.buildRequestJSON() else {
@@ -25,7 +22,7 @@ class MathServiceAPI {
         print("request:", requestJSON, separator: "\n")
         
         let URLRequest = NSMutableURLRequest()
-        URLRequest.URL = NSURL(string: "https://jsonrpcx.org/api/authUserServer.php")!
+        URLRequest.URL = NSURL(string: "https://jsonrpckit-demo.appspot.com")!
         URLRequest.HTTPMethod = "POST"
         URLRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         URLRequest.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(requestJSON, options: [])
@@ -51,11 +48,8 @@ class MathServiceAPI {
     }
 }
 
-struct Subtract: AuthRequestType {
+struct Subtract: RequestType {
     typealias Response = Int
-    
-    let userName: String
-    let APIKey: String
     
     let minuend: Int
     let subtrahend: Int
@@ -68,20 +62,13 @@ struct Subtract: AuthRequestType {
         return [minuend, subtrahend]
     }
     
-    var auth: String? {
-        return "\(userName)|\(APIKey)"
-    }
-    
     func responseFromObject(object: AnyObject) -> Response? {
         return object as? Response
     }
 }
 
-struct Multiply: AuthRequestType {
+struct Multiply: RequestType {
     typealias Response = Int
-    
-    let userName: String
-    let APIKey: String
     
     let multiplicand: Int
     let multiplier: Int
@@ -94,20 +81,13 @@ struct Multiply: AuthRequestType {
         return [multiplicand, multiplier]
     }
     
-    var auth: String? {
-        return "\(userName)|\(APIKey)"
-    }
-    
     func responseFromObject(object: AnyObject) -> Response? {
         return object as? Response
     }
 }
 
-struct Divide: AuthRequestType {
+struct Divide: RequestType {
     typealias Response = Float
-    
-    let userName: String
-    let APIKey: String
     
     let dividend: Int
     let divisor: Int
@@ -118,10 +98,6 @@ struct Divide: AuthRequestType {
     
     var params: AnyObject? {
         return [dividend, divisor]
-    }
-    
-    var auth: String? {
-        return "\(userName)|\(APIKey)"
     }
     
     func responseFromObject(object: AnyObject) -> Response? {

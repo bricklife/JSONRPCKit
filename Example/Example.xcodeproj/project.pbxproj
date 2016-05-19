@@ -87,14 +87,14 @@
 		CB63E2451CE2309100E22B5C /* Example */ = {
 			isa = PBXGroup;
 			children = (
-				CB63E2461CE2309100E22B5C /* AppDelegate.swift */,
-				CB63E24D1CE2309100E22B5C /* Assets.xcassets */,
-				CB63E25A1CE230E300E22B5C /* BatchRequestViewController.swift */,
-				CB63E2521CE2309100E22B5C /* Info.plist */,
-				CB63E24F1CE2309100E22B5C /* LaunchScreen.storyboard */,
 				CB63E24A1CE2309100E22B5C /* Main.storyboard */,
-				CB63E2591CE230E300E22B5C /* MathService.swift */,
+				CB63E2461CE2309100E22B5C /* AppDelegate.swift */,
 				CB63E2581CE230E300E22B5C /* SingleRequestViewController.swift */,
+				CB63E25A1CE230E300E22B5C /* BatchRequestViewController.swift */,
+				CB63E2591CE230E300E22B5C /* MathService.swift */,
+				CB63E2521CE2309100E22B5C /* Info.plist */,
+				CB63E24D1CE2309100E22B5C /* Assets.xcassets */,
+				CB63E24F1CE2309100E22B5C /* LaunchScreen.storyboard */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -336,6 +336,7 @@
 				CB63E2571CE2309100E22B5C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

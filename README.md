@@ -4,4 +4,3 @@ JSONRPCKit is a [JSON-RPC 2.0](http://www.jsonrpc.org/specification) library pur
 ## ToDo
 - add Tests
 - add JSONRPCHTTPClient
-- add Local JSON-RPC 2.0 Server
