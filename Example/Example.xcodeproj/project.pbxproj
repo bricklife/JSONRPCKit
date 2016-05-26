@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CB31EFB11CF6E88100DD13DD /* JSONRPCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB31EFB01CF6E88100DD13DD /* JSONRPCKit.framework */; };
+		CB31EFB21CF6E88100DD13DD /* JSONRPCKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CB31EFB01CF6E88100DD13DD /* JSONRPCKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CB31EFB41CF6E88800DD13DD /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB31EFB31CF6E88800DD13DD /* Result.framework */; };
+		CB31EFB51CF6E88800DD13DD /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CB31EFB31CF6E88800DD13DD /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CB31EFB71CF6E8B400DD13DD /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB31EFB61CF6E8B400DD13DD /* Alamofire.framework */; };
+		CB31EFB81CF6E8B400DD13DD /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CB31EFB61CF6E8B400DD13DD /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CB63E2471CE2309100E22B5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB63E2461CE2309100E22B5C /* AppDelegate.swift */; };
 		CB63E24C1CE2309100E22B5C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB63E24A1CE2309100E22B5C /* Main.storyboard */; };
 		CB63E24E1CE2309100E22B5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB63E24D1CE2309100E22B5C /* Assets.xcassets */; };
@@ -14,24 +20,18 @@
 		CB63E25B1CE230E300E22B5C /* SingleRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB63E2581CE230E300E22B5C /* SingleRequestViewController.swift */; };
 		CB63E25C1CE230E300E22B5C /* MathService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB63E2591CE230E300E22B5C /* MathService.swift */; };
 		CB63E25D1CE230E300E22B5C /* BatchRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB63E25A1CE230E300E22B5C /* BatchRequestViewController.swift */; };
-		CB63E2661CE231FB00E22B5C /* JSONRPCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB63E2651CE231FB00E22B5C /* JSONRPCKit.framework */; };
-		CB63E2671CE231FB00E22B5C /* JSONRPCKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CB63E2651CE231FB00E22B5C /* JSONRPCKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		CB63E2691CE2323C00E22B5C /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB63E2681CE2323C00E22B5C /* Result.framework */; };
-		CB63E26A1CE2323C00E22B5C /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CB63E2681CE2323C00E22B5C /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		CB63E26C1CE2326200E22B5C /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB63E26B1CE2326200E22B5C /* Alamofire.framework */; };
-		CB63E26D1CE2326200E22B5C /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CB63E26B1CE2326200E22B5C /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		CB63E2641CE2317900E22B5C /* Embed Frameworks */ = {
+		CB31EFAF1CF6E84400DD13DD /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				CB63E2671CE231FB00E22B5C /* JSONRPCKit.framework in Embed Frameworks */,
-				CB63E26D1CE2326200E22B5C /* Alamofire.framework in Embed Frameworks */,
-				CB63E26A1CE2323C00E22B5C /* Result.framework in Embed Frameworks */,
+				CB31EFB21CF6E88100DD13DD /* JSONRPCKit.framework in Embed Frameworks */,
+				CB31EFB81CF6E8B400DD13DD /* Alamofire.framework in Embed Frameworks */,
+				CB31EFB51CF6E88800DD13DD /* Result.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -39,6 +39,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CB31EFB01CF6E88100DD13DD /* JSONRPCKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = JSONRPCKit.framework; path = "../Debug-iphonesimulator/JSONRPCKit.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB31EFB31CF6E88800DD13DD /* Result.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Result.framework; path = "../Debug-iphonesimulator/Result.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB31EFB61CF6E8B400DD13DD /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Alamofire.framework; path = "../Debug-iphonesimulator/Alamofire.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB63E2431CE2309100E22B5C /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB63E2461CE2309100E22B5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CB63E24B1CE2309100E22B5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -48,9 +51,6 @@
 		CB63E2581CE230E300E22B5C /* SingleRequestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleRequestViewController.swift; sourceTree = "<group>"; };
 		CB63E2591CE230E300E22B5C /* MathService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathService.swift; sourceTree = "<group>"; };
 		CB63E25A1CE230E300E22B5C /* BatchRequestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchRequestViewController.swift; sourceTree = "<group>"; };
-		CB63E2651CE231FB00E22B5C /* JSONRPCKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = JSONRPCKit.framework; path = "/Users/ooba/Library/Developer/Xcode/DerivedData/JSONRPCKit-eyjczmxjmkkuomguooskjadkjyrr/Build/Products/Debug-iphonesimulator/JSONRPCKit.framework"; sourceTree = "<absolute>"; };
-		CB63E2681CE2323C00E22B5C /* Result.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Result.framework; path = "/Users/ooba/Library/Developer/Xcode/DerivedData/JSONRPCKit-eyjczmxjmkkuomguooskjadkjyrr/Build/Products/Debug-iphonesimulator/Result.framework"; sourceTree = "<absolute>"; };
-		CB63E26B1CE2326200E22B5C /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Alamofire.framework; path = "/Users/ooba/Library/Developer/Xcode/DerivedData/JSONRPCKit-eyjczmxjmkkuomguooskjadkjyrr/Build/Products/Debug-iphoneos/Alamofire.framework"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,9 +58,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB63E2661CE231FB00E22B5C /* JSONRPCKit.framework in Frameworks */,
-				CB63E26C1CE2326200E22B5C /* Alamofire.framework in Frameworks */,
-				CB63E2691CE2323C00E22B5C /* Result.framework in Frameworks */,
+				CB31EFB11CF6E88100DD13DD /* JSONRPCKit.framework in Frameworks */,
+				CB31EFB71CF6E8B400DD13DD /* Alamofire.framework in Frameworks */,
+				CB31EFB41CF6E88800DD13DD /* Result.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,9 +102,9 @@
 		CB63E26E1CE232C700E22B5C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CB63E26B1CE2326200E22B5C /* Alamofire.framework */,
-				CB63E2651CE231FB00E22B5C /* JSONRPCKit.framework */,
-				CB63E2681CE2323C00E22B5C /* Result.framework */,
+				CB31EFB61CF6E8B400DD13DD /* Alamofire.framework */,
+				CB31EFB01CF6E88100DD13DD /* JSONRPCKit.framework */,
+				CB31EFB31CF6E88800DD13DD /* Result.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -119,7 +119,7 @@
 				CB63E23F1CE2309100E22B5C /* Sources */,
 				CB63E2401CE2309100E22B5C /* Frameworks */,
 				CB63E2411CE2309100E22B5C /* Resources */,
-				CB63E2641CE2317900E22B5C /* Embed Frameworks */,
+				CB31EFAF1CF6E84400DD13DD /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

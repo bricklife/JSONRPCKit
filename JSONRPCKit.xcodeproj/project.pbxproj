@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CB31EFBA1CF6E8FE00DD13DD /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB31EFB91CF6E8FE00DD13DD /* Result.framework */; };
 		CB36EB221BF24F1E003A4BCA /* AuthRequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB36EB211BF24F1E003A4BCA /* AuthRequestType.swift */; };
 		CB36EB281BF39028003A4BCA /* RequestIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB36EB271BF39028003A4BCA /* RequestIdentifier.swift */; };
-		CB63E2381CE22F6C00E22B5C /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB63E2371CE22F6C00E22B5C /* Result.framework */; };
 		CB82B9E21BF0C5CE00756CB1 /* JSONRPCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB82B9E11BF0C5CE00756CB1 /* JSONRPCError.swift */; };
 		CBB0C3521BF0B1D6006A7D41 /* JSONRPCKit.h in Headers */ = {isa = PBXBuildFile; fileRef = CBB0C3511BF0B1D6006A7D41 /* JSONRPCKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CBB0C35A1BF0B2D3006A7D41 /* RequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB0C3591BF0B2D3006A7D41 /* RequestType.swift */; };
@@ -19,9 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CB31EFB91CF6E8FE00DD13DD /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = "../Debug-iphonesimulator/Result.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB36EB211BF24F1E003A4BCA /* AuthRequestType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthRequestType.swift; sourceTree = "<group>"; };
 		CB36EB271BF39028003A4BCA /* RequestIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestIdentifier.swift; sourceTree = "<group>"; };
-		CB63E2371CE22F6C00E22B5C /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Result.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB82B9E11BF0C5CE00756CB1 /* JSONRPCError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONRPCError.swift; sourceTree = "<group>"; };
 		CBB0C34E1BF0B1D6006A7D41 /* JSONRPCKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JSONRPCKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBB0C3511BF0B1D6006A7D41 /* JSONRPCKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONRPCKit.h; sourceTree = "<group>"; };
@@ -37,7 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB63E2381CE22F6C00E22B5C /* Result.framework in Frameworks */,
+				CB31EFBA1CF6E8FE00DD13DD /* Result.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,7 +47,7 @@
 		CB63E2391CE22F7E00E22B5C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CB63E2371CE22F6C00E22B5C /* Result.framework */,
+				CB31EFB91CF6E8FE00DD13DD /* Result.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
