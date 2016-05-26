@@ -26,33 +26,43 @@ public class JSONRPC {
         self.init(identifierGenerator: NumberIdentifierGenerator())
     }
 
-    public func addRequest<T: RequestType>(request: T, handler: (Result<T.Response, JSONRPCError>) -> Void) {
+    public func addRequest<T: RequestType>(request: T, queue: dispatch_queue_t? = dispatch_get_main_queue(), handler: (Result<T.Response, JSONRPCError>) -> Void) {
         let identifier = identifierGenerator.next()
         
         requests.append(buildJSONFromRequest(request, identifier: identifier))
         
         handlers[identifier] = { (json: [String: AnyObject]) -> Void in
+            func executeHandler(result: Result<T.Response, JSONRPCError>) {
+                if let queue = queue {
+                    dispatch_async(queue) {
+                        handler(result)
+                    }
+                } else {
+                    handler(result)
+                }
+            }
+            
             if let result = json["result"] {
                 guard let response = request.responseFromObject(result) else {
-                    handler(.Failure(.InvalidResult(result)))
+                    executeHandler(.Failure(.InvalidResult(result)))
                     return
                 }
                 
-                handler(.Success(response))
+                executeHandler(.Success(response))
                 return
             }
             
             if let error = json["error"] as? [String: AnyObject] {
                 guard let code = error["code"] as? Int, message = error["message"] as? String else {
-                    handler(.Failure(.InvalidResponse(json)))
+                    executeHandler(.Failure(.InvalidResponse(json)))
                     return
                 }
                 
-                handler(.Failure(.RequestError(code, message, error["data"])))
+                executeHandler(.Failure(.RequestError(code, message, error["data"])))
                 return
             }
             
-            handler(.Failure(.InvalidResponse(json)))
+            executeHandler(.Failure(.InvalidResponse(json)))
         }
     }
     
