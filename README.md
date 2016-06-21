@@ -4,3 +4,6 @@ JSONRPCKit is a [JSON-RPC 2.0](http://www.jsonrpc.org/specification) library pur
 ## ToDo
 - add Tests
 - add JSONRPCHTTPClient
+
+## License
+JSONRPCKit is released under the [MIT License](LICENSE.md).
