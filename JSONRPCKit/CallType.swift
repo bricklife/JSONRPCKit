@@ -16,14 +16,6 @@ protocol CallType {
     func parseResponseObject(object: AnyObject) throws -> Response
 }
 
-extension CallType {
-    private func findObjectForId(id: RequestIdentifier, inObjects objects: [AnyObject]) -> AnyObject? {
-        return objects
-            .filter { $0["id"].flatMap(RequestIdentifier.init) == id }
-            .first
-    }
-}
-
 struct Call1<Request: RequestType>: CallType {
     typealias Response = Request.Response
 
