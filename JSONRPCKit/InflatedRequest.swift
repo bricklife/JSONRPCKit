@@ -22,7 +22,7 @@ struct InflatedRequest<Request: RequestType> {
             "method": request.method,
         ]
 
-        if let parameters = request.params {
+        if let parameters = request.parameters {
             body["params"] = parameters
         }
 
@@ -47,10 +47,10 @@ struct InflatedRequest<Request: RequestType> {
             throw JSONRPCError(errorObject: errorObject)
 
         case (let resultObject?, nil):
-            if let response = request.responseFromObject(resultObject) {
-                return response
-            } else {
-                fatalError("TODO: throw result object parse error")
+            do {
+                return try request.responseFromResultObject(resultObject)
+            } catch {
+                throw JSONRPCError.ResultObjectParseError(error)
             }
 
         default:
