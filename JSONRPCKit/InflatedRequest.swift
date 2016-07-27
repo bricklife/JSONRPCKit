@@ -32,7 +32,7 @@ struct InflatedRequest<Request: RequestType> {
         self.body = body
     }
 
-    /// - Throws: Error
+    /// - Throws: JSONRPCError
     func parseResponseObject(object: AnyObject) throws -> Request.Response {
         let receivedVersion = object["version"] as? String
         guard version == receivedVersion else {
