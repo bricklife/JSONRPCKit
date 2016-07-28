@@ -8,11 +8,11 @@
 
 import Foundation
 
-public class NumberIdGenerator: IdGeneratorType {
+public struct NumberIdGenerator: IdGeneratorType {
     
     private var currentId = 1
 
-    public func next() -> Id {
+    public mutating func next() -> Id {
         defer {
             currentId += 1
         }
