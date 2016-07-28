@@ -89,8 +89,8 @@ struct CallElement<R: RequestType>: CallElementType {
     let id: Id?
     let body: AnyObject
 
-    init(request: Request, version: String, idGenerator: IdGeneratorType) {
-        let id: Id? = CallElement<Request>.isNotification ? nil : idGenerator.next()
+    init(request: Request, version: String, id: Id) {
+        let id: Id? = CallElement<Request>.isNotification ? nil : id
         var body: [String: AnyObject] = [
             "jsonrpc": version,
             "method": request.method,

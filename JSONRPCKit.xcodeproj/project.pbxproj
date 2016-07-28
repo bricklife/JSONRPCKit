@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7FC654F81D48B6CB004C390C /* CallType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC654F61D48B6CB004C390C /* CallType.swift */; };
 		7FC654F91D48B6CB004C390C /* CallElementType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC654F71D48B6CB004C390C /* CallElementType.swift */; };
+		7FC654FB1D49DF27004C390C /* CallFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC654FA1D49DF27004C390C /* CallFactory.swift */; };
 		CB31EFBA1CF6E8FE00DD13DD /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB31EFB91CF6E8FE00DD13DD /* Result.framework */; };
 		CB36EB281BF39028003A4BCA /* Id.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB36EB271BF39028003A4BCA /* Id.swift */; };
 		CB82B9E21BF0C5CE00756CB1 /* JSONRPCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB82B9E11BF0C5CE00756CB1 /* JSONRPCError.swift */; };
@@ -21,6 +22,7 @@
 /* Begin PBXFileReference section */
 		7FC654F61D48B6CB004C390C /* CallType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallType.swift; sourceTree = "<group>"; };
 		7FC654F71D48B6CB004C390C /* CallElementType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallElementType.swift; sourceTree = "<group>"; };
+		7FC654FA1D49DF27004C390C /* CallFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallFactory.swift; sourceTree = "<group>"; };
 		CB31EFB91CF6E8FE00DD13DD /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = "../Debug-iphonesimulator/Result.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB36EB271BF39028003A4BCA /* Id.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Id.swift; sourceTree = "<group>"; };
 		CB82B9E11BF0C5CE00756CB1 /* JSONRPCError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONRPCError.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				CBB0C3591BF0B2D3006A7D41 /* RequestType.swift */,
 				7FC654F61D48B6CB004C390C /* CallType.swift */,
 				7FC654F71D48B6CB004C390C /* CallElementType.swift */,
+				7FC654FA1D49DF27004C390C /* CallFactory.swift */,
 				CB82B9E11BF0C5CE00756CB1 /* JSONRPCError.swift */,
 				CB36EB271BF39028003A4BCA /* Id.swift */,
 				CBB4161B1BF3599D00B4DB0E /* IdGeneratorType.swift */,
@@ -166,6 +169,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB82B9E21BF0C5CE00756CB1 /* JSONRPCError.swift in Sources */,
+				7FC654FB1D49DF27004C390C /* CallFactory.swift in Sources */,
 				CBB4161E1BF370EA00B4DB0E /* NumberIdGenerator.swift in Sources */,
 				CB36EB281BF39028003A4BCA /* Id.swift in Sources */,
 				CBB4161C1BF3599D00B4DB0E /* IdGeneratorType.swift in Sources */,
