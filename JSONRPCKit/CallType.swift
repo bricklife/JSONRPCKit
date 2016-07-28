@@ -25,8 +25,8 @@ struct Call1<Request: RequestType>: CallType {
         return element.body
     }
 
-    init(request: Request, version: String, identifierGenerator: RequestIdentifierGenerator) {
-        self.element = CallElement(request: request, version: version, identifierGenerator: identifierGenerator)
+    init(request: Request, version: String, idGenerator: IdGeneratorType) {
+        self.element = CallElement(request: request, version: version, idGenerator: idGenerator)
     }
 
     func parseResponseObject(object: AnyObject) throws -> Response {
@@ -47,9 +47,9 @@ struct Call2<Request1: RequestType, Request2: RequestType>: CallType {
         ]
     }
 
-    init(request1: Request1, request2: Request2, version: String, identifierGenerator: RequestIdentifierGenerator) {
-        self.element1 = CallElement(request: request1, version: version, identifierGenerator: identifierGenerator)
-        self.element2 = CallElement(request: request2, version: version, identifierGenerator: identifierGenerator)
+    init(request1: Request1, request2: Request2, version: String, idGenerator: IdGeneratorType) {
+        self.element1 = CallElement(request: request1, version: version, idGenerator: idGenerator)
+        self.element2 = CallElement(request: request2, version: version, idGenerator: idGenerator)
     }
 
     func parseResponseObject(object: AnyObject) throws -> Response {
@@ -79,10 +79,10 @@ struct Call3<Request1: RequestType, Request2: RequestType, Request3: RequestType
         ]
     }
 
-    init(request1: Request1, request2: Request2, request3: Request3, version: String, identifierGenerator: RequestIdentifierGenerator) {
-        self.element1 = CallElement(request: request1, version: version, identifierGenerator: identifierGenerator)
-        self.element2 = CallElement(request: request2, version: version, identifierGenerator: identifierGenerator)
-        self.element3 = CallElement(request: request3, version: version, identifierGenerator: identifierGenerator)
+    init(request1: Request1, request2: Request2, request3: Request3, version: String, idGenerator: IdGeneratorType) {
+        self.element1 = CallElement(request: request1, version: version, idGenerator: idGenerator)
+        self.element2 = CallElement(request: request2, version: version, idGenerator: idGenerator)
+        self.element3 = CallElement(request: request3, version: version, idGenerator: idGenerator)
     }
 
     func parseResponseObject(object: AnyObject) throws -> Response {

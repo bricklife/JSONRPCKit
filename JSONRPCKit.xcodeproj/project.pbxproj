@@ -10,26 +10,26 @@
 		7FC654F81D48B6CB004C390C /* CallType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC654F61D48B6CB004C390C /* CallType.swift */; };
 		7FC654F91D48B6CB004C390C /* CallElementType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC654F71D48B6CB004C390C /* CallElementType.swift */; };
 		CB31EFBA1CF6E8FE00DD13DD /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB31EFB91CF6E8FE00DD13DD /* Result.framework */; };
-		CB36EB281BF39028003A4BCA /* RequestIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB36EB271BF39028003A4BCA /* RequestIdentifier.swift */; };
+		CB36EB281BF39028003A4BCA /* Id.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB36EB271BF39028003A4BCA /* Id.swift */; };
 		CB82B9E21BF0C5CE00756CB1 /* JSONRPCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB82B9E11BF0C5CE00756CB1 /* JSONRPCError.swift */; };
 		CBB0C3521BF0B1D6006A7D41 /* JSONRPCKit.h in Headers */ = {isa = PBXBuildFile; fileRef = CBB0C3511BF0B1D6006A7D41 /* JSONRPCKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CBB0C35A1BF0B2D3006A7D41 /* RequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB0C3591BF0B2D3006A7D41 /* RequestType.swift */; };
-		CBB4161C1BF3599D00B4DB0E /* RequestIdentifierGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB4161B1BF3599D00B4DB0E /* RequestIdentifierGenerator.swift */; };
-		CBB4161E1BF370EA00B4DB0E /* NumberIdentifierGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB4161D1BF370EA00B4DB0E /* NumberIdentifierGenerator.swift */; };
+		CBB4161C1BF3599D00B4DB0E /* IdGeneratorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB4161B1BF3599D00B4DB0E /* IdGeneratorType.swift */; };
+		CBB4161E1BF370EA00B4DB0E /* NumberIdGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB4161D1BF370EA00B4DB0E /* NumberIdGenerator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7FC654F61D48B6CB004C390C /* CallType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallType.swift; sourceTree = "<group>"; };
 		7FC654F71D48B6CB004C390C /* CallElementType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallElementType.swift; sourceTree = "<group>"; };
 		CB31EFB91CF6E8FE00DD13DD /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = "../Debug-iphonesimulator/Result.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CB36EB271BF39028003A4BCA /* RequestIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestIdentifier.swift; sourceTree = "<group>"; };
+		CB36EB271BF39028003A4BCA /* Id.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Id.swift; sourceTree = "<group>"; };
 		CB82B9E11BF0C5CE00756CB1 /* JSONRPCError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONRPCError.swift; sourceTree = "<group>"; };
 		CBB0C34E1BF0B1D6006A7D41 /* JSONRPCKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JSONRPCKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBB0C3511BF0B1D6006A7D41 /* JSONRPCKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONRPCKit.h; sourceTree = "<group>"; };
 		CBB0C3531BF0B1D7006A7D41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CBB0C3591BF0B2D3006A7D41 /* RequestType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestType.swift; sourceTree = "<group>"; };
-		CBB4161B1BF3599D00B4DB0E /* RequestIdentifierGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestIdentifierGenerator.swift; sourceTree = "<group>"; };
-		CBB4161D1BF370EA00B4DB0E /* NumberIdentifierGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberIdentifierGenerator.swift; sourceTree = "<group>"; };
+		CBB4161B1BF3599D00B4DB0E /* IdGeneratorType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdGeneratorType.swift; sourceTree = "<group>"; };
+		CBB4161D1BF370EA00B4DB0E /* NumberIdGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberIdGenerator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,9 +77,9 @@
 				7FC654F61D48B6CB004C390C /* CallType.swift */,
 				7FC654F71D48B6CB004C390C /* CallElementType.swift */,
 				CB82B9E11BF0C5CE00756CB1 /* JSONRPCError.swift */,
-				CB36EB271BF39028003A4BCA /* RequestIdentifier.swift */,
-				CBB4161B1BF3599D00B4DB0E /* RequestIdentifierGenerator.swift */,
-				CBB4161D1BF370EA00B4DB0E /* NumberIdentifierGenerator.swift */,
+				CB36EB271BF39028003A4BCA /* Id.swift */,
+				CBB4161B1BF3599D00B4DB0E /* IdGeneratorType.swift */,
+				CBB4161D1BF370EA00B4DB0E /* NumberIdGenerator.swift */,
 				CBB0C3531BF0B1D7006A7D41 /* Info.plist */,
 			);
 			path = JSONRPCKit;
@@ -166,9 +166,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB82B9E21BF0C5CE00756CB1 /* JSONRPCError.swift in Sources */,
-				CBB4161E1BF370EA00B4DB0E /* NumberIdentifierGenerator.swift in Sources */,
-				CB36EB281BF39028003A4BCA /* RequestIdentifier.swift in Sources */,
-				CBB4161C1BF3599D00B4DB0E /* RequestIdentifierGenerator.swift in Sources */,
+				CBB4161E1BF370EA00B4DB0E /* NumberIdGenerator.swift in Sources */,
+				CB36EB281BF39028003A4BCA /* Id.swift in Sources */,
+				CBB4161C1BF3599D00B4DB0E /* IdGeneratorType.swift in Sources */,
 				7FC654F91D48B6CB004C390C /* CallElementType.swift in Sources */,
 				CBB0C35A1BF0B2D3006A7D41 /* RequestType.swift in Sources */,
 				7FC654F81D48B6CB004C390C /* CallType.swift in Sources */,

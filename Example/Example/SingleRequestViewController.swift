@@ -9,11 +9,11 @@
 import UIKit
 import JSONRPCKit
 
-public class StringIdentifierGenerator: RequestIdentifierGenerator {
+public class StringIdentifierGenerator: IdGenerator {
     
     private var currentIdentifier = 1
     
-    public func next() -> RequestIdentifier {
+    public func next() -> Id {
         defer {
             currentIdentifier += 1
         }
@@ -30,7 +30,7 @@ class SingleRequestViewController: UIViewController {
     @IBOutlet weak var subtractAnswerLabel: UILabel!
     
     func subtract(first: Int, _ second: Int) {
-        let jsonrpc = JSONRPC(identifierGenerator: StringIdentifierGenerator())
+        let jsonrpc = JSONRPC(idGenerator: StringIdentifierGenerator())
         
         let subtractRequest = Divide(
             dividend: first,

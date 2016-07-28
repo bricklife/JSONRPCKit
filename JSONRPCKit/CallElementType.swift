@@ -13,7 +13,7 @@ protocol CallElementType {
 
     var request: Request { get }
     var version: String { get }
-    var id: RequestIdentifier? { get }
+    var id: Id? { get }
     var body: AnyObject { get }
 
     static var isNotification: Bool { get }
@@ -56,7 +56,7 @@ extension CallElementType {
     /// - Throws: JSONRPCError
     func parseResponseArray(array: [AnyObject]) throws -> Request.Response {
         let matchedObject = array
-            .filter { $0["id"].flatMap(RequestIdentifier.init) == id }
+            .filter { $0["id"].flatMap(Id.init) == id }
             .first
 
         guard let object = matchedObject else {
@@ -86,11 +86,11 @@ struct CallElement<R: RequestType>: CallElementType {
 
     let request: Request
     let version: String
-    let id: RequestIdentifier?
+    let id: Id?
     let body: AnyObject
 
-    init(request: Request, version: String, identifierGenerator: RequestIdentifierGenerator) {
-        let id: RequestIdentifier? = CallElement<Request>.isNotification ? nil : identifierGenerator.next()
+    init(request: Request, version: String, idGenerator: IdGeneratorType) {
+        let id: Id? = CallElement<Request>.isNotification ? nil : idGenerator.next()
         var body: [String: AnyObject] = [
             "jsonrpc": version,
             "method": request.method,
