@@ -97,7 +97,7 @@ struct CallElement<R: RequestType>: CallElementType {
         ]
 
         if let id = id {
-            body["params"] = id.value
+            body["id"] = id.value
         }
 
         if let parameters = request.parameters {
