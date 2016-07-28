@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol IdGeneratorType {
-    
+public protocol IdGeneratorType: class {
+
     func next() -> Id
 }
