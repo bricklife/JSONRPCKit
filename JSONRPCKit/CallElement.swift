@@ -8,28 +8,23 @@
 
 import Foundation
 
-struct CallElement<Request: RequestType> {
-    let request: Request
-    let version: String
-    let id: RequestIdentifier
-    let body: AnyObject
+protocol CallElementType {
+    associatedtype Request: RequestType
 
-    init(request: Request, version: String, identifierGenerator: RequestIdentifierGenerator) {
-        let id = identifierGenerator.next()
-        var body: [String: AnyObject] = [
-            "jsonrpc": version,
-            "id": id.value,
-            "method": request.method,
-        ]
+    var request: Request { get }
+    var version: String { get }
+    var id: RequestIdentifier? { get }
+    var body: AnyObject { get }
 
-        if let parameters = request.parameters {
-            body["params"] = parameters
-        }
+    static var isNotification: Bool { get }
 
-        self.request = request
-        self.version = version
-        self.id = id
-        self.body = body
+    func parseResponseObject(object: AnyObject) throws -> Request.Response
+    func parseResponseArray(array: [AnyObject]) throws -> Request.Response
+}
+
+extension CallElementType {
+    static var isNotification: Bool {
+        return false
     }
 
     /// - Throws: JSONRPCError
@@ -58,6 +53,7 @@ struct CallElement<Request: RequestType> {
         }
     }
 
+    /// - Throws: JSONRPCError
     func parseResponseArray(array: [AnyObject]) throws -> Request.Response {
         let matchedObject = array
             .filter { $0["id"].flatMap(RequestIdentifier.init) == id }
@@ -70,3 +66,48 @@ struct CallElement<Request: RequestType> {
         return try parseResponseObject(object)
     }
 }
+
+extension CallElementType where Request.Response == Void {
+    static var isNotification: Bool {
+        return true
+    }
+
+    func parseResponseObject(object: AnyObject) throws -> Request.Response {
+        return ()
+    }
+
+    func parseResponseArray(array: [AnyObject]) throws -> Request.Response {
+        return ()
+    }
+}
+
+struct CallElement<R: RequestType>: CallElementType {
+    typealias Request = R
+
+    let request: Request
+    let version: String
+    let id: RequestIdentifier?
+    let body: AnyObject
+
+    init(request: Request, version: String, identifierGenerator: RequestIdentifierGenerator) {
+        let id: RequestIdentifier? = CallElement<Request>.isNotification ? nil : identifierGenerator.next()
+        var body: [String: AnyObject] = [
+            "jsonrpc": version,
+            "method": request.method,
+        ]
+
+        if let id = id {
+            body["params"] = id.value
+        }
+
+        if let parameters = request.parameters {
+            body["params"] = parameters
+        }
+
+        self.request = request
+        self.version = version
+        self.id = id
+        self.body = body
+    }
+}
+

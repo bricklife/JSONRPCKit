@@ -10,7 +10,7 @@ import Foundation
 
 enum JSONRPCError: ErrorType {
     case ResponseError(code: Int, message: String, data: AnyObject?)
-    case ResponseNotFound(requestId: RequestIdentifier, objects: [AnyObject])
+    case ResponseNotFound(requestId: RequestIdentifier?, objects: [AnyObject])
     case ResultObjectParseError(ErrorType)
     case ErrorObjectParseError(ErrorType)
     case UnsupportedVersion(String?)

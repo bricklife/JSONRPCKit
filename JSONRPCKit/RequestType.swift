@@ -9,6 +9,7 @@
 import Foundation
 
 public protocol RequestType {
+    /// If `Response == Void`, request is treated as a notification.
     associatedtype Response
     
     var method: String { get }
