@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol CallElementType {
+public protocol CallElementType {
     associatedtype Request: RequestType
 
     var request: Request { get }
@@ -22,7 +22,7 @@ protocol CallElementType {
     func parseResponseArray(array: [AnyObject]) throws -> Request.Response
 }
 
-extension CallElementType {
+public extension CallElementType {
     static var isNotification: Bool {
         return false
     }
@@ -67,29 +67,29 @@ extension CallElementType {
     }
 }
 
-extension CallElementType where Request.Response == Void {
-    static var isNotification: Bool {
+public extension CallElementType where Request.Response == Void {
+    public static var isNotification: Bool {
         return true
     }
 
-    func parseResponseObject(object: AnyObject) throws -> Request.Response {
+    public func parseResponseObject(object: AnyObject) throws -> Request.Response {
         return ()
     }
 
-    func parseResponseArray(array: [AnyObject]) throws -> Request.Response {
+    public func parseResponseArray(array: [AnyObject]) throws -> Request.Response {
         return ()
     }
 }
 
-struct CallElement<R: RequestType>: CallElementType {
-    typealias Request = R
+public struct CallElement<R: RequestType>: CallElementType {
+    public typealias Request = R
 
-    let request: Request
-    let version: String
-    let id: Id?
-    let body: AnyObject
+    public let request: Request
+    public let version: String
+    public let id: Id?
+    public let body: AnyObject
 
-    init(request: Request, version: String, id: Id) {
+    public init(request: Request, version: String, id: Id) {
         let id: Id? = CallElement<Request>.isNotification ? nil : id
         var body: [String: AnyObject] = [
             "jsonrpc": version,

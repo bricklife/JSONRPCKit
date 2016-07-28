@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum JSONRPCError: ErrorType {
+public enum JSONRPCError: ErrorType {
     case ResponseError(code: Int, message: String, data: AnyObject?)
     case ResponseNotFound(requestId: Id?, objects: [AnyObject])
     case ResultObjectParseError(ErrorType)
@@ -17,7 +17,7 @@ enum JSONRPCError: ErrorType {
     case MissingBothResultAndError(AnyObject)
     case NonArrayResponse(AnyObject)
 
-    init(errorObject: AnyObject) {
+    public init(errorObject: AnyObject) {
         enum ParseError: ErrorType {
             case MissingKey(key: String, errorObject: AnyObject)
         }
