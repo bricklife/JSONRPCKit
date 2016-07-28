@@ -28,6 +28,10 @@ public extension CallElementType {
             throw JSONRPCError.UnsupportedVersion(receivedVersion)
         }
 
+        guard id == object["id"].flatMap(Id.init) else {
+            throw JSONRPCError.ResponseNotFound(requestId: id, object: object)
+        }
+
         let resultObject = object["result"] as? [String: AnyObject]
         let errorObject = object["error"] as? [String: AnyObject]
 
@@ -54,7 +58,7 @@ public extension CallElementType {
             .first
 
         guard let object = matchedObject else {
-            throw JSONRPCError.ResponseNotFound(requestId: id, objects: array)
+            throw JSONRPCError.ResponseNotFound(requestId: id, object: array)
         }
 
         return try parseResponseObject(object)

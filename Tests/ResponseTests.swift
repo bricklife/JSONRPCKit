@@ -109,4 +109,106 @@ class ResponseTests: XCTestCase {
             XCTFail()
         }
     }
+
+    func testResponseNotFoundError() {
+        let request = TestRequest(method: "method", parameters: nil)
+        let call = callFactory.create(request)
+
+        let responseObject: AnyObject = [
+            "id": 100,
+            "jsonrpc": "2.0",
+            "result": [:]
+        ]
+
+        do {
+            try call.parseResponseObject(responseObject)
+            XCTFail()
+        } catch let error as JSONRPCError {
+            guard case .ResponseNotFound(let id, let object) = error else {
+                XCTFail()
+                return
+            }
+
+            XCTAssertEqual(id, call.element.id)
+            XCTAssertEqual(object["id"], 100)
+        } catch {
+            XCTFail()
+        }
+    }
+
+    func testResponseNotFoundError2() {
+        let request1 = TestRequest(method: "method1", parameters: nil)
+        let request2 = TestRequest(method: "method2", parameters: nil)
+        let call = callFactory.create(request1, request2)
+
+        let responseObject: AnyObject = [
+            [
+                "id": 1,
+                "jsonrpc": "2.0",
+                "result": [:],
+            ],
+            [
+                "id": 102,
+                "jsonrpc": "2.0",
+                "result": [:],
+            ],
+        ]
+
+        do {
+            try call.parseResponseObject(responseObject)
+            XCTFail()
+        } catch let error as JSONRPCError {
+            guard case .ResponseNotFound(let id, let object) = error else {
+                XCTFail()
+                return
+            }
+
+            let array = object as? [AnyObject]
+            XCTAssertEqual(id, call.element2.id)
+            XCTAssertEqual(array?[1]["id"], 102)
+        } catch {
+            XCTFail()
+        }
+    }
+
+    func testResponseNotFoundError3() {
+        let request1 = TestRequest(method: "method1", parameters: nil)
+        let request2 = TestRequest(method: "method2", parameters: nil)
+        let request3 = TestRequest(method: "method3", parameters: nil)
+        let call = callFactory.create(request1, request2, request3)
+
+        let responseObject: AnyObject = [
+            [
+                "id": 1,
+                "jsonrpc": "2.0",
+                "result": [:],
+            ],
+            [
+                "id": 2,
+                "jsonrpc": "2.0",
+                "result": [:],
+            ],
+            [
+                "id": 103,
+                "jsonrpc": "2.0",
+                "result": [:],
+            ],
+        ]
+
+        do {
+            try call.parseResponseObject(responseObject)
+            XCTFail()
+        } catch let error as JSONRPCError {
+            guard case .ResponseNotFound(let id, let object) = error else {
+                XCTFail()
+                return
+            }
+
+            let array = object as? [AnyObject]
+            XCTAssertEqual(id, call.element3.id)
+            XCTAssertEqual(array?[2]["id"], 103)
+        } catch {
+            XCTFail()
+        }
+    }
 }
