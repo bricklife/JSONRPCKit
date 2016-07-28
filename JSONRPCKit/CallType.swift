@@ -19,37 +19,37 @@ protocol CallType {
 struct Call1<Request: RequestType>: CallType {
     typealias Response = Request.Response
 
-    let inflatedRequest: InflatedRequest<Request>
+    let element: CallElement<Request>
     
     var requestObject: AnyObject {
-        return inflatedRequest.body
+        return element.body
     }
 
     init(request: Request, version: String, identifierGenerator: RequestIdentifierGenerator) {
-        self.inflatedRequest = InflatedRequest(request: request, version: version, identifierGenerator: identifierGenerator)
+        self.element = CallElement(request: request, version: version, identifierGenerator: identifierGenerator)
     }
 
     func parseResponseObject(object: AnyObject) throws -> Response {
-        return try inflatedRequest.parseResponseObject(object)
+        return try element.parseResponseObject(object)
     }
 }
 
 struct Call2<Request1: RequestType, Request2: RequestType>: CallType {
     typealias Response = (Request1.Response, Request2.Response)
 
-    let inflatedRequest1: InflatedRequest<Request1>
-    let inflatedRequest2: InflatedRequest<Request2>
+    let element1: CallElement<Request1>
+    let element2: CallElement<Request2>
 
     var requestObject: AnyObject {
         return [
-            inflatedRequest1.body,
-            inflatedRequest2.body,
+            element1.body,
+            element2.body,
         ]
     }
 
     init(request1: Request1, request2: Request2, version: String, identifierGenerator: RequestIdentifierGenerator) {
-        self.inflatedRequest1 = InflatedRequest(request: request1, version: version, identifierGenerator: identifierGenerator)
-        self.inflatedRequest2 = InflatedRequest(request: request2, version: version, identifierGenerator: identifierGenerator)
+        self.element1 = CallElement(request: request1, version: version, identifierGenerator: identifierGenerator)
+        self.element2 = CallElement(request: request2, version: version, identifierGenerator: identifierGenerator)
     }
 
     func parseResponseObject(object: AnyObject) throws -> Response {
@@ -58,8 +58,8 @@ struct Call2<Request1: RequestType, Request2: RequestType>: CallType {
         }
 
         return (
-            try inflatedRequest1.parseResponseArray(array),
-            try inflatedRequest2.parseResponseArray(array)
+            try element1.parseResponseArray(array),
+            try element2.parseResponseArray(array)
         )
     }
 }
@@ -67,22 +67,22 @@ struct Call2<Request1: RequestType, Request2: RequestType>: CallType {
 struct Call3<Request1: RequestType, Request2: RequestType, Request3: RequestType>: CallType {
     typealias Response = (Request1.Response, Request2.Response, Request3.Response)
 
-    let inflatedRequest1: InflatedRequest<Request1>
-    let inflatedRequest2: InflatedRequest<Request2>
-    let inflatedRequest3: InflatedRequest<Request3>
+    let element1: CallElement<Request1>
+    let element2: CallElement<Request2>
+    let element3: CallElement<Request3>
 
     var requestObject: AnyObject {
         return [
-            inflatedRequest1.body,
-            inflatedRequest2.body,
-            inflatedRequest3.body,
+            element1.body,
+            element2.body,
+            element3.body,
         ]
     }
 
     init(request1: Request1, request2: Request2, request3: Request3, version: String, identifierGenerator: RequestIdentifierGenerator) {
-        self.inflatedRequest1 = InflatedRequest(request: request1, version: version, identifierGenerator: identifierGenerator)
-        self.inflatedRequest2 = InflatedRequest(request: request2, version: version, identifierGenerator: identifierGenerator)
-        self.inflatedRequest3 = InflatedRequest(request: request3, version: version, identifierGenerator: identifierGenerator)
+        self.element1 = CallElement(request: request1, version: version, identifierGenerator: identifierGenerator)
+        self.element2 = CallElement(request: request2, version: version, identifierGenerator: identifierGenerator)
+        self.element3 = CallElement(request: request3, version: version, identifierGenerator: identifierGenerator)
     }
 
     func parseResponseObject(object: AnyObject) throws -> Response {
@@ -91,9 +91,9 @@ struct Call3<Request1: RequestType, Request2: RequestType, Request3: RequestType
         }
 
         return (
-            try inflatedRequest1.parseResponseArray(array),
-            try inflatedRequest2.parseResponseArray(array),
-            try inflatedRequest3.parseResponseArray(array)
+            try element1.parseResponseArray(array),
+            try element2.parseResponseArray(array),
+            try element3.parseResponseArray(array)
         )
     }
 }

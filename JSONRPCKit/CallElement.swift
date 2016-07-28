@@ -1,5 +1,5 @@
 //
-//  InflatedRequest.swift
+//  CallElement.swift
 //  JSONRPCKit
 //
 //  Created by ishkawa on 2016/07/27.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct InflatedRequest<Request: RequestType> {
+struct CallElement<Request: RequestType> {
     let request: Request
     let version: String
     let id: RequestIdentifier
