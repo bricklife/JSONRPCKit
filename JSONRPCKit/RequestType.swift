@@ -14,6 +14,23 @@ public protocol RequestType {
     
     var method: String { get }
     var parameters: AnyObject? { get }
+    var isNotification: Bool { get }
     
     func responseFromResultObject(resultObject: AnyObject) throws -> Response
+}
+
+public extension RequestType {
+    var isNotification: Bool {
+        return false
+    }
+}
+
+public extension RequestType where Response == Void {
+    var isNotification: Bool {
+        return true
+    }
+
+    func responseFromResultObject(resultObject: AnyObject) throws -> Response {
+        return ()
+    }
 }

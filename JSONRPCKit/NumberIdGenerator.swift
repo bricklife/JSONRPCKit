@@ -12,6 +12,8 @@ public struct NumberIdGenerator: IdGeneratorType {
     
     private var currentId = 1
 
+    public init() {}
+
     public mutating func next() -> Id {
         defer {
             currentId += 1

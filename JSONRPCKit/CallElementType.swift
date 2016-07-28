@@ -16,20 +16,14 @@ public protocol CallElementType {
     var id: Id? { get }
     var body: AnyObject { get }
 
-    static var isNotification: Bool { get }
-
     func parseResponseObject(object: AnyObject) throws -> Request.Response
     func parseResponseArray(array: [AnyObject]) throws -> Request.Response
 }
 
 public extension CallElementType {
-    static var isNotification: Bool {
-        return false
-    }
-
     /// - Throws: JSONRPCError
     func parseResponseObject(object: AnyObject) throws -> Request.Response {
-        let receivedVersion = object["version"] as? String
+        let receivedVersion = object["jsonrpc"] as? String
         guard version == receivedVersion else {
             throw JSONRPCError.UnsupportedVersion(receivedVersion)
         }
@@ -68,10 +62,6 @@ public extension CallElementType {
 }
 
 public extension CallElementType where Request.Response == Void {
-    public static var isNotification: Bool {
-        return true
-    }
-
     public func parseResponseObject(object: AnyObject) throws -> Request.Response {
         return ()
     }
@@ -90,7 +80,7 @@ public struct CallElement<R: RequestType>: CallElementType {
     public let body: AnyObject
 
     public init(request: Request, version: String, id: Id) {
-        let id: Id? = CallElement<Request>.isNotification ? nil : id
+        let id: Id? = request.isNotification ? nil : id
         var body: [String: AnyObject] = [
             "jsonrpc": version,
             "method": request.method,
