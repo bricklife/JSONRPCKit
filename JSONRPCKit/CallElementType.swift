@@ -57,14 +57,14 @@ public extension CallElementType {
             return .Failure(.ResponseNotFound(requestId: id, object: object))
         }
 
-        let resultObject = object["result"] as? [String: AnyObject]
-        let errorObject = object["error"] as? [String: AnyObject]
+        let resultObject: AnyObject? = object["result"]
+        let errorObject: AnyObject? = object["error"]
 
         switch (resultObject, errorObject) {
-        case (nil, let errorObject?):
+        case (nil, let errorObject as AnyObject):
             return .Failure(JSONRPCError(errorObject: errorObject))
 
-        case (let resultObject?, nil):
+        case (let resultObject as AnyObject, nil):
             do {
                 return .Success(try request.responseFromResultObject(resultObject))
             } catch {
