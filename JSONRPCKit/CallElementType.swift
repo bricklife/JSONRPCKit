@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Result
 
 public protocol CallElementType {
     associatedtype Request: RequestType
@@ -18,18 +19,42 @@ public protocol CallElementType {
 
     func parseResponseObject(object: AnyObject) throws -> Request.Response
     func parseResponseArray(array: [AnyObject]) throws -> Request.Response
+
+    func resultFromObject(object: AnyObject) -> Result<Request.Response, JSONRPCError>
+    func resultFromArray(array: [AnyObject]) -> Result<Request.Response, JSONRPCError>
 }
 
 public extension CallElementType {
     /// - Throws: JSONRPCError
     func parseResponseObject(object: AnyObject) throws -> Request.Response {
+        switch resultFromObject(object) {
+        case .Success(let response):
+            return response
+
+        case .Failure(let error):
+            throw error
+        }
+    }
+
+    /// - Throws: JSONRPCError
+    func parseResponseArray(array: [AnyObject]) throws -> Request.Response {
+        switch resultFromArray(array) {
+        case .Success(let response):
+            return response
+
+        case .Failure(let error):
+            throw error
+        }
+    }
+
+    func resultFromObject(object: AnyObject) -> Result<Request.Response, JSONRPCError> {
         let receivedVersion = object["jsonrpc"] as? String
         guard version == receivedVersion else {
-            throw JSONRPCError.UnsupportedVersion(receivedVersion)
+            return .Failure(.UnsupportedVersion(receivedVersion))
         }
 
         guard id == object["id"].flatMap(Id.init) else {
-            throw JSONRPCError.ResponseNotFound(requestId: id, object: object)
+            return .Failure(.ResponseNotFound(requestId: id, object: object))
         }
 
         let resultObject = object["result"] as? [String: AnyObject]
@@ -37,31 +62,30 @@ public extension CallElementType {
 
         switch (resultObject, errorObject) {
         case (nil, let errorObject?):
-            throw JSONRPCError(errorObject: errorObject)
+            return .Failure(JSONRPCError(errorObject: errorObject))
 
         case (let resultObject?, nil):
             do {
-                return try request.responseFromResultObject(resultObject)
+                return .Success(try request.responseFromResultObject(resultObject))
             } catch {
-                throw JSONRPCError.ResultObjectParseError(error)
+                return .Failure(.ResultObjectParseError(error))
             }
 
         default:
-            throw JSONRPCError.MissingBothResultAndError(object)
+            return .Failure(.MissingBothResultAndError(object))
         }
     }
 
-    /// - Throws: JSONRPCError
-    func parseResponseArray(array: [AnyObject]) throws -> Request.Response {
+    func resultFromArray(array: [AnyObject]) -> Result<Request.Response, JSONRPCError> {
         let matchedObject = array
             .filter { $0["id"].flatMap(Id.init) == id }
             .first
 
         guard let object = matchedObject else {
-            throw JSONRPCError.ResponseNotFound(requestId: id, object: array)
+            return .Failure(.ResponseNotFound(requestId: id, object: array))
         }
 
-        return try parseResponseObject(object)
+        return resultFromObject(object)
     }
 }
 
@@ -72,6 +96,14 @@ public extension CallElementType where Request.Response == Void {
 
     public func parseResponseArray(array: [AnyObject]) throws -> Request.Response {
         return ()
+    }
+
+    func resultFromObject(object: AnyObject) -> Result<Request.Response, JSONRPCError> {
+        return .Success()
+    }
+
+    func resultFromArray(array: [AnyObject]) -> Result<Request.Response, JSONRPCError> {
+        return .Success()
     }
 }
 
