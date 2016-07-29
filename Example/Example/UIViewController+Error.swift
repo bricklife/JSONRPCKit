@@ -22,12 +22,6 @@ extension UIViewController {
             message = error.localizedRecoverySuggestion
 
         case .ResponseError(let error as JSONRPCError):
-            if case .MissingBothResultAndError(let object) = error {
-                let data = try! NSJSONSerialization.dataWithJSONObject(object, options: .PrettyPrinted)
-                let string = String(data: data, encoding: NSUTF8StringEncoding)!
-                print(string)
-            }
-
             if case .ResponseError(_, let errorMessage, let data as String) = error {
                 title = errorMessage
                 message = data
