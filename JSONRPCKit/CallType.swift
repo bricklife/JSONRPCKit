@@ -10,17 +10,17 @@ import Foundation
 import Result
 
 public protocol CallType {
-    associatedtype Response
+    associatedtype Responses
     associatedtype Results
 
     var requestObject: AnyObject { get }
 
-    func parseResponseObject(object: AnyObject) throws -> Response
+    func responsesFromObject(object: AnyObject) throws -> Responses
     func resultsFromObject(object: AnyObject) -> Results
 }
 
 public struct Call1<Request: RequestType>: CallType {
-    public typealias Response = Request.Response
+    public typealias Responses = Request.Response
     public typealias Results = Result<Request.Response, JSONRPCError>
 
     public let element: CallElement<Request>
@@ -29,8 +29,8 @@ public struct Call1<Request: RequestType>: CallType {
         return element.body
     }
 
-    public func parseResponseObject(object: AnyObject) throws -> Response {
-        return try element.parseResponseObject(object)
+    public func responsesFromObject(object: AnyObject) throws -> Responses {
+        return try element.responseFromObject(object)
     }
 
     public func resultsFromObject(object: AnyObject) -> Results {
@@ -39,7 +39,7 @@ public struct Call1<Request: RequestType>: CallType {
 }
 
 public struct Call2<Request1: RequestType, Request2: RequestType>: CallType {
-    public typealias Response = (Request1.Response, Request2.Response)
+    public typealias Responses = (Request1.Response, Request2.Response)
     public typealias Results = (Result<Request1.Response, JSONRPCError>, Result<Request2.Response, JSONRPCError>)
 
     public let element1: CallElement<Request1>
@@ -52,14 +52,14 @@ public struct Call2<Request1: RequestType, Request2: RequestType>: CallType {
         ]
     }
 
-    public func parseResponseObject(object: AnyObject) throws -> Response {
+    public func responsesFromObject(object: AnyObject) throws -> Responses {
         guard let array = object as? [AnyObject] else {
             throw JSONRPCError.NonArrayResponse(object)
         }
 
         return (
-            try element1.parseResponseArray(array),
-            try element2.parseResponseArray(array)
+            try element1.responseFromArray(array),
+            try element2.responseFromArray(array)
         )
     }
 
@@ -79,7 +79,7 @@ public struct Call2<Request1: RequestType, Request2: RequestType>: CallType {
 }
 
 public struct Call3<Request1: RequestType, Request2: RequestType, Request3: RequestType>: CallType {
-    public typealias Response = (Request1.Response, Request2.Response, Request3.Response)
+    public typealias Responses = (Request1.Response, Request2.Response, Request3.Response)
     public typealias Results = (Result<Request1.Response, JSONRPCError>, Result<Request2.Response, JSONRPCError>, Result<Request3.Response, JSONRPCError>)
 
     public let element1: CallElement<Request1>
@@ -94,15 +94,15 @@ public struct Call3<Request1: RequestType, Request2: RequestType, Request3: Requ
         ]
     }
 
-    public func parseResponseObject(object: AnyObject) throws -> Response {
+    public func responsesFromObject(object: AnyObject) throws -> Responses {
         guard let array = object as? [AnyObject] else {
             throw JSONRPCError.NonArrayResponse(object)
         }
 
         return (
-            try element1.parseResponseArray(array),
-            try element2.parseResponseArray(array),
-            try element3.parseResponseArray(array)
+            try element1.responseFromArray(array),
+            try element2.responseFromArray(array),
+            try element3.responseFromArray(array)
         )
     }
 

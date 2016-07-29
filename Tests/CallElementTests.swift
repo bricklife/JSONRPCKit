@@ -46,7 +46,7 @@ class CallElementTests: XCTestCase {
         XCTAssertEqual(parameters?["key"] as? String, "value")
     }
 
-    func testParseResponseObject() {
+    func testResponseFromObject() {
         let request = TestRequest(method: "method", parameters: nil)
         let element = CallElement(request: request, version: "2.0", id: Id.Number(1))
 
@@ -58,11 +58,11 @@ class CallElementTests: XCTestCase {
             ]
         ]
 
-        let response = try? element.parseResponseObject(responseObject)
+        let response = try? element.responseFromObject(responseObject)
         XCTAssertEqual(response?["key"], "value")
     }
 
-    func testParseResponseArray() {
+    func testResponseFromArray() {
         let request = TestRequest(method: "method", parameters: nil)
         let element = CallElement(request: request, version: "2.0", id: Id.Number(1))
 
@@ -83,11 +83,11 @@ class CallElementTests: XCTestCase {
             ]
         ]
 
-        let response = try? element.parseResponseArray(responseArray)
+        let response = try? element.responseFromArray(responseArray)
         XCTAssertEqual(response?["key1"], "value1")
     }
 
-    func testParseResponseObjectResponseError() {
+    func testResponseFromObjectResponseError() {
         let request = TestRequest(method: "method", parameters: nil)
         let element = CallElement(request: request, version: "2.0", id: Id.Number(1))
 
@@ -104,7 +104,7 @@ class CallElementTests: XCTestCase {
         ]
 
         do {
-            try element.parseResponseObject(responseObject)
+            try element.responseFromObject(responseObject)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
@@ -118,7 +118,7 @@ class CallElementTests: XCTestCase {
         }
     }
 
-    func testParseResponseArrayResponseError() {
+    func testResponseFromArrayResponseError() {
         let request = TestRequest(method: "method", parameters: nil)
         let element = CallElement(request: request, version: "2.0", id: Id.Number(1))
 
@@ -142,7 +142,7 @@ class CallElementTests: XCTestCase {
         ]
 
         do {
-            try element.parseResponseArray(responseArray)
+            try element.responseFromArray(responseArray)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
@@ -156,7 +156,7 @@ class CallElementTests: XCTestCase {
         }
     }
 
-    func testParseResponseObjectResultObjectParseError() {
+    func testResponseFromObjectResultObjectParseError() {
         let request = TestParseErrorRequest(method: "method", parameters: nil)
         let element = CallElement(request: request, version: "2.0", id: Id.Number(1))
 
@@ -167,7 +167,7 @@ class CallElementTests: XCTestCase {
         ]
 
         do {
-            try element.parseResponseObject(responseObject)
+            try element.responseFromObject(responseObject)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
@@ -179,7 +179,7 @@ class CallElementTests: XCTestCase {
         }
     }
 
-    func testParseResponseArrayResultObjectParseError() {
+    func testResponseFromArrayResultObjectParseError() {
         let request = TestParseErrorRequest(method: "method", parameters: nil)
         let element = CallElement(request: request, version: "2.0", id: Id.Number(1))
 
@@ -197,7 +197,7 @@ class CallElementTests: XCTestCase {
         ]
 
         do {
-            try element.parseResponseArray(responseArray)
+            try element.responseFromArray(responseArray)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
@@ -209,7 +209,7 @@ class CallElementTests: XCTestCase {
         }
     }
 
-    func testParseResponseObjectErrorObjectParseError() {
+    func testResponseFromObjectErrorObjectParseError() {
         let request = TestRequest(method: "method", parameters: nil)
         let element = CallElement(request: request, version: "2.0", id: Id.Number(1))
 
@@ -222,7 +222,7 @@ class CallElementTests: XCTestCase {
         ]
 
         do {
-            try element.parseResponseObject(responseObject)
+            try element.responseFromObject(responseObject)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
@@ -234,7 +234,7 @@ class CallElementTests: XCTestCase {
         }
     }
 
-    func testParseResponseArrayErrorObjectParseError() {
+    func testResponseFromArrayErrorObjectParseError() {
         let request = TestRequest(method: "method", parameters: nil)
         let element = CallElement(request: request, version: "2.0", id: Id.Number(1))
 
@@ -254,7 +254,7 @@ class CallElementTests: XCTestCase {
         ]
 
         do {
-            try element.parseResponseArray(responseArray)
+            try element.responseFromArray(responseArray)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
@@ -266,7 +266,7 @@ class CallElementTests: XCTestCase {
         }
     }
 
-    func testParseResponseObjectUnsupportedVersion() {
+    func testResponseFromObjectUnsupportedVersion() {
         let request = TestRequest(method: "method", parameters: nil)
         let element = CallElement(request: request, version: "2.0", id: Id.Number(1))
 
@@ -279,7 +279,7 @@ class CallElementTests: XCTestCase {
         ]
 
         do {
-            try element.parseResponseObject(responseObject)
+            try element.responseFromObject(responseObject)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
@@ -291,7 +291,7 @@ class CallElementTests: XCTestCase {
         }
     }
 
-    func testParseResponseArrayUnsupportedVersion() {
+    func testResponseFromArrayUnsupportedVersion() {
         let request = TestRequest(method: "method", parameters: nil)
         let element = CallElement(request: request, version: "2.0", id: Id.Number(1))
 
@@ -309,7 +309,7 @@ class CallElementTests: XCTestCase {
         ]
 
         do {
-            try element.parseResponseArray(responseArray)
+            try element.responseFromArray(responseArray)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
@@ -321,7 +321,7 @@ class CallElementTests: XCTestCase {
         }
     }
 
-    func testParseResponseObjectResponseNotFound() {
+    func testResponseFromObjectResponseNotFound() {
         let request = TestRequest(method: "method", parameters: nil)
         let element = CallElement(request: request, version: "2.0", id: Id.Number(1))
 
@@ -332,7 +332,7 @@ class CallElementTests: XCTestCase {
         ]
 
         do {
-            try element.parseResponseObject(responseObject)
+            try element.responseFromObject(responseObject)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
@@ -345,7 +345,7 @@ class CallElementTests: XCTestCase {
         }
     }
 
-    func testParseResponseArrayResponseNotFound() {
+    func testResponseFromArrayResponseNotFound() {
         let request = TestRequest(method: "method", parameters: nil)
         let element = CallElement(request: request, version: "2.0", id: Id.Number(1))
 
@@ -363,7 +363,7 @@ class CallElementTests: XCTestCase {
         ]
 
         do {
-            try element.parseResponseArray(responseArray)
+            try element.responseFromArray(responseArray)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
@@ -376,7 +376,7 @@ class CallElementTests: XCTestCase {
         }
     }
 
-    func testParseResponseObjectMissingBothResultAndError() {
+    func testResponseFromObjectMissingBothResultAndError() {
         let request = TestRequest(method: "method", parameters: nil)
         let element = CallElement(request: request, version: "2.0", id: Id.Number(1))
 
@@ -386,7 +386,7 @@ class CallElementTests: XCTestCase {
         ]
 
         do {
-            try element.parseResponseObject(responseObject)
+            try element.responseFromObject(responseObject)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
@@ -398,7 +398,7 @@ class CallElementTests: XCTestCase {
         }
     }
 
-    func testParseResponseArrayMissingBothResultAndError() {
+    func testResponseFromArrayMissingBothResultAndError() {
         let request = TestRequest(method: "method", parameters: nil)
         let element = CallElement(request: request, version: "2.0", id: Id.Number(1))
 
@@ -415,7 +415,7 @@ class CallElementTests: XCTestCase {
         ]
 
         do {
-            try element.parseResponseArray(responseArray)
+            try element.responseFromArray(responseArray)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError

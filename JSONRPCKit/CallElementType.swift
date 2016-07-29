@@ -17,8 +17,8 @@ public protocol CallElementType {
     var id: Id? { get }
     var body: AnyObject { get }
 
-    func parseResponseObject(object: AnyObject) throws -> Request.Response
-    func parseResponseArray(array: [AnyObject]) throws -> Request.Response
+    func responseFromObject(object: AnyObject) throws -> Request.Response
+    func responseFromArray(array: [AnyObject]) throws -> Request.Response
 
     func resultFromObject(object: AnyObject) -> Result<Request.Response, JSONRPCError>
     func resultFromArray(array: [AnyObject]) -> Result<Request.Response, JSONRPCError>
@@ -26,7 +26,7 @@ public protocol CallElementType {
 
 public extension CallElementType {
     /// - Throws: JSONRPCError
-    func parseResponseObject(object: AnyObject) throws -> Request.Response {
+    func responseFromObject(object: AnyObject) throws -> Request.Response {
         switch resultFromObject(object) {
         case .Success(let response):
             return response
@@ -37,7 +37,7 @@ public extension CallElementType {
     }
 
     /// - Throws: JSONRPCError
-    func parseResponseArray(array: [AnyObject]) throws -> Request.Response {
+    func responseFromArray(array: [AnyObject]) throws -> Request.Response {
         switch resultFromArray(array) {
         case .Success(let response):
             return response
@@ -90,11 +90,11 @@ public extension CallElementType {
 }
 
 public extension CallElementType where Request.Response == Void {
-    public func parseResponseObject(object: AnyObject) throws -> Request.Response {
+    public func responseFromObject(object: AnyObject) throws -> Request.Response {
         return ()
     }
 
-    public func parseResponseArray(array: [AnyObject]) throws -> Request.Response {
+    public func responseFromArray(array: [AnyObject]) throws -> Request.Response {
         return ()
     }
 
