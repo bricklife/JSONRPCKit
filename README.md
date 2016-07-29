@@ -197,7 +197,7 @@ let request2 = CountCharactersRequest(message: "sapporo")
 let call = callFactory.create(request1, request2)
 let httpRequest = MyServiceRequest(call: call)
 
-Session.sendRequest(request) { result in
+Session.sendRequest(httpRequest) { result in
     switch result {
     case .Success(let response1, let response2):
         print(response1.count) // CountCharactersResponse
