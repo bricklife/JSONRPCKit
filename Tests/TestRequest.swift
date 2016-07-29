@@ -26,3 +26,18 @@ struct TestNotificationRequest: RequestType {
     let method: String
     let parameters: AnyObject?
 }
+
+struct TestParseErrorRequest: RequestType {
+    struct ParseError: ErrorType {
+
+    }
+
+    typealias Response = AnyObject
+
+    let method: String
+    let parameters: AnyObject?
+
+    func responseFromResultObject(resultObject: AnyObject) throws -> AnyObject {
+        throw ParseError()
+    }
+}

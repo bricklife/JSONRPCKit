@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7F359B761D4B1A1100032E8D /* CallElementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F359B751D4B1A1100032E8D /* CallElementTests.swift */; };
+		7F359B781D4B1B0500032E8D /* CallFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F359B771D4B1B0500032E8D /* CallFactoryTests.swift */; };
 		7FC654F81D48B6CB004C390C /* CallType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC654F61D48B6CB004C390C /* CallType.swift */; };
 		7FC654F91D48B6CB004C390C /* CallElementType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC654F71D48B6CB004C390C /* CallElementType.swift */; };
 		7FC654FB1D49DF27004C390C /* CallFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC654FA1D49DF27004C390C /* CallFactory.swift */; };
-		7FC655031D49EA19004C390C /* RequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC655021D49EA19004C390C /* RequestTests.swift */; };
 		7FC655051D49EA19004C390C /* JSONRPCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB0C34E1BF0B1D6006A7D41 /* JSONRPCKit.framework */; };
 		7FC6550C1D49FA20004C390C /* TestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC6550B1D49FA20004C390C /* TestRequest.swift */; };
-		7FC6550E1D49FBDC004C390C /* ResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC6550D1D49FBDC004C390C /* ResponseTests.swift */; };
 		CB31EFBA1CF6E8FE00DD13DD /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB31EFB91CF6E8FE00DD13DD /* Result.framework */; };
 		CB36EB281BF39028003A4BCA /* Id.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB36EB271BF39028003A4BCA /* Id.swift */; };
 		CB82B9E21BF0C5CE00756CB1 /* JSONRPCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB82B9E11BF0C5CE00756CB1 /* JSONRPCError.swift */; };
@@ -34,14 +34,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7F359B751D4B1A1100032E8D /* CallElementTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallElementTests.swift; sourceTree = "<group>"; };
+		7F359B771D4B1B0500032E8D /* CallFactoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallFactoryTests.swift; sourceTree = "<group>"; };
 		7FC654F61D48B6CB004C390C /* CallType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallType.swift; sourceTree = "<group>"; };
 		7FC654F71D48B6CB004C390C /* CallElementType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallElementType.swift; sourceTree = "<group>"; };
 		7FC654FA1D49DF27004C390C /* CallFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallFactory.swift; sourceTree = "<group>"; };
 		7FC655001D49EA19004C390C /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7FC655021D49EA19004C390C /* RequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTests.swift; sourceTree = "<group>"; };
 		7FC655041D49EA19004C390C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7FC6550B1D49FA20004C390C /* TestRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestRequest.swift; sourceTree = "<group>"; };
-		7FC6550D1D49FBDC004C390C /* ResponseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseTests.swift; sourceTree = "<group>"; };
 		CB31EFB91CF6E8FE00DD13DD /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = "../Debug-iphonesimulator/Result.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB36EB271BF39028003A4BCA /* Id.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Id.swift; sourceTree = "<group>"; };
 		CB82B9E11BF0C5CE00756CB1 /* JSONRPCError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONRPCError.swift; sourceTree = "<group>"; };
@@ -77,8 +77,8 @@
 			isa = PBXGroup;
 			children = (
 				7FC6550B1D49FA20004C390C /* TestRequest.swift */,
-				7FC655021D49EA19004C390C /* RequestTests.swift */,
-				7FC6550D1D49FBDC004C390C /* ResponseTests.swift */,
+				7F359B751D4B1A1100032E8D /* CallElementTests.swift */,
+				7F359B771D4B1B0500032E8D /* CallFactoryTests.swift */,
 				7FC655041D49EA19004C390C /* Info.plist */,
 			);
 			path = Tests;
@@ -237,8 +237,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7FC655031D49EA19004C390C /* RequestTests.swift in Sources */,
-				7FC6550E1D49FBDC004C390C /* ResponseTests.swift in Sources */,
+				7F359B781D4B1B0500032E8D /* CallFactoryTests.swift in Sources */,
+				7F359B761D4B1A1100032E8D /* CallElementTests.swift in Sources */,
 				7FC6550C1D49FA20004C390C /* TestRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -427,6 +427,7 @@
 				7FC6550A1D49EA19004C390C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CBB0C3481BF0B1D6006A7D41 /* Build configuration list for PBXProject "JSONRPCKit" */ = {
 			isa = XCConfigurationList;
