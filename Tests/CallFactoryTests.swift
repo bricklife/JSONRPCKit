@@ -8,6 +8,7 @@
 
 import XCTest
 import JSONRPCKit
+import Dispatch
 
 class CallFactoryTests: XCTestCase {
     var callFactory: CallFactory!
@@ -43,5 +44,21 @@ class CallFactoryTests: XCTestCase {
         XCTAssertEqual(call.element1.id?.value as? Int, 1)
         XCTAssertEqual(call.element2.id?.value as? Int, 2)
         XCTAssertEqual(call.element3.id?.value as? Int, 3)
+    }
+
+    func testThreadSafety() {
+        let operationQueue = NSOperationQueue()
+
+        for _ in 1..<10000 {
+            operationQueue.addOperationWithBlock {
+                let request = TestRequest(method: "method", parameters: nil)
+                self.callFactory.create(request)
+            }
+        }
+
+        operationQueue.waitUntilAllOperationsAreFinished()
+
+        let nextId = callFactory.idGenerator.next().value as? Int
+        XCTAssertEqual(nextId, 10000)
     }
 }
