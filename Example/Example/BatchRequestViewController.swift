@@ -16,42 +16,34 @@ class BatchRequestViewController: UIViewController {
     @IBOutlet weak var secondTextField: UITextField!
     @IBOutlet weak var subtractAnswerLabel: UILabel!
     @IBOutlet weak var multiplyAnswerLabel: UILabel!
-    
+
+    let callFactory = CallFactory(version: "2.0", idGenerator: StringIdGenerator())
+
     func subtractAndmultiply(first: Int, _ second: Int) {
-        let jsonrpc = JSONRPC()
-        
         let subtractRequest = Subtract(
             minuend: first,
             subtrahend: second
         )
-        
-        jsonrpc.addRequest(subtractRequest) { [weak self] result in
-            switch result {
-            case .Success(let answer):
-                self?.subtractAnswerLabel.text = "\(answer)"
-            case .Failure:
-                self?.subtractAnswerLabel.text = "?"
-            }
-        }
-        
+
         let multiplyRequest = Multiply(
             multiplicand: first,
             multiplier: second
         )
-        
-        jsonrpc.addRequest(multiplyRequest) { [weak self] result in
+
+        let call = callFactory.create(subtractRequest, multiplyRequest)
+        let httpRequest = MathServiceRequest(call: call)
+
+        Session.sendRequest(httpRequest) { [weak self] result in
             switch result {
-            case .Success(let answer):
-                self?.multiplyAnswerLabel.text = "\(answer)"
-            case .Failure:
+            case .Success(let subtractAnswer, let multiplyAnswer):
+                self?.subtractAnswerLabel.text = "\(subtractAnswer)"
+                self?.multiplyAnswerLabel.text = "\(multiplyAnswer)"
+
+            case .Failure(let error):
+                self?.subtractAnswerLabel.text = "?"
                 self?.multiplyAnswerLabel.text = "?"
+                self?.showAlertWithError(error)
             }
-        }
-        
-        MathServiceAPI.request(jsonrpc) { [weak self] error in
-            let alert = UIAlertController(title: error.localizedDescription, message: error.localizedRecoverySuggestion, preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-            self?.presentViewController(alert, animated: true, completion: nil)
         }
     }
     

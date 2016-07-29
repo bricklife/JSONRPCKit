@@ -7,58 +7,51 @@
 //
 
 import UIKit
+import APIKit
 import JSONRPCKit
 
-public class StringIdentifierGenerator: IdGenerator {
+public struct StringIdGenerator: IdGeneratorType {
+
+    private var currentId = 1
     
-    private var currentIdentifier = 1
-    
-    public func next() -> Id {
+    public mutating func next() -> Id {
         defer {
-            currentIdentifier += 1
+            currentId += 1
         }
         
-        return .StringIdentifier("id\(currentIdentifier)")
+        return .String("id\(currentId)")
     }
 }
-
 
 class SingleRequestViewController: UIViewController {
     
     @IBOutlet weak var firstTextField: UITextField!
     @IBOutlet weak var secondTextField: UITextField!
     @IBOutlet weak var subtractAnswerLabel: UILabel!
+
+    let callFactory = CallFactory(version: "2.0", idGenerator: StringIdGenerator())
     
     func subtract(first: Int, _ second: Int) {
-        let jsonrpc = JSONRPC(idGenerator: StringIdentifierGenerator())
-        
-        let subtractRequest = Divide(
+        let divideRequest = Divide(
             dividend: first,
             divisor: second
         )
-        
-        jsonrpc.addRequest(subtractRequest) { [weak self] result in
+
+        let call = callFactory.create(divideRequest)
+        let httpRequest = MathServiceRequest(call: call)
+
+        Session.sendRequest(httpRequest) { [weak self] result in
             switch result {
             case .Success(let answer):
                 self?.subtractAnswerLabel.text = "\(answer)"
                 
             case .Failure(let error):
                 self?.subtractAnswerLabel.text = "?"
-                if case .RequestError(_, let message, let data as String) = error {
-                    let alert = UIAlertController(title: message, message: data, preferredStyle: .Alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-                    self?.presentViewController(alert, animated: true, completion: nil)
-                }
+                self?.showAlertWithError(error)
             }
         }
-        
-        MathServiceAPI.request(jsonrpc) { [weak self] error in
-            let alert = UIAlertController(title: error.localizedDescription, message: error.localizedRecoverySuggestion, preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-            self?.presentViewController(alert, animated: true, completion: nil)
-        }
     }
-    
+
     @IBAction func didPush(sender: AnyObject) {
         guard let first = Int(firstTextField.text!), second = Int(secondTextField.text!) else {
             subtractAnswerLabel.text = "?"

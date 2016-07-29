@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7FD0A33F1D4B5926007C9EAB /* APIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FD0A33E1D4B5926007C9EAB /* APIKit.framework */; };
+		7FD0A3431D4B5E80007C9EAB /* UIViewController+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0A3421D4B5E80007C9EAB /* UIViewController+Error.swift */; };
 		CB31EFB11CF6E88100DD13DD /* JSONRPCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB31EFB01CF6E88100DD13DD /* JSONRPCKit.framework */; };
 		CB31EFB21CF6E88100DD13DD /* JSONRPCKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CB31EFB01CF6E88100DD13DD /* JSONRPCKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CB31EFB41CF6E88800DD13DD /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB31EFB31CF6E88800DD13DD /* Result.framework */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		7FD0A33E1D4B5926007C9EAB /* APIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = APIKit.framework; path = ../Carthage/Checkouts/APIKit/build/Debug/APIKit.framework; sourceTree = "<group>"; };
+		7FD0A3421D4B5E80007C9EAB /* UIViewController+Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Error.swift"; sourceTree = "<group>"; };
 		CB31EFB01CF6E88100DD13DD /* JSONRPCKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = JSONRPCKit.framework; path = "../Debug-iphonesimulator/JSONRPCKit.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB31EFB31CF6E88800DD13DD /* Result.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Result.framework; path = "../Debug-iphonesimulator/Result.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB31EFB61CF6E8B400DD13DD /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Alamofire.framework; path = "../Debug-iphonesimulator/Alamofire.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,6 +93,7 @@
 				CB63E2581CE230E300E22B5C /* SingleRequestViewController.swift */,
 				CB63E25A1CE230E300E22B5C /* BatchRequestViewController.swift */,
 				CB63E2591CE230E300E22B5C /* MathService.swift */,
+				7FD0A3421D4B5E80007C9EAB /* UIViewController+Error.swift */,
 				CB63E2521CE2309100E22B5C /* Info.plist */,
 				CB63E24D1CE2309100E22B5C /* Assets.xcassets */,
 				CB63E24F1CE2309100E22B5C /* LaunchScreen.storyboard */,
@@ -182,6 +185,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB63E25C1CE230E300E22B5C /* MathService.swift in Sources */,
+				7FD0A3431D4B5E80007C9EAB /* UIViewController+Error.swift in Sources */,
 				CB63E25B1CE230E300E22B5C /* SingleRequestViewController.swift in Sources */,
 				CB63E25D1CE230E300E22B5C /* BatchRequestViewController.swift in Sources */,
 				CB63E2471CE2309100E22B5C /* AppDelegate.swift in Sources */,
