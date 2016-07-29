@@ -53,7 +53,7 @@ To create JSON-RPC request object, pass `RequestType` instances to `CallFactory`
 ```swift
 let callFactory = CallFactory(version: "2.0", idGenerator: NumberIdGenerator())
 let request1 = CountCharactersRequest(characters: "tokyo")
-let request2 = CountCharactersRequest(characters: "sapporo")
+let request2 = CountCharactersRequest(characters: "california")
 let call = callFactory.create(request1, request2)
 ```
 
@@ -193,7 +193,7 @@ struct MyServiceRequest<Call: CallType>: APIKit.RequestType {
 ```swift
 let callFactory = CallFactory(version: "2.0", idGenerator: NumberIdGenerator())
 let request1 = CountCharactersRequest(message: "tokyo")
-let request2 = CountCharactersRequest(message: "sapporo")
+let request2 = CountCharactersRequest(message: "california")
 let call = callFactory.create(request1, request2)
 let httpRequest = MyServiceRequest(call: call)
 
