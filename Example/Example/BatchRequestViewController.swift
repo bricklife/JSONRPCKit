@@ -8,6 +8,7 @@
 
 import UIKit
 import JSONRPCKit
+import APIKit
 
 class BatchRequestViewController: UIViewController {
     
