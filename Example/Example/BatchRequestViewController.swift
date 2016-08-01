@@ -17,7 +17,7 @@ class BatchRequestViewController: UIViewController {
     @IBOutlet weak var subtractAnswerLabel: UILabel!
     @IBOutlet weak var multiplyAnswerLabel: UILabel!
 
-    let callFactory = CallBatchFactory(version: "2.0", idGenerator: StringIdGenerator())
+    let callBatchFactory = CallBatchFactory(version: "2.0", idGenerator: StringIdGenerator())
 
     func subtractAndmultiply(first: Int, _ second: Int) {
         let subtractRequest = Subtract(
@@ -30,7 +30,7 @@ class BatchRequestViewController: UIViewController {
             multiplier: second
         )
 
-        let callBatch = callFactory.create(subtractRequest, multiplyRequest)
+        let callBatch = callBatchFactory.create(subtractRequest, multiplyRequest)
         let httpRequest = MathServiceRequest(callBatch: callBatch)
 
         Session.sendRequest(httpRequest) { [weak self] result in
