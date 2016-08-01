@@ -83,7 +83,7 @@ class CallTests: XCTestCase {
             ]
         ]
 
-        let response = try? call.responseFromArray(responseArray)
+        let response = try? call.responseFromBatchObjects(responseArray)
         XCTAssertEqual(response?["key1"], "value1")
     }
 
@@ -142,7 +142,7 @@ class CallTests: XCTestCase {
         ]
 
         do {
-            try call.responseFromArray(responseArray)
+            try call.responseFromBatchObjects(responseArray)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
@@ -197,7 +197,7 @@ class CallTests: XCTestCase {
         ]
 
         do {
-            try call.responseFromArray(responseArray)
+            try call.responseFromBatchObjects(responseArray)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
@@ -254,7 +254,7 @@ class CallTests: XCTestCase {
         ]
 
         do {
-            try call.responseFromArray(responseArray)
+            try call.responseFromBatchObjects(responseArray)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
@@ -309,7 +309,7 @@ class CallTests: XCTestCase {
         ]
 
         do {
-            try call.responseFromArray(responseArray)
+            try call.responseFromBatchObjects(responseArray)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
@@ -363,7 +363,7 @@ class CallTests: XCTestCase {
         ]
 
         do {
-            try call.responseFromArray(responseArray)
+            try call.responseFromBatchObjects(responseArray)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
@@ -415,7 +415,7 @@ class CallTests: XCTestCase {
         ]
 
         do {
-            try call.responseFromArray(responseArray)
+            try call.responseFromBatchObjects(responseArray)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError

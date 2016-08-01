@@ -18,10 +18,10 @@ public protocol CallType {
     var body: AnyObject { get }
 
     func responseFromObject(object: AnyObject) throws -> Request.Response
-    func responseFromArray(array: [AnyObject]) throws -> Request.Response
+    func responseFromBatchObjects(objects: [AnyObject]) throws -> Request.Response
 
     func resultFromObject(object: AnyObject) -> Result<Request.Response, JSONRPCError>
-    func resultFromArray(array: [AnyObject]) -> Result<Request.Response, JSONRPCError>
+    func resultFromBatchObjects(objects: [AnyObject]) -> Result<Request.Response, JSONRPCError>
 }
 
 public extension CallType {
@@ -37,8 +37,8 @@ public extension CallType {
     }
 
     /// - Throws: JSONRPCError
-    func responseFromArray(array: [AnyObject]) throws -> Request.Response {
-        switch resultFromArray(array) {
+    func responseFromBatchObjects(objects: [AnyObject]) throws -> Request.Response {
+        switch resultFromBatchObjects(objects) {
         case .Success(let response):
             return response
 
@@ -76,13 +76,13 @@ public extension CallType {
         }
     }
 
-    func resultFromArray(array: [AnyObject]) -> Result<Request.Response, JSONRPCError> {
-        let matchedObject = array
+    func resultFromBatchObjects(objects: [AnyObject]) -> Result<Request.Response, JSONRPCError> {
+        let matchedObject = objects
             .filter { $0["id"].flatMap(Id.init) == id }
             .first
 
         guard let object = matchedObject else {
-            return .Failure(.ResponseNotFound(requestId: id, object: array))
+            return .Failure(.ResponseNotFound(requestId: id, object: objects))
         }
 
         return resultFromObject(object)
@@ -94,7 +94,7 @@ public extension CallType where Request.Response == Void {
         return ()
     }
 
-    public func responseFromArray(array: [AnyObject]) throws -> Request.Response {
+    public func responseFromBatchObjects(objects: [AnyObject]) throws -> Request.Response {
         return ()
     }
 
@@ -102,7 +102,7 @@ public extension CallType where Request.Response == Void {
         return .Success()
     }
 
-    func resultFromArray(array: [AnyObject]) -> Result<Request.Response, JSONRPCError> {
+    func resultFromBatchObjects(objects: [AnyObject]) -> Result<Request.Response, JSONRPCError> {
         return .Success()
     }
 }

@@ -53,18 +53,18 @@ public struct CallBatch2<Request1: RequestType, Request2: RequestType>: CallBatc
     }
 
     public func responsesFromObject(object: AnyObject) throws -> Responses {
-        guard let array = object as? [AnyObject] else {
+        guard let batchObjects = object as? [AnyObject] else {
             throw JSONRPCError.NonArrayResponse(object)
         }
 
         return (
-            try call1.responseFromArray(array),
-            try call2.responseFromArray(array)
+            try call1.responseFromBatchObjects(batchObjects),
+            try call2.responseFromBatchObjects(batchObjects)
         )
     }
 
     public func resultsFromObject(object: AnyObject) -> Results {
-        guard let array = object as? [AnyObject] else {
+        guard let batchObjects = object as? [AnyObject] else {
             return (
                 .Failure(.NonArrayResponse(object)),
                 .Failure(.NonArrayResponse(object))
@@ -72,8 +72,8 @@ public struct CallBatch2<Request1: RequestType, Request2: RequestType>: CallBatc
         }
 
         return (
-            call1.resultFromArray(array),
-            call2.resultFromArray(array)
+            call1.resultFromBatchObjects(batchObjects),
+            call2.resultFromBatchObjects(batchObjects)
         )
     }
 }
@@ -95,19 +95,19 @@ public struct CallBatch3<Request1: RequestType, Request2: RequestType, Request3:
     }
 
     public func responsesFromObject(object: AnyObject) throws -> Responses {
-        guard let array = object as? [AnyObject] else {
+        guard let batchObjects = object as? [AnyObject] else {
             throw JSONRPCError.NonArrayResponse(object)
         }
 
         return (
-            try call1.responseFromArray(array),
-            try call2.responseFromArray(array),
-            try call3.responseFromArray(array)
+            try call1.responseFromBatchObjects(batchObjects),
+            try call2.responseFromBatchObjects(batchObjects),
+            try call3.responseFromBatchObjects(batchObjects)
         )
     }
 
     public func resultsFromObject(object: AnyObject) -> Results {
-        guard let array = object as? [AnyObject] else {
+        guard let batchObjects = object as? [AnyObject] else {
             return (
                 .Failure(.NonArrayResponse(object)),
                 .Failure(.NonArrayResponse(object)),
@@ -116,9 +116,9 @@ public struct CallBatch3<Request1: RequestType, Request2: RequestType, Request3:
         }
 
         return (
-            call1.resultFromArray(array),
-            call2.resultFromArray(array),
-            call3.resultFromArray(array)
+            call1.resultFromBatchObjects(batchObjects),
+            call2.resultFromBatchObjects(batchObjects),
+            call3.resultFromBatchObjects(batchObjects)
         )
     }
 }
