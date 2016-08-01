@@ -20,12 +20,12 @@ public final class CallBatchFactory {
         self.idGenerator = idGenerator
     }
 
-    public func create<Request: RequestType>(request: Request) -> CallBatch1<Request> {
+    public func create<Request: RequestType>(request: Request) -> CallBatch<Request> {
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
         let call = Call(request: request, version: version, id: idGenerator.next())
         dispatch_semaphore_signal(semaphore)
 
-        return CallBatch1(call: call)
+        return CallBatch(call: call)
     }
 
     public func create<Request1: RequestType, Request2: RequestType>(request1: Request1, _ request2: Request2) -> CallBatch2<Request1, Request2> {

@@ -19,7 +19,7 @@ public protocol CallBatchType {
     func resultsFromObject(object: AnyObject) -> Results
 }
 
-public struct CallBatch1<Request: RequestType>: CallBatchType {
+public struct CallBatch<Request: RequestType>: CallBatchType {
     public typealias Responses = Request.Response
     public typealias Results = Result<Request.Response, JSONRPCError>
 
