@@ -2,10 +2,26 @@
 
 JSONRPCKit is a [JSON-RPC 2.0](http://www.jsonrpc.org/specification) library purely written in Swift. This library is highly inspired by [APIKit](https://github.com/ishkawa/APIKit).
 
+```swift
+// Generating request JSON
+let callBatchFactory = CallBatchFactory(version: "2.0", idGenerator: NumberIdGenerator())
+let request = SubtractRequest(lhs: 42, rhs: 23)
+let batch = callBatchFactory.create(request)
+batch.requestObject // ["jsonrpc": "2.0", "method": "subtract", "params": [42, 23], "id": 1]
+
+// Parsing response JSON
+let responseObject: AnyObject = ["jsonrpc": "2.0", "result": 19, "id": 1]
+let response = try! batch.responsesFromObject(responseObject)
+response // 19 (type of response is inferred from SubtractRequest.Response)
+```
 
 ## Basic usage
 
-### Defining request
+1. Define request type
+2. Generate request JSON
+3. Parse response JSON
+
+### Defining request type
 
 First of all, define a request type that conforms to `RequestType`.
 
@@ -46,19 +62,19 @@ struct CountCharactersResponse {
 ```
 
 
-### Creating request
+### Generating request JSON
 
-To create JSON-RPC request object, pass `RequestType` instances to `CallFactory` instance.
+To generate request JSON, pass `RequestType` instances to `CallBatchFactory` instance, which has common JSON-RPC version and identifier generator.
+When `CallBatchFactory` instance receives request(s), it generates identifier(s) for the request(s) and request JSON by combining id, version, method and parameters.
 
 ```swift
-let callFactory = CallFactory(version: "2.0", idGenerator: NumberIdGenerator())
+let callBatchFactory = CallBatchFactory(version: "2.0", idGenerator: NumberIdGenerator())
 let request1 = CountCharactersRequest(characters: "tokyo")
 let request2 = CountCharactersRequest(characters: "california")
-let call = callFactory.create(request1, request2)
+let batch = callBatchFactory.create(request1, request2)
 ```
 
-`CallFactory` creates `CallType` instance, which represents JSON-RPC call.
-`call.requestObject` represents JSON-RPC request object.
+The request JSON is available in `batch.requestObject`. It looks like below:
 
 ```json
 [
@@ -82,9 +98,9 @@ let call = callFactory.create(request1, request2)
 ```
 
 
-### Parsing response
+### Parsing response JSON
 
-Suppose that following JSON is returned as response object:
+Suppose that following JSON is returned from server:
 
 ```json
 [
@@ -105,66 +121,32 @@ Suppose that following JSON is returned as response object:
 ]
 ```
 
-To parse response object, execute `responseFromObject(_:)` of `CallFactory` instance.
-This method returns tuple of responses.
+To parse response object, execute `responsesFromObject(_:)` of `CallBatchType` instance.
+When `responsesFromObject(_:)` is called, `CallBatchType` finds corresponding response object by comparing request id and response id.
+After it find the response object, it executes `responsesFromObject(_:)` of `Response` to get `Request.Response` from the response object.
 
 ```swift
-let call = ...
 let responseObject = ...
-let (response1, response2) = try! call.responsesFromObject(responseObject)
+let (response1, response2) = try! batch.responsesFromObject(responseObject)
 print(response1) // CountCharactersResponse(count: 5)
 print(response2) // CountCharactersResponse(count: 10)
 ```
 
+## JSON-RPC over HTTP by [APIKit](https://github.com/ishkawa/APIKit)
 
-### Handling errors individually
+APIKit is a type-safe networking abstraction layer.
 
-If you need to treat results of individually, use `resultsFromObject(_:)` of `CallFactory` instance.
-In JSON below, the first response indicates success, but the second one indicates failure.
+### Defining HTTP request type
 
-```json
-[
-  {
-    "jsonrpc" : "2.0",
-    "id" : 1,
-    "result" : {
-      "count" : 5
-    }
-  },
-  {
-    "jsonrpc" : "2.0",
-    "id" : 2,
-    "error" : {
-      "code" : 999,
-      "message" : "error!"
-    }
-  }
-]
-```
-
-`resultsFromObject(_:)` returns tuple of `Result<Request.Response, JSONRPCError>`.
-
-```swift
-let call = ...
-let responseObject = ...
-let (result1, result2) = call.resultsFromObject(responseObject)
-print(response1.count) // Result.Success(CountCharactersResponse(count: 5))
-print(response2.count) // Result.Failure(JSONRPCError.ResponseError(code: 999, message: "error!", data: nil))
-```
-
-## Combination with APIKit
-
-[APIKit](https://github.com/ishkawa/APIKit) is useful to implement JSON-RPC over HTTP/HTTPS.
-
-### Defining RequestType in APIKit
+APIKit also has `RequestType` that represents HTTP request.
 
 ```swift
 import APIKit
 
-struct MyServiceRequest<Call: CallType>: APIKit.RequestType {
-    typealias Response = Call.Response
+struct MyServiceRequest<CallBatch: CallBatchType>: APIKit.RequestType {
+    typealias Response = CallBatch.Responses
 
-    let call: Call
+    let batch: CallBatch
 
     var baseURL: NSURL {
         return NSURL(string: "https://api.example.com/")!
@@ -179,11 +161,11 @@ struct MyServiceRequest<Call: CallType>: APIKit.RequestType {
     }
 
     var parameters: AnyObject? {
-        return call.requestObject
+        return batch.requestObject
     }
 
     func responseFromObject(object: AnyObject, URLResponse: NSHTTPURLResponse) throws -> Response {
-        return try call.responsesFromObject(object)
+        return try batch.responsesFromObject(object)
     }
 }
 ```
@@ -191,11 +173,11 @@ struct MyServiceRequest<Call: CallType>: APIKit.RequestType {
 ### Sending HTTP/HTTPS request
 
 ```swift
-let callFactory = CallFactory(version: "2.0", idGenerator: NumberIdGenerator())
+let callBatchFactory = CallBatchFactory(version: "2.0", idGenerator: NumberIdGenerator())
 let request1 = CountCharactersRequest(message: "tokyo")
 let request2 = CountCharactersRequest(message: "california")
-let call = callFactory.create(request1, request2)
-let httpRequest = MyServiceRequest(call: call)
+let batch = callBatchFactory.create(request1, request2)
+let httpRequest = MyServiceRequest(batch: batch)
 
 Session.sendRequest(httpRequest) { result in
     switch result {
