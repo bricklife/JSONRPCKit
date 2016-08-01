@@ -26,7 +26,7 @@ public protocol CallType {
 
 public extension CallType {
     /// - Throws: JSONRPCError
-    func responseFromObject(object: AnyObject) throws -> Request.Response {
+    public func responseFromObject(object: AnyObject) throws -> Request.Response {
         switch resultFromObject(object) {
         case .Success(let response):
             return response
@@ -37,7 +37,7 @@ public extension CallType {
     }
 
     /// - Throws: JSONRPCError
-    func responseFromBatchObjects(objects: [AnyObject]) throws -> Request.Response {
+    public func responseFromBatchObjects(objects: [AnyObject]) throws -> Request.Response {
         switch resultFromBatchObjects(objects) {
         case .Success(let response):
             return response
@@ -47,7 +47,7 @@ public extension CallType {
         }
     }
 
-    func resultFromObject(object: AnyObject) -> Result<Request.Response, JSONRPCError> {
+    public func resultFromObject(object: AnyObject) -> Result<Request.Response, JSONRPCError> {
         let receivedVersion = object["jsonrpc"] as? String
         guard version == receivedVersion else {
             return .Failure(.UnsupportedVersion(receivedVersion))
@@ -76,7 +76,7 @@ public extension CallType {
         }
     }
 
-    func resultFromBatchObjects(objects: [AnyObject]) -> Result<Request.Response, JSONRPCError> {
+    public func resultFromBatchObjects(objects: [AnyObject]) -> Result<Request.Response, JSONRPCError> {
         let matchedObject = objects
             .filter { $0["id"].flatMap(Id.init) == id }
             .first
@@ -98,11 +98,11 @@ public extension CallType where Request.Response == Void {
         return ()
     }
 
-    func resultFromObject(object: AnyObject) -> Result<Request.Response, JSONRPCError> {
+    public func resultFromObject(object: AnyObject) -> Result<Request.Response, JSONRPCError> {
         return .Success()
     }
 
-    func resultFromBatchObjects(objects: [AnyObject]) -> Result<Request.Response, JSONRPCError> {
+    public func resultFromBatchObjects(objects: [AnyObject]) -> Result<Request.Response, JSONRPCError> {
         return .Success()
     }
 }

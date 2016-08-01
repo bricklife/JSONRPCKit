@@ -30,7 +30,7 @@ public extension RequestType where Response == Void {
         return true
     }
 
-    func responseFromResultObject(resultObject: AnyObject) throws -> Response {
+    public func responseFromResultObject(resultObject: AnyObject) throws -> Response {
         return ()
     }
 }
