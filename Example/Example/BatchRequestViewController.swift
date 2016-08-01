@@ -17,7 +17,7 @@ class BatchRequestViewController: UIViewController {
     @IBOutlet weak var subtractAnswerLabel: UILabel!
     @IBOutlet weak var multiplyAnswerLabel: UILabel!
 
-    let callFactory = CallFactory(version: "2.0", idGenerator: StringIdGenerator())
+    let callFactory = CallBatchFactory(version: "2.0", idGenerator: StringIdGenerator())
 
     func subtractAndmultiply(first: Int, _ second: Int) {
         let subtractRequest = Subtract(
