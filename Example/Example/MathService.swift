@@ -12,10 +12,10 @@ import JSONRPCKit
 
 // use https://github.com/jenolan/jsonrpcx-php/blob/master/examples/server.php
 
-struct MathServiceRequest<Call: CallBatchType>: APIKit.RequestType {
-    let call: Call
+struct MathServiceRequest<CallBatch: CallBatchType>: APIKit.RequestType {
+    let callBatch: CallBatch
 
-    typealias Response = Call.Responses
+    typealias Response = CallBatch.Responses
 
     var baseURL: NSURL {
         return NSURL(string: "https://jsonrpckit-demo.appspot.com")!
@@ -30,11 +30,11 @@ struct MathServiceRequest<Call: CallBatchType>: APIKit.RequestType {
     }
 
     var parameters: AnyObject? {
-        return call.requestObject
+        return callBatch.requestObject
     }
 
     func responseFromObject(object: AnyObject, URLResponse: NSHTTPURLResponse) throws -> Response {
-        return try call.responsesFromObject(object)
+        return try callBatch.responsesFromObject(object)
     }
 }
 

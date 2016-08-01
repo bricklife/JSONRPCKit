@@ -30,8 +30,8 @@ class BatchRequestViewController: UIViewController {
             multiplier: second
         )
 
-        let call = callFactory.create(subtractRequest, multiplyRequest)
-        let httpRequest = MathServiceRequest(call: call)
+        let callBatch = callFactory.create(subtractRequest, multiplyRequest)
+        let httpRequest = MathServiceRequest(callBatch: callBatch)
 
         Session.sendRequest(httpRequest) { [weak self] result in
             switch result {
