@@ -16,7 +16,7 @@ class BatchFactoryTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        batchFactory = BatchFactory(version: "2.0", idGenerator: NumberIdGenerator())
+        batchFactory = BatchFactory()
     }
 
     func test1() {

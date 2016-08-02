@@ -15,7 +15,7 @@ public final class BatchFactory {
 
     private let semaphore = dispatch_semaphore_create(1)
 
-    public init(version: String, idGenerator: IdGeneratorType) {
+    public init(version: String = "2.0", idGenerator: IdGeneratorType = NumberIdGenerator()) {
         self.version = version
         self.idGenerator = idGenerator
     }

@@ -29,7 +29,7 @@ class SingleRequestViewController: UIViewController {
     @IBOutlet weak var secondTextField: UITextField!
     @IBOutlet weak var subtractAnswerLabel: UILabel!
 
-    let batchFactory = BatchFactory(version: "2.0", idGenerator: StringIdGenerator())
+    let batchFactory = BatchFactory()
 
     func subtract(first: Int, _ second: Int) {
         let divideRequest = Divide(
