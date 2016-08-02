@@ -191,6 +191,9 @@ Session.sendRequest(httpRequest) { result in
 }
 ```
 
+## Migrating from JSONRPCKit 0.x
+
+`git diff 0.6.0 develop/1.0 -- Example`
 
 ## License
 
