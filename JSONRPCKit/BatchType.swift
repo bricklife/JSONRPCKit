@@ -17,6 +17,8 @@ public protocol BatchType {
 
     func responsesFromObject(object: AnyObject) throws -> Responses
     func resultsFromObject(object: AnyObject) -> Results
+
+    static func responsesFromResults(results: Results) throws -> Responses
 }
 
 public struct Batch<Request: RequestType>: BatchType {
@@ -35,6 +37,10 @@ public struct Batch<Request: RequestType>: BatchType {
 
     public func resultsFromObject(object: AnyObject) -> Results {
         return batchElement.resultFromObject(object)
+    }
+
+    public static func responsesFromResults(results: Results) throws -> Responses {
+        return try results.dematerialize()
     }
 }
 
@@ -74,6 +80,13 @@ public struct Batch2<Request1: RequestType, Request2: RequestType>: BatchType {
         return (
             batchElement1.resultFromBatchObjects(batchObjects),
             batchElement2.resultFromBatchObjects(batchObjects)
+        )
+    }
+
+    public static func responsesFromResults(results: Results) throws -> Responses {
+        return (
+            try results.0.dematerialize(),
+            try results.1.dematerialize()
         )
     }
 }
@@ -119,6 +132,14 @@ public struct Batch3<Request1: RequestType, Request2: RequestType, Request3: Req
             batchElement1.resultFromBatchObjects(batchObjects),
             batchElement2.resultFromBatchObjects(batchObjects),
             batchElement3.resultFromBatchObjects(batchObjects)
+        )
+    }
+
+    public static func responsesFromResults(results: Results) throws -> Responses {
+        return (
+            try results.0.dematerialize(),
+            try results.1.dematerialize(),
+            try results.2.dematerialize()
         )
     }
 }
