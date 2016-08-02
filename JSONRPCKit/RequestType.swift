@@ -14,6 +14,7 @@ public protocol RequestType {
     
     var method: String { get }
     var parameters: AnyObject? { get }
+    var extendedFields: [String: AnyObject]? { get }
     var isNotification: Bool { get }
     
     func responseFromResultObject(resultObject: AnyObject) throws -> Response
@@ -21,6 +22,10 @@ public protocol RequestType {
 
 public extension RequestType {
     public var parameters: AnyObject? {
+        return nil
+    }
+
+    public var extendedFields: [String: AnyObject]? {
         return nil
     }
 

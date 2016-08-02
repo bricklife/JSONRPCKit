@@ -12,16 +12,17 @@ import JSONRPCKit
 class BatchElementTests: XCTestCase {
 
     func testRequestObject() {
-        let request = TestRequest(method: "method", parameters: ["key": "value"])
+        let request = TestRequest(method: "method", parameters: ["key": "value"], extendedFields: ["exkey": "exvalue"])
         let batchElement = BatchElement(request: request, version: "2.0", id: Id.Number(1))
         XCTAssertEqual(batchElement.id, Id.Number(1))
         XCTAssertEqual(batchElement.version, "2.0")
 
         let requestObject = batchElement.body as? [String: AnyObject]
-        XCTAssertEqual(requestObject?.keys.count, 4)
+        XCTAssertEqual(requestObject?.keys.count, 5)
         XCTAssertEqual(requestObject?["jsonrpc"] as? String, "2.0")
         XCTAssertEqual(requestObject?["id"] as? Int, 1)
         XCTAssertEqual(requestObject?["method"] as? String, "method")
+        XCTAssertEqual(requestObject?["exkey"] as? String, "exvalue")
 
         let parameters = requestObject?["params"] as? [String: AnyObject]
         XCTAssertEqual(parameters?.keys.count, 1)

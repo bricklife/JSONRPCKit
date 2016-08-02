@@ -14,6 +14,13 @@ struct TestRequest: RequestType {
 
     let method: String
     let parameters: AnyObject?
+    let extendedFields: [String : AnyObject]?
+
+    init(method: String, parameters: AnyObject?, extendedFields: [String: AnyObject]? = nil) {
+        self.method = method
+        self.parameters = parameters
+        self.extendedFields = extendedFields
+    }
 
     func responseFromResultObject(resultObject: AnyObject) throws -> AnyObject {
         return resultObject

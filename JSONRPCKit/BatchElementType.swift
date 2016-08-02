@@ -128,6 +128,10 @@ public struct BatchElement<Request: RequestType>: BatchElementType {
             body["params"] = parameters
         }
 
+        request.extendedFields?.forEach { key, value in
+            body[key] = value
+        }
+
         self.request = request
         self.version = version
         self.id = id
