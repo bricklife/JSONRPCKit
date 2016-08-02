@@ -29,7 +29,7 @@ class SingleRequestViewController: UIViewController {
     @IBOutlet weak var secondTextField: UITextField!
     @IBOutlet weak var subtractAnswerLabel: UILabel!
 
-    let callBatchFactory = CallBatchFactory(version: "2.0", idGenerator: StringIdGenerator())
+    let batchFactory = BatchFactory(version: "2.0", idGenerator: StringIdGenerator())
 
     func subtract(first: Int, _ second: Int) {
         let divideRequest = Divide(
@@ -37,8 +37,8 @@ class SingleRequestViewController: UIViewController {
             divisor: second
         )
 
-        let callBatch = callBatchFactory.create(divideRequest)
-        let httpRequest = MathServiceRequest(callBatch: callBatch)
+        let batch = batchFactory.create(divideRequest)
+        let httpRequest = MathServiceRequest(batch: batch)
 
         Session.sendRequest(httpRequest) { [weak self] result in
             switch result {

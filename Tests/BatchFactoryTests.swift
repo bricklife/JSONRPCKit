@@ -1,5 +1,5 @@
 //
-//  CallBatchFactoryTests.swift
+//  BatchFactoryTests.swift
 //  JSONRPCKit
 //
 //  Created by ishkawa on 2016/07/29.
@@ -10,40 +10,40 @@ import XCTest
 import JSONRPCKit
 import Dispatch
 
-class CallBatchFactoryTests: XCTestCase {
-    var callBatchFactory: CallBatchFactory!
+class BatchFactoryTests: XCTestCase {
+    var batchFactory: BatchFactory!
     
     override func setUp() {
         super.setUp()
 
-        callBatchFactory = CallBatchFactory(version: "2.0", idGenerator: NumberIdGenerator())
+        batchFactory = BatchFactory(version: "2.0", idGenerator: NumberIdGenerator())
     }
 
     func test1() {
         let request = TestRequest(method: "method", parameters: ["key": "value"])
-        let batch = callBatchFactory.create(request)
+        let batch = batchFactory.create(request)
 
-        XCTAssertEqual(batch.call.id?.value as? Int, 1)
+        XCTAssertEqual(batch.batchElement.id?.value as? Int, 1)
     }
 
     func test2() {
         let request1 = TestRequest(method: "method1", parameters: ["key1": "value1"])
         let request2 = TestRequest(method: "method2", parameters: ["key2": "value2"])
-        let batch = callBatchFactory.create(request1, request2)
+        let batch = batchFactory.create(request1, request2)
 
-        XCTAssertEqual(batch.call1.id?.value as? Int, 1)
-        XCTAssertEqual(batch.call2.id?.value as? Int, 2)
+        XCTAssertEqual(batch.batchElement1.id?.value as? Int, 1)
+        XCTAssertEqual(batch.batchElement2.id?.value as? Int, 2)
     }
 
     func test3() {
         let request1 = TestRequest(method: "method1", parameters: ["key1": "value1"])
         let request2 = TestRequest(method: "method2", parameters: ["key2": "value2"])
         let request3 = TestRequest(method: "method3", parameters: ["key3": "value3"])
-        let batch = callBatchFactory.create(request1, request2, request3)
+        let batch = batchFactory.create(request1, request2, request3)
 
-        XCTAssertEqual(batch.call1.id?.value as? Int, 1)
-        XCTAssertEqual(batch.call2.id?.value as? Int, 2)
-        XCTAssertEqual(batch.call3.id?.value as? Int, 3)
+        XCTAssertEqual(batch.batchElement1.id?.value as? Int, 1)
+        XCTAssertEqual(batch.batchElement2.id?.value as? Int, 2)
+        XCTAssertEqual(batch.batchElement3.id?.value as? Int, 3)
     }
 
     func testThreadSafety() {
@@ -52,13 +52,13 @@ class CallBatchFactoryTests: XCTestCase {
         for _ in 1..<10000 {
             operationQueue.addOperationWithBlock {
                 let request = TestRequest(method: "method", parameters: nil)
-                self.callBatchFactory.create(request)
+                self.batchFactory.create(request)
             }
         }
 
         operationQueue.waitUntilAllOperationsAreFinished()
 
-        let nextId = callBatchFactory.idGenerator.next().value as? Int
+        let nextId = batchFactory.idGenerator.next().value as? Int
         XCTAssertEqual(nextId, 10000)
     }
 }

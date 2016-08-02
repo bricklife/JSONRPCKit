@@ -1,5 +1,5 @@
 //
-//  Call.swift
+//  BatchElement.swift
 //  JSONRPCKit
 //
 //  Created by ishkawa on 2016/07/27.
@@ -9,7 +9,7 @@
 import Foundation
 import Result
 
-public protocol CallType {
+public protocol BatchElementType {
     associatedtype Request: RequestType
 
     var request: Request { get }
@@ -24,7 +24,7 @@ public protocol CallType {
     func resultFromBatchObjects(objects: [AnyObject]) -> Result<Request.Response, JSONRPCError>
 }
 
-public extension CallType {
+public extension BatchElementType {
     /// - Throws: JSONRPCError
     public func responseFromObject(object: AnyObject) throws -> Request.Response {
         switch resultFromObject(object) {
@@ -89,7 +89,7 @@ public extension CallType {
     }
 }
 
-public extension CallType where Request.Response == Void {
+public extension BatchElementType where Request.Response == Void {
     public func responseFromObject(object: AnyObject) throws -> Request.Response {
         return ()
     }
@@ -107,7 +107,7 @@ public extension CallType where Request.Response == Void {
     }
 }
 
-public struct Call<Request: RequestType>: CallType {
+public struct BatchElement<Request: RequestType>: BatchElementType {
     public let request: Request
     public let version: String
     public let id: Id?
