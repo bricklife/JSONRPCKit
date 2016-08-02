@@ -20,13 +20,17 @@ public protocol RequestType {
 }
 
 public extension RequestType {
-    var isNotification: Bool {
+    public var parameters: AnyObject? {
+        return nil
+    }
+
+    public var isNotification: Bool {
         return false
     }
 }
 
 public extension RequestType where Response == Void {
-    var isNotification: Bool {
+    public var isNotification: Bool {
         return true
     }
 
