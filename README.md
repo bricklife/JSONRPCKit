@@ -15,6 +15,12 @@ let response = try! batch.responsesFromObject(responseObject)
 response // 19 (type of response is inferred from SubtractRequest.Response)
 ```
 
+
+## Requirements
+
+- Swift 2.2 or 2.3
+- iOS 8.0 or later
+
 ## Basic usage
 
 1. Define request type
