@@ -15,74 +15,79 @@ public protocol BatchElementType {
     var request: Request { get }
     var version: String { get }
     var id: Id? { get }
-    var body: AnyObject { get }
+    var body: Any { get }
 
-    func responseFromObject(object: AnyObject) throws -> Request.Response
-    func responseFromBatchObjects(objects: [AnyObject]) throws -> Request.Response
+    func responseFromObject(_ object: Any) throws -> Request.Response
+    func responseFromBatchObjects(_ objects: [Any]) throws -> Request.Response
 
-    func resultFromObject(object: AnyObject) -> Result<Request.Response, JSONRPCError>
-    func resultFromBatchObjects(objects: [AnyObject]) -> Result<Request.Response, JSONRPCError>
+    func resultFromObject(_ object: Any) -> Result<Request.Response, JSONRPCError>
+    func resultFromBatchObjects(_ objects: [Any]) -> Result<Request.Response, JSONRPCError>
 }
 
 public extension BatchElementType {
     /// - Throws: JSONRPCError
-    public func responseFromObject(object: AnyObject) throws -> Request.Response {
+    public func responseFromObject(_ object: Any) throws -> Request.Response {
         switch resultFromObject(object) {
-        case .Success(let response):
+        case .success(let response):
             return response
 
-        case .Failure(let error):
+        case .failure(let error):
             throw error
         }
     }
 
     /// - Throws: JSONRPCError
-    public func responseFromBatchObjects(objects: [AnyObject]) throws -> Request.Response {
+    public func responseFromBatchObjects(_ objects: [Any]) throws -> Request.Response {
         switch resultFromBatchObjects(objects) {
-        case .Success(let response):
+        case .success(let response):
             return response
 
-        case .Failure(let error):
+        case .failure(let error):
             throw error
         }
     }
 
-    public func resultFromObject(object: AnyObject) -> Result<Request.Response, JSONRPCError> {
-        let receivedVersion = object["jsonrpc"] as? String
+    public func resultFromObject(_ object: Any) -> Result<Request.Response, JSONRPCError> {
+        guard let dictionary = object as? [String: Any] else {
+            fatalError("FIXME")
+        }
+        
+        let receivedVersion = dictionary["jsonrpc"] as? String
         guard version == receivedVersion else {
-            return .Failure(.UnsupportedVersion(receivedVersion))
+            return .failure(.unsupportedVersion(receivedVersion))
         }
 
-        guard id == object["id"].flatMap(Id.init) else {
-            return .Failure(.ResponseNotFound(requestId: id, object: object))
+        guard id == dictionary["id"].flatMap(Id.init) else {
+            return .failure(.responseNotFound(requestId: id, object: dictionary))
         }
 
-        let resultObject: AnyObject? = object["result"]
-        let errorObject: AnyObject? = object["error"]
+        let resultObject = dictionary["result"]
+        let errorObject = dictionary["error"]
 
         switch (resultObject, errorObject) {
         case (nil, let errorObject?):
-            return .Failure(JSONRPCError(errorObject: errorObject))
+            return .failure(JSONRPCError(errorObject: errorObject))
 
         case (let resultObject?, nil):
             do {
-                return .Success(try request.responseFromResultObject(resultObject))
+                return .success(try request.responseFromResultObject(resultObject))
             } catch {
-                return .Failure(.ResultObjectParseError(error))
+                return .failure(.resultObjectParseError(error))
             }
 
         default:
-            return .Failure(.MissingBothResultAndError(object))
+            return .failure(.missingBothResultAndError(dictionary))
         }
     }
 
-    public func resultFromBatchObjects(objects: [AnyObject]) -> Result<Request.Response, JSONRPCError> {
+    public func resultFromBatchObjects(_ objects: [Any]) -> Result<Request.Response, JSONRPCError> {
         let matchedObject = objects
+            .flatMap { $0 as? [String: Any] }
             .filter { $0["id"].flatMap(Id.init) == id }
             .first
 
         guard let object = matchedObject else {
-            return .Failure(.ResponseNotFound(requestId: id, object: objects))
+            return .failure(.responseNotFound(requestId: id, object: objects))
         }
 
         return resultFromObject(object)
@@ -90,20 +95,20 @@ public extension BatchElementType {
 }
 
 public extension BatchElementType where Request.Response == Void {
-    public func responseFromObject(object: AnyObject) throws -> Request.Response {
+    public func responseFromObject(_ object: Any) throws -> Request.Response {
         return ()
     }
 
-    public func responseFromBatchObjects(objects: [AnyObject]) throws -> Request.Response {
+    public func responseFromBatchObjects(_ objects: [Any]) throws -> Request.Response {
         return ()
     }
 
-    public func resultFromObject(object: AnyObject) -> Result<Request.Response, JSONRPCError> {
-        return .Success()
+    public func resultFromObject(_ object: Any) -> Result<Request.Response, JSONRPCError> {
+        return .success()
     }
 
-    public func resultFromBatchObjects(objects: [AnyObject]) -> Result<Request.Response, JSONRPCError> {
-        return .Success()
+    public func resultFromBatchObjects(_ objects: [Any]) -> Result<Request.Response, JSONRPCError> {
+        return .success()
     }
 }
 
@@ -111,13 +116,13 @@ public struct BatchElement<Request: RequestType>: BatchElementType {
     public let request: Request
     public let version: String
     public let id: Id?
-    public let body: AnyObject
+    public let body: Any
 
     public init(request: Request, version: String, id: Id) {
         let id: Id? = request.isNotification ? nil : id
-        var body: [String: AnyObject] = [
-            "jsonrpc": version,
-            "method": request.method,
+        var body: [String: Any] = [
+            "jsonrpc": version as Any,
+            "method": request.method as Any,
         ]
 
         if let id = id {
@@ -135,7 +140,7 @@ public struct BatchElement<Request: RequestType>: BatchElementType {
         self.request = request
         self.version = version
         self.id = id
-        self.body = body
+        self.body = body as Any
     }
 }
 

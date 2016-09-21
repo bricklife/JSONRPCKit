@@ -13,36 +13,36 @@ public final class BatchFactory {
     public let version: String
     public var idGenerator: IdGeneratorType
 
-    private let semaphore = dispatch_semaphore_create(1)
+    fileprivate let semaphore = DispatchSemaphore(value: 1)
 
     public init(version: String = "2.0", idGenerator: IdGeneratorType = NumberIdGenerator()) {
         self.version = version
         self.idGenerator = idGenerator
     }
 
-    public func create<Request: RequestType>(request: Request) -> Batch<Request> {
-        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
+    public func create<Request: RequestType>(_ request: Request) -> Batch<Request> {
+        _ = semaphore.wait(timeout: DispatchTime.distantFuture)
         let batchElement = BatchElement(request: request, version: version, id: idGenerator.next())
-        dispatch_semaphore_signal(semaphore)
+        semaphore.signal()
 
         return Batch(batchElement: batchElement)
     }
 
-    public func create<Request1: RequestType, Request2: RequestType>(request1: Request1, _ request2: Request2) -> Batch2<Request1, Request2> {
-        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
+    public func create<Request1: RequestType, Request2: RequestType>(_ request1: Request1, _ request2: Request2) -> Batch2<Request1, Request2> {
+        _ = semaphore.wait(timeout: DispatchTime.distantFuture)
         let batchElement1 = BatchElement(request: request1, version: version, id: idGenerator.next())
         let batchElement2 = BatchElement(request: request2, version: version, id: idGenerator.next())
-        dispatch_semaphore_signal(semaphore)
+        semaphore.signal()
 
         return Batch2(batchElement1: batchElement1, batchElement2: batchElement2)
     }
 
-    public func create<Request1: RequestType, Request2: RequestType, Request3: RequestType>(request1: Request1, _ request2: Request2, _ request3: Request3) -> Batch3<Request1, Request2, Request3> {
-        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
+    public func create<Request1: RequestType, Request2: RequestType, Request3: RequestType>(_ request1: Request1, _ request2: Request2, _ request3: Request3) -> Batch3<Request1, Request2, Request3> {
+        _ = semaphore.wait(timeout: DispatchTime.distantFuture)
         let batchElement1 = BatchElement(request: request1, version: version, id: idGenerator.next())
         let batchElement2 = BatchElement(request: request2, version: version, id: idGenerator.next())
         let batchElement3 = BatchElement(request: request3, version: version, id: idGenerator.next())
-        dispatch_semaphore_signal(semaphore)
+        semaphore.signal()
 
         return Batch3(batchElement1: batchElement1, batchElement2: batchElement2, batchElement3: batchElement3)
     }

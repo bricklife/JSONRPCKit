@@ -42,10 +42,10 @@ class SingleRequestViewController: UIViewController {
 
         Session.sendRequest(httpRequest) { [weak self] result in
             switch result {
-            case .Success(let answer):
+            case .success(let answer):
                 self?.subtractAnswerLabel.text = "\(answer)"
                 
-            case .Failure(let error):
+            case .failure(let error):
                 self?.subtractAnswerLabel.text = "?"
                 self?.showAlertWithError(error)
             }

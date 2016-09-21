@@ -47,12 +47,12 @@ class BatchFactoryTests: XCTestCase {
     }
 
     func testThreadSafety() {
-        let operationQueue = NSOperationQueue()
+        let operationQueue = OperationQueue()
 
         for _ in 1..<10000 {
-            operationQueue.addOperationWithBlock {
+            operationQueue.addOperation {
                 let request = TestRequest(method: "method", parameters: nil)
-                self.batchFactory.create(request)
+                _ = self.batchFactory.create(request)
             }
         }
 

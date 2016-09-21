@@ -8,32 +8,37 @@
 
 import Foundation
 
-public enum JSONRPCError: ErrorType {
-    case ResponseError(code: Int, message: String, data: AnyObject?)
-    case ResponseNotFound(requestId: Id?, object: AnyObject)
-    case ResultObjectParseError(ErrorType)
-    case ErrorObjectParseError(ErrorType)
-    case UnsupportedVersion(String?)
-    case MissingBothResultAndError(AnyObject)
-    case NonArrayResponse(AnyObject)
+public enum JSONRPCError: Error {
+    case responseError(code: Int, message: String, data: Any?)
+    case responseNotFound(requestId: Id?, object: Any)
+    case resultObjectParseError(Error)
+    case errorObjectParseError(Error)
+    case unsupportedVersion(String?)
+    case missingBothResultAndError(Any)
+    case nonArrayResponse(Any)
 
-    public init(errorObject: AnyObject) {
-        enum ParseError: ErrorType {
-            case MissingKey(key: String, errorObject: AnyObject)
+    public init(errorObject: Any) {
+        enum ParseError: Error {
+            case nonDictionaryObject(object: Any)
+            case missingKey(key: String, errorObject: Any)
         }
 
         do {
-            guard let code = errorObject["code"] as? Int else {
-                throw ParseError.MissingKey(key: "code", errorObject: errorObject)
+            guard let dictionary = errorObject as? [String: Any] else {
+                throw ParseError.nonDictionaryObject(object: errorObject)
+            }
+            
+            guard let code = dictionary["code"] as? Int else {
+                throw ParseError.missingKey(key: "code", errorObject: errorObject)
             }
 
-            guard let message = errorObject["message"] as? String else {
-                throw ParseError.MissingKey(key: "message", errorObject: errorObject)
+            guard let message = dictionary["message"] as? String else {
+                throw ParseError.missingKey(key: "message", errorObject: errorObject)
             }
 
-            self = .ResponseError(code: code, message: message, data: errorObject["data"])
+            self = .responseError(code: code, message: message, data: dictionary["data"])
         } catch {
-            self = .ErrorObjectParseError(error)
+            self = .errorObjectParseError(error)
         }
     }
 }

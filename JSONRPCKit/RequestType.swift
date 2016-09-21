@@ -13,19 +13,19 @@ public protocol RequestType {
     associatedtype Response
     
     var method: String { get }
-    var parameters: AnyObject? { get }
-    var extendedFields: [String: AnyObject]? { get }
+    var parameters: Any? { get }
+    var extendedFields: [String: Any]? { get }
     var isNotification: Bool { get }
     
-    func responseFromResultObject(resultObject: AnyObject) throws -> Response
+    func responseFromResultObject(_ resultObject: Any) throws -> Response
 }
 
 public extension RequestType {
-    public var parameters: AnyObject? {
+    public var parameters: Any? {
         return nil
     }
 
-    public var extendedFields: [String: AnyObject]? {
+    public var extendedFields: [String: Any]? {
         return nil
     }
 
@@ -39,7 +39,7 @@ public extension RequestType where Response == Void {
         return true
     }
 
-    public func responseFromResultObject(resultObject: AnyObject) throws -> Response {
+    public func responseFromResultObject(_ resultObject: Any) throws -> Response {
         return ()
     }
 }

@@ -13,12 +13,12 @@ public protocol BatchType {
     associatedtype Responses
     associatedtype Results
 
-    var requestObject: AnyObject { get }
+    var requestObject: Any { get }
 
-    func responsesFromObject(object: AnyObject) throws -> Responses
-    func resultsFromObject(object: AnyObject) -> Results
+    func responsesFromObject(_ object: Any) throws -> Responses
+    func resultsFromObject(_ object: Any) -> Results
 
-    static func responsesFromResults(results: Results) throws -> Responses
+    static func responsesFromResults(_ results: Results) throws -> Responses
 }
 
 public struct Batch<Request: RequestType>: BatchType {
@@ -27,19 +27,19 @@ public struct Batch<Request: RequestType>: BatchType {
 
     public let batchElement: BatchElement<Request>
     
-    public var requestObject: AnyObject {
+    public var requestObject: Any {
         return batchElement.body
     }
 
-    public func responsesFromObject(object: AnyObject) throws -> Responses {
+    public func responsesFromObject(_ object: Any) throws -> Responses {
         return try batchElement.responseFromObject(object)
     }
 
-    public func resultsFromObject(object: AnyObject) -> Results {
+    public func resultsFromObject(_ object: Any) -> Results {
         return batchElement.resultFromObject(object)
     }
 
-    public static func responsesFromResults(results: Results) throws -> Responses {
+    public static func responsesFromResults(_ results: Results) throws -> Responses {
         return try results.dematerialize()
     }
 }
@@ -51,16 +51,16 @@ public struct Batch2<Request1: RequestType, Request2: RequestType>: BatchType {
     public let batchElement1: BatchElement<Request1>
     public let batchElement2: BatchElement<Request2>
 
-    public var requestObject: AnyObject {
+    public var requestObject: Any {
         return [
             batchElement1.body,
             batchElement2.body,
         ]
     }
 
-    public func responsesFromObject(object: AnyObject) throws -> Responses {
-        guard let batchObjects = object as? [AnyObject] else {
-            throw JSONRPCError.NonArrayResponse(object)
+    public func responsesFromObject(_ object: Any) throws -> Responses {
+        guard let batchObjects = object as? [Any] else {
+            throw JSONRPCError.nonArrayResponse(object)
         }
 
         return (
@@ -69,11 +69,11 @@ public struct Batch2<Request1: RequestType, Request2: RequestType>: BatchType {
         )
     }
 
-    public func resultsFromObject(object: AnyObject) -> Results {
-        guard let batchObjects = object as? [AnyObject] else {
+    public func resultsFromObject(_ object: Any) -> Results {
+        guard let batchObjects = object as? [Any] else {
             return (
-                .Failure(.NonArrayResponse(object)),
-                .Failure(.NonArrayResponse(object))
+                .failure(.nonArrayResponse(object)),
+                .failure(.nonArrayResponse(object))
             )
         }
 
@@ -83,7 +83,7 @@ public struct Batch2<Request1: RequestType, Request2: RequestType>: BatchType {
         )
     }
 
-    public static func responsesFromResults(results: Results) throws -> Responses {
+    public static func responsesFromResults(_ results: Results) throws -> Responses {
         return (
             try results.0.dematerialize(),
             try results.1.dematerialize()
@@ -99,7 +99,7 @@ public struct Batch3<Request1: RequestType, Request2: RequestType, Request3: Req
     public let batchElement2: BatchElement<Request2>
     public let batchElement3: BatchElement<Request3>
 
-    public var requestObject: AnyObject {
+    public var requestObject: Any {
         return [
             batchElement1.body,
             batchElement2.body,
@@ -107,9 +107,9 @@ public struct Batch3<Request1: RequestType, Request2: RequestType, Request3: Req
         ]
     }
 
-    public func responsesFromObject(object: AnyObject) throws -> Responses {
-        guard let batchObjects = object as? [AnyObject] else {
-            throw JSONRPCError.NonArrayResponse(object)
+    public func responsesFromObject(_ object: Any) throws -> Responses {
+        guard let batchObjects = object as? [Any] else {
+            throw JSONRPCError.nonArrayResponse(object)
         }
 
         return (
@@ -119,12 +119,12 @@ public struct Batch3<Request1: RequestType, Request2: RequestType, Request3: Req
         )
     }
 
-    public func resultsFromObject(object: AnyObject) -> Results {
-        guard let batchObjects = object as? [AnyObject] else {
+    public func resultsFromObject(_ object: Any) -> Results {
+        guard let batchObjects = object as? [Any] else {
             return (
-                .Failure(.NonArrayResponse(object)),
-                .Failure(.NonArrayResponse(object)),
-                .Failure(.NonArrayResponse(object))
+                .failure(.nonArrayResponse(object)),
+                .failure(.nonArrayResponse(object)),
+                .failure(.nonArrayResponse(object))
             )
         }
 
@@ -135,7 +135,7 @@ public struct Batch3<Request1: RequestType, Request2: RequestType, Request3: Req
         )
     }
 
-    public static func responsesFromResults(results: Results) throws -> Responses {
+    public static func responsesFromResults(_ results: Results) throws -> Responses {
         return (
             try results.0.dematerialize(),
             try results.1.dematerialize(),

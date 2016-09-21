@@ -35,11 +35,11 @@ class BatchRequestViewController: UIViewController {
 
         Session.sendRequest(httpRequest) { [weak self] result in
             switch result {
-            case .Success(let subtractAnswer, let multiplyAnswer):
+            case .success(let subtractAnswer, let multiplyAnswer):
                 self?.subtractAnswerLabel.text = "\(subtractAnswer)"
                 self?.multiplyAnswerLabel.text = "\(multiplyAnswer)"
 
-            case .Failure(let error):
+            case .failure(let error):
                 self?.subtractAnswerLabel.text = "?"
                 self?.multiplyAnswerLabel.text = "?"
                 self?.showAlertWithError(error)

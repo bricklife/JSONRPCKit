@@ -10,7 +10,7 @@ import Foundation
 
 public struct NumberIdGenerator: IdGeneratorType {
     
-    private var currentId = 1
+    fileprivate var currentId = 1
 
     public init() {}
 
@@ -19,6 +19,6 @@ public struct NumberIdGenerator: IdGeneratorType {
             currentId += 1
         }
         
-        return .Number(currentId)
+        return .number(currentId)
     }
 }
