@@ -1,6 +1,6 @@
-[submodule "Carthage/Checkouts/Alamofire"]
-	path = Carthage/Checkouts/Alamofire
-	url = https://github.com/Alamofire/Alamofire.git
 [submodule "Carthage/Checkouts/Result"]
 	path = Carthage/Checkouts/Result
 	url = https://github.com/antitypical/Result.git
+[submodule "Carthage/Checkouts/APIKit"]
+	path = Carthage/Checkouts/APIKit
+	url = https://github.com/ishkawa/APIKit.git

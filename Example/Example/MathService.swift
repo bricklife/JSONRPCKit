@@ -7,48 +7,43 @@
 //
 
 import Foundation
+import APIKit
 import JSONRPCKit
-import Alamofire
 
 // use https://github.com/jenolan/jsonrpcx-php/blob/master/examples/server.php
 
-class MathServiceAPI {
-    
-    static func request(jsonrpc: JSONRPC, errorHandler: ((error: NSError) -> Void)? = nil) {
-        guard let requestJSON = try? jsonrpc.buildRequestJSON() else {
-            return
-        }
-        
-        print("request:", requestJSON, separator: "\n")
-        
-        let URLRequest = NSMutableURLRequest()
-        URLRequest.URL = NSURL(string: "https://jsonrpckit-demo.appspot.com")!
-        URLRequest.HTTPMethod = "POST"
-        URLRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        URLRequest.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(requestJSON, options: [])
-        
-        Alamofire.request(URLRequest)
-            .responseJSON { response in
-                switch response.result {
-                case .Success(let responseJSON):
-                    print("response:", responseJSON, separator: "\n")
-                    
-                    do {
-                        try jsonrpc.parseResponseJSON(responseJSON)
-                    } catch {}
-                    
-                case .Failure(let error):
-                    print("error:", error, separator: "\n")
-                    
-                    if let errorHandler = errorHandler {
-                        errorHandler(error: error)
-                    }
-                }
-        }
+struct MathServiceRequest<Batch: BatchType>: APIKit.RequestType {
+    let batch: Batch
+
+    typealias Response = Batch.Responses
+
+    var baseURL: NSURL {
+        return NSURL(string: "https://jsonrpckit-demo.appspot.com")!
+    }
+
+    var method: HTTPMethod {
+        return .POST
+    }
+
+    var path: String {
+        return "/"
+    }
+
+    var parameters: AnyObject? {
+        return batch.requestObject
+    }
+
+    func responseFromObject(object: AnyObject, URLResponse: NSHTTPURLResponse) throws -> Response {
+        return try batch.responsesFromObject(object)
     }
 }
 
-struct Subtract: RequestType {
+struct CastError<ExpectedType>: ErrorType {
+    let actualValue: Any
+    let expectedType: ExpectedType.Type
+}
+
+struct Subtract: JSONRPCKit.RequestType {
     typealias Response = Int
     
     let minuend: Int
@@ -57,17 +52,21 @@ struct Subtract: RequestType {
     var method: String {
         return "subtract"
     }
-    
-    var params: AnyObject? {
+
+    var parameters: AnyObject? {
         return [minuend, subtrahend]
     }
     
-    func responseFromObject(object: AnyObject) -> Response? {
-        return object as? Response
+    func responseFromResultObject(resultObject: AnyObject) throws -> Response {
+        if let response = resultObject as? Response {
+            return response
+        } else {
+            throw CastError(actualValue: resultObject, expectedType: Response.self)
+        }
     }
 }
 
-struct Multiply: RequestType {
+struct Multiply: JSONRPCKit.RequestType {
     typealias Response = Int
     
     let multiplicand: Int
@@ -77,16 +76,20 @@ struct Multiply: RequestType {
         return "multiply"
     }
     
-    var params: AnyObject? {
+    var parameters: AnyObject? {
         return [multiplicand, multiplier]
     }
     
-    func responseFromObject(object: AnyObject) -> Response? {
-        return object as? Response
+    func responseFromResultObject(resultObject: AnyObject) throws -> Response {
+        if let response = resultObject as? Response {
+            return response
+        } else {
+            throw CastError(actualValue: resultObject, expectedType: Response.self)
+        }
     }
 }
 
-struct Divide: RequestType {
+struct Divide: JSONRPCKit.RequestType {
     typealias Response = Float
     
     let dividend: Int
@@ -96,11 +99,15 @@ struct Divide: RequestType {
         return "divide"
     }
     
-    var params: AnyObject? {
+    var parameters: AnyObject? {
         return [dividend, divisor]
     }
     
-    func responseFromObject(object: AnyObject) -> Response? {
-        return object as? Response
+    func responseFromResultObject(resultObject: AnyObject) throws -> Response {
+        if let response = resultObject as? Response {
+            return response
+        } else {
+            throw CastError(actualValue: resultObject, expectedType: Response.self)
+        }
     }
 }

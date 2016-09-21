@@ -17,10 +17,10 @@
          location = "group:Cartfile.private">
       </FileRef>
       <FileRef
-         location = "group:Carthage/Checkouts/Result/Result.xcodeproj">
+         location = "group:Carthage/Checkouts/APIKit/APIKit.xcodeproj">
       </FileRef>
       <FileRef
-         location = "group:Carthage/Checkouts/Alamofire/Alamofire.xcodeproj">
+         location = "group:Carthage/Checkouts/Result/Result.xcodeproj">
       </FileRef>
    </Group>
 </Workspace>

@@ -9,32 +9,37 @@
 import Foundation
 
 public protocol RequestType {
+    /// If `Response == Void`, request is treated as a notification.
     associatedtype Response
     
     var method: String { get }
+    var parameters: AnyObject? { get }
+    var extendedFields: [String: AnyObject]? { get }
+    var isNotification: Bool { get }
     
-    var params: AnyObject? { get }
-    
-    func buildJSON() -> [String: AnyObject]
-    
-    func responseFromObject(object: AnyObject) -> Response?
+    func responseFromResultObject(resultObject: AnyObject) throws -> Response
 }
 
 public extension RequestType {
-    
-    var params: AnyObject? {
+    public var parameters: AnyObject? {
         return nil
     }
-    
-    func buildJSON() -> [String: AnyObject] {
-        var json: [String: AnyObject] = [:]
-        
-        json["method"] = method
-        
-        if let params = params {
-            json["params"] = params
-        }
-        
-        return json
+
+    public var extendedFields: [String: AnyObject]? {
+        return nil
+    }
+
+    public var isNotification: Bool {
+        return false
+    }
+}
+
+public extension RequestType where Response == Void {
+    public var isNotification: Bool {
+        return true
+    }
+
+    public func responseFromResultObject(resultObject: AnyObject) throws -> Response {
+        return ()
     }
 }

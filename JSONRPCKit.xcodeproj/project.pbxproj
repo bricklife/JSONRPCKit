@@ -7,32 +7,63 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7F359B761D4B1A1100032E8D /* BatchElementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F359B751D4B1A1100032E8D /* BatchElementTests.swift */; };
+		7F359B781D4B1B0500032E8D /* BatchFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F359B771D4B1B0500032E8D /* BatchFactoryTests.swift */; };
+		7FC654F81D48B6CB004C390C /* BatchType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC654F61D48B6CB004C390C /* BatchType.swift */; };
+		7FC654F91D48B6CB004C390C /* BatchElementType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC654F71D48B6CB004C390C /* BatchElementType.swift */; };
+		7FC654FB1D49DF27004C390C /* BatchFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC654FA1D49DF27004C390C /* BatchFactory.swift */; };
+		7FC655051D49EA19004C390C /* JSONRPCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB0C34E1BF0B1D6006A7D41 /* JSONRPCKit.framework */; };
+		7FC6550C1D49FA20004C390C /* TestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC6550B1D49FA20004C390C /* TestRequest.swift */; };
+		7FD0A33D1D4B4024007C9EAB /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB31EFB91CF6E8FE00DD13DD /* Result.framework */; };
 		CB31EFBA1CF6E8FE00DD13DD /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB31EFB91CF6E8FE00DD13DD /* Result.framework */; };
-		CB36EB221BF24F1E003A4BCA /* AuthRequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB36EB211BF24F1E003A4BCA /* AuthRequestType.swift */; };
-		CB36EB281BF39028003A4BCA /* RequestIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB36EB271BF39028003A4BCA /* RequestIdentifier.swift */; };
+		CB36EB281BF39028003A4BCA /* Id.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB36EB271BF39028003A4BCA /* Id.swift */; };
 		CB82B9E21BF0C5CE00756CB1 /* JSONRPCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB82B9E11BF0C5CE00756CB1 /* JSONRPCError.swift */; };
 		CBB0C3521BF0B1D6006A7D41 /* JSONRPCKit.h in Headers */ = {isa = PBXBuildFile; fileRef = CBB0C3511BF0B1D6006A7D41 /* JSONRPCKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CBB0C35A1BF0B2D3006A7D41 /* RequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB0C3591BF0B2D3006A7D41 /* RequestType.swift */; };
-		CBB0C35C1BF0B6FD006A7D41 /* JSONRPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB0C35B1BF0B6FD006A7D41 /* JSONRPC.swift */; };
-		CBB4161C1BF3599D00B4DB0E /* RequestIdentifierGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB4161B1BF3599D00B4DB0E /* RequestIdentifierGenerator.swift */; };
-		CBB4161E1BF370EA00B4DB0E /* NumberIdentifierGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB4161D1BF370EA00B4DB0E /* NumberIdentifierGenerator.swift */; };
+		CBB4161C1BF3599D00B4DB0E /* IdGeneratorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB4161B1BF3599D00B4DB0E /* IdGeneratorType.swift */; };
+		CBB4161E1BF370EA00B4DB0E /* NumberIdGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB4161D1BF370EA00B4DB0E /* NumberIdGenerator.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		7FC655061D49EA19004C390C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CBB0C3451BF0B1D6006A7D41 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CBB0C34D1BF0B1D6006A7D41;
+			remoteInfo = "JSONRPCKit-iOS";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		7F359B751D4B1A1100032E8D /* BatchElementTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchElementTests.swift; sourceTree = "<group>"; };
+		7F359B771D4B1B0500032E8D /* BatchFactoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchFactoryTests.swift; sourceTree = "<group>"; };
+		7FC654F61D48B6CB004C390C /* BatchType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchType.swift; sourceTree = "<group>"; };
+		7FC654F71D48B6CB004C390C /* BatchElementType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchElementType.swift; sourceTree = "<group>"; };
+		7FC654FA1D49DF27004C390C /* BatchFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchFactory.swift; sourceTree = "<group>"; };
+		7FC655001D49EA19004C390C /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FC655041D49EA19004C390C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7FC6550B1D49FA20004C390C /* TestRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestRequest.swift; sourceTree = "<group>"; };
 		CB31EFB91CF6E8FE00DD13DD /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = "../Debug-iphonesimulator/Result.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CB36EB211BF24F1E003A4BCA /* AuthRequestType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthRequestType.swift; sourceTree = "<group>"; };
-		CB36EB271BF39028003A4BCA /* RequestIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestIdentifier.swift; sourceTree = "<group>"; };
+		CB36EB271BF39028003A4BCA /* Id.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Id.swift; sourceTree = "<group>"; };
 		CB82B9E11BF0C5CE00756CB1 /* JSONRPCError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONRPCError.swift; sourceTree = "<group>"; };
 		CBB0C34E1BF0B1D6006A7D41 /* JSONRPCKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JSONRPCKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBB0C3511BF0B1D6006A7D41 /* JSONRPCKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONRPCKit.h; sourceTree = "<group>"; };
 		CBB0C3531BF0B1D7006A7D41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CBB0C3591BF0B2D3006A7D41 /* RequestType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestType.swift; sourceTree = "<group>"; };
-		CBB0C35B1BF0B6FD006A7D41 /* JSONRPC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONRPC.swift; sourceTree = "<group>"; };
-		CBB4161B1BF3599D00B4DB0E /* RequestIdentifierGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestIdentifierGenerator.swift; sourceTree = "<group>"; };
-		CBB4161D1BF370EA00B4DB0E /* NumberIdentifierGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberIdentifierGenerator.swift; sourceTree = "<group>"; };
+		CBB4161B1BF3599D00B4DB0E /* IdGeneratorType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdGeneratorType.swift; sourceTree = "<group>"; };
+		CBB4161D1BF370EA00B4DB0E /* NumberIdGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberIdGenerator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		7FC654FD1D49EA19004C390C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7FD0A33D1D4B4024007C9EAB /* Result.framework in Frameworks */,
+				7FC655051D49EA19004C390C /* JSONRPCKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CBB0C34A1BF0B1D6006A7D41 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -44,6 +75,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7FC655011D49EA19004C390C /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				7FC6550B1D49FA20004C390C /* TestRequest.swift */,
+				7F359B751D4B1A1100032E8D /* BatchElementTests.swift */,
+				7F359B771D4B1B0500032E8D /* BatchFactoryTests.swift */,
+				7FC655041D49EA19004C390C /* Info.plist */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 		CB63E2391CE22F7E00E22B5C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				CBB0C3501BF0B1D6006A7D41 /* JSONRPCKit */,
+				7FC655011D49EA19004C390C /* Tests */,
 				CBB0C34F1BF0B1D6006A7D41 /* Products */,
 				CB63E2391CE22F7E00E22B5C /* Frameworks */,
 			);
@@ -65,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				CBB0C34E1BF0B1D6006A7D41 /* JSONRPCKit.framework */,
+				7FC655001D49EA19004C390C /* Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -74,12 +118,13 @@
 			children = (
 				CBB0C3511BF0B1D6006A7D41 /* JSONRPCKit.h */,
 				CBB0C3591BF0B2D3006A7D41 /* RequestType.swift */,
-				CB36EB211BF24F1E003A4BCA /* AuthRequestType.swift */,
-				CBB0C35B1BF0B6FD006A7D41 /* JSONRPC.swift */,
+				7FC654F61D48B6CB004C390C /* BatchType.swift */,
+				7FC654F71D48B6CB004C390C /* BatchElementType.swift */,
+				7FC654FA1D49DF27004C390C /* BatchFactory.swift */,
 				CB82B9E11BF0C5CE00756CB1 /* JSONRPCError.swift */,
-				CB36EB271BF39028003A4BCA /* RequestIdentifier.swift */,
-				CBB4161B1BF3599D00B4DB0E /* RequestIdentifierGenerator.swift */,
-				CBB4161D1BF370EA00B4DB0E /* NumberIdentifierGenerator.swift */,
+				CB36EB271BF39028003A4BCA /* Id.swift */,
+				CBB4161B1BF3599D00B4DB0E /* IdGeneratorType.swift */,
+				CBB4161D1BF370EA00B4DB0E /* NumberIdGenerator.swift */,
 				CBB0C3531BF0B1D7006A7D41 /* Info.plist */,
 			);
 			path = JSONRPCKit;
@@ -99,6 +144,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		7FC654FF1D49EA19004C390C /* Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7FC655081D49EA19004C390C /* Build configuration list for PBXNativeTarget "Tests" */;
+			buildPhases = (
+				7FC654FC1D49EA19004C390C /* Sources */,
+				7FC654FD1D49EA19004C390C /* Frameworks */,
+				7FC654FE1D49EA19004C390C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7FC655071D49EA19004C390C /* PBXTargetDependency */,
+			);
+			name = Tests;
+			productName = Tests;
+			productReference = 7FC655001D49EA19004C390C /* Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		CBB0C34D1BF0B1D6006A7D41 /* JSONRPCKit-iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CBB0C3561BF0B1D7006A7D41 /* Build configuration list for PBXNativeTarget "JSONRPCKit-iOS" */;
@@ -123,12 +186,17 @@
 		CBB0C3451BF0B1D6006A7D41 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0710;
-				LastUpgradeCheck = 0710;
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Shinichiro Oba";
 				TargetAttributes = {
+					7FC654FF1D49EA19004C390C = {
+						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
+					};
 					CBB0C34D1BF0B1D6006A7D41 = {
 						CreatedOnToolsVersion = 7.1;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -146,11 +214,19 @@
 			projectRoot = "";
 			targets = (
 				CBB0C34D1BF0B1D6006A7D41 /* JSONRPCKit-iOS */,
+				7FC654FF1D49EA19004C390C /* Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		7FC654FE1D49EA19004C390C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CBB0C34C1BF0B1D6006A7D41 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -161,23 +237,68 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		7FC654FC1D49EA19004C390C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F359B781D4B1B0500032E8D /* BatchFactoryTests.swift in Sources */,
+				7F359B761D4B1A1100032E8D /* BatchElementTests.swift in Sources */,
+				7FC6550C1D49FA20004C390C /* TestRequest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CBB0C3491BF0B1D6006A7D41 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				CB82B9E21BF0C5CE00756CB1 /* JSONRPCError.swift in Sources */,
-				CBB4161E1BF370EA00B4DB0E /* NumberIdentifierGenerator.swift in Sources */,
-				CB36EB281BF39028003A4BCA /* RequestIdentifier.swift in Sources */,
-				CBB4161C1BF3599D00B4DB0E /* RequestIdentifierGenerator.swift in Sources */,
-				CB36EB221BF24F1E003A4BCA /* AuthRequestType.swift in Sources */,
+				7FC654FB1D49DF27004C390C /* BatchFactory.swift in Sources */,
+				CBB4161E1BF370EA00B4DB0E /* NumberIdGenerator.swift in Sources */,
+				CB36EB281BF39028003A4BCA /* Id.swift in Sources */,
+				CBB4161C1BF3599D00B4DB0E /* IdGeneratorType.swift in Sources */,
+				7FC654F91D48B6CB004C390C /* BatchElementType.swift in Sources */,
 				CBB0C35A1BF0B2D3006A7D41 /* RequestType.swift in Sources */,
-				CBB0C35C1BF0B6FD006A7D41 /* JSONRPC.swift in Sources */,
+				7FC654F81D48B6CB004C390C /* BatchType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		7FC655071D49EA19004C390C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CBB0C34D1BF0B1D6006A7D41 /* JSONRPCKit-iOS */;
+			targetProxy = 7FC655061D49EA19004C390C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		7FC655091D49EA19004C390C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "-.Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
+			};
+			name = Debug;
+		};
+		7FC6550A1D49EA19004C390C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "-.Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
+			};
+			name = Release;
+		};
 		CBB0C3541BF0B1D7006A7D41 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -191,8 +312,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -239,8 +362,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -260,6 +385,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -271,6 +397,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -282,6 +409,7 @@
 				PRODUCT_NAME = "$(PROJECT_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -289,6 +417,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -299,12 +428,22 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.bricklife.ios.JSONRPCKit;
 				PRODUCT_NAME = "$(PROJECT_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		7FC655081D49EA19004C390C /* Build configuration list for PBXNativeTarget "Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7FC655091D49EA19004C390C /* Debug */,
+				7FC6550A1D49EA19004C390C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		CBB0C3481BF0B1D6006A7D41 /* Build configuration list for PBXProject "JSONRPCKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

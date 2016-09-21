@@ -4,15 +4,17 @@
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "67620B5EFA902936DF04070AF595B76AB0333747" : 0,
     "956D2B21DD155C49504BB67697A67F7C5351A353" : 0,
-    "AD7BAB873C97DE45820C77B7C507D01D37AE8FCE" : 0,
-    "67620B5EFA902936DF04070AF595B76AB0333747" : 0
+    "F607A624BDF2624F7609EF66C123E17132AFE18F" : 0,
+    "AD7BAB873C97DE45820C77B7C507D01D37AE8FCE" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "B7070147-19AF-425E-BE57-543D984E1DB3",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "67620B5EFA902936DF04070AF595B76AB0333747" : "JSONRPCKit\/Carthage\/Checkouts\/Alamofire\/",
     "956D2B21DD155C49504BB67697A67F7C5351A353" : "JSONRPCKit\/Carthage\/Checkouts\/Result\/",
-    "AD7BAB873C97DE45820C77B7C507D01D37AE8FCE" : "JSONRPCKit\/",
-    "67620B5EFA902936DF04070AF595B76AB0333747" : "JSONRPCKit\/Carthage\/Checkouts\/Alamofire\/"
+    "F607A624BDF2624F7609EF66C123E17132AFE18F" : "JSONRPCKit\/Carthage\/Checkouts\/APIKit\/",
+    "AD7BAB873C97DE45820C77B7C507D01D37AE8FCE" : "JSONRPCKit\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "JSONRPCKit",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
@@ -32,6 +34,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/bricklife\/JSONRPCKit.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "AD7BAB873C97DE45820C77B7C507D01D37AE8FCE"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:ishkawa\/APIKit.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F607A624BDF2624F7609EF66C123E17132AFE18F"
     }
   ]
 }
