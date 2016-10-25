@@ -1,5 +1,5 @@
 //
-//  BatchType.swift
+//  Batch.swift
 //  JSONRPCKit
 //
 //  Created by ishkawa on 2016/07/27.
@@ -9,7 +9,7 @@
 import Foundation
 import Result
 
-public protocol BatchType {
+public protocol Batch {
     associatedtype Responses
     associatedtype Results
 
@@ -21,7 +21,7 @@ public protocol BatchType {
     static func responses(from results: Results) throws -> Responses
 }
 
-public struct Batch<Request: RequestType>: BatchType {
+public struct Batch1<Request: RequestType>: Batch {
     public typealias Responses = Request.Response
     public typealias Results = Result<Request.Response, JSONRPCError>
 
@@ -44,7 +44,7 @@ public struct Batch<Request: RequestType>: BatchType {
     }
 }
 
-public struct Batch2<Request1: RequestType, Request2: RequestType>: BatchType {
+public struct Batch2<Request1: RequestType, Request2: RequestType>: Batch {
     public typealias Responses = (Request1.Response, Request2.Response)
     public typealias Results = (Result<Request1.Response, JSONRPCError>, Result<Request2.Response, JSONRPCError>)
 
@@ -91,7 +91,7 @@ public struct Batch2<Request1: RequestType, Request2: RequestType>: BatchType {
     }
 }
 
-public struct Batch3<Request1: RequestType, Request2: RequestType, Request3: RequestType>: BatchType {
+public struct Batch3<Request1: RequestType, Request2: RequestType, Request3: RequestType>: Batch {
     public typealias Responses = (Request1.Response, Request2.Response, Request3.Response)
     public typealias Results = (Result<Request1.Response, JSONRPCError>, Result<Request2.Response, JSONRPCError>, Result<Request3.Response, JSONRPCError>)
 

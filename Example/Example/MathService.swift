@@ -12,7 +12,7 @@ import JSONRPCKit
 
 // use https://github.com/jenolan/jsonrpcx-php/blob/master/examples/server.php
 
-struct MathServiceRequest<Batch: BatchType>: APIKit.RequestType {
+struct MathServiceRequest<Batch: Batch>: APIKit.RequestType {
     let batch: Batch
 
     typealias Response = Batch.Responses

@@ -20,12 +20,12 @@ public final class BatchFactory {
         self.idGenerator = idGenerator
     }
 
-    public func create<Request: RequestType>(_ request: Request) -> Batch<Request> {
+    public func create<Request: RequestType>(_ request: Request) -> Batch1<Request> {
         _ = semaphore.wait(timeout: DispatchTime.distantFuture)
         let batchElement = BatchElement(request: request, version: version, id: idGenerator.next())
         semaphore.signal()
 
-        return Batch(batchElement: batchElement)
+        return Batch1(batchElement: batchElement)
     }
 
     public func create<Request1: RequestType, Request2: RequestType>(_ request1: Request1, _ request2: Request2) -> Batch2<Request1, Request2> {
