@@ -49,7 +49,7 @@ internal extension BatchElementProcotol {
 
     internal func result(from object: Any) -> Result<Request.Response, JSONRPCError> {
         guard let dictionary = object as? [String: Any] else {
-            fatalError("FIXME")
+            return .failure(.unexpectedTypeObject(object))
         }
         
         let receivedVersion = dictionary["jsonrpc"] as? String

@@ -14,6 +14,7 @@ public enum JSONRPCError: Error {
     case resultObjectParseError(Error)
     case errorObjectParseError(Error)
     case unsupportedVersion(String?)
+    case unexpectedTypeObject(Any)
     case missingBothResultAndError(Any)
     case nonArrayResponse(Any)
 
