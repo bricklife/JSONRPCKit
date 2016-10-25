@@ -12,38 +12,38 @@ import JSONRPCKit
 
 // use https://github.com/jenolan/jsonrpcx-php/blob/master/examples/server.php
 
-struct MathServiceRequest<Batch: Batch>: APIKit.RequestType {
+struct MathServiceRequest<Batch: JSONRPCKit.Batch>: APIKit.Request {
     let batch: Batch
 
     typealias Response = Batch.Responses
 
-    var baseURL: NSURL {
-        return NSURL(string: "https://jsonrpckit-demo.appspot.com")!
+    var baseURL: URL {
+        return URL(string: "https://jsonrpckit-demo.appspot.com")!
     }
 
     var method: HTTPMethod {
-        return .POST
+        return .post
     }
 
     var path: String {
         return "/"
     }
 
-    var parameters: AnyObject? {
+    var parameters: Any? {
         return batch.requestObject
     }
 
-    func response(object: AnyObject, URLResponse: NSHTTPURLResponse) throws -> Response {
-        return try batch.responses(object)
+    func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Response {
+        return try batch.responses(from: object)
     }
 }
 
-struct CastError<ExpectedType>: ErrorType {
+struct CastError<ExpectedType>: Error {
     let actualValue: Any
     let expectedType: ExpectedType.Type
 }
 
-struct Subtract: JSONRPCKit.RequestType {
+struct Subtract: JSONRPCKit.Request {
     typealias Response = Int
     
     let minuend: Int
@@ -53,11 +53,11 @@ struct Subtract: JSONRPCKit.RequestType {
         return "subtract"
     }
 
-    var parameters: AnyObject? {
+    var parameters: Any? {
         return [minuend, subtrahend]
     }
-    
-    func response(resultObject: AnyObject) throws -> Response {
+
+    func response(from resultObject: Any) throws -> Response {
         if let response = resultObject as? Response {
             return response
         } else {
@@ -66,7 +66,7 @@ struct Subtract: JSONRPCKit.RequestType {
     }
 }
 
-struct Multiply: JSONRPCKit.RequestType {
+struct Multiply: JSONRPCKit.Request {
     typealias Response = Int
     
     let multiplicand: Int
@@ -76,11 +76,11 @@ struct Multiply: JSONRPCKit.RequestType {
         return "multiply"
     }
     
-    var parameters: AnyObject? {
+    var parameters: Any? {
         return [multiplicand, multiplier]
     }
     
-    func response(resultObject: AnyObject) throws -> Response {
+    func response(from resultObject: Any) throws -> Response {
         if let response = resultObject as? Response {
             return response
         } else {
@@ -89,7 +89,7 @@ struct Multiply: JSONRPCKit.RequestType {
     }
 }
 
-struct Divide: JSONRPCKit.RequestType {
+struct Divide: JSONRPCKit.Request {
     typealias Response = Float
     
     let dividend: Int
@@ -99,11 +99,11 @@ struct Divide: JSONRPCKit.RequestType {
         return "divide"
     }
     
-    var parameters: AnyObject? {
+    var parameters: Any? {
         return [dividend, divisor]
     }
     
-    func response(resultObject: AnyObject) throws -> Response {
+    func response(from resultObject: Any) throws -> Response {
         if let response = resultObject as? Response {
             return response
         } else {

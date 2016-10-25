@@ -12,17 +12,17 @@ import JSONRPCKit
 
 extension UIViewController {
 
-    func showAlertWithError(error: SessionTaskError) {
+    func showAlertWithError(_ error: SessionTaskError) {
         let title: String?
         let message: String?
 
         switch error {
-        case .ConnectionError(let error as NSError):
+        case .connectionError(let error as NSError):
             title = error.localizedDescription
             message = error.localizedRecoverySuggestion
 
-        case .ResponseError(let error as JSONRPCError):
-            if case .ResponseError(_, let errorMessage, let data as String) = error {
+        case .responseError(let error as JSONRPCError):
+            if case .responseError(_, let errorMessage, let data as String) = error {
                 title = errorMessage
                 message = data
             } else {
@@ -34,10 +34,10 @@ extension UIViewController {
             message = nil
         }
 
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alertController.addAction(alertAction)
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
 
 }
