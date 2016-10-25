@@ -17,7 +17,7 @@ public protocol RequestType {
     var extendedFields: [String: Any]? { get }
     var isNotification: Bool { get }
     
-    func responseFromResultObject(_ resultObject: Any) throws -> Response
+    func response(from resultObject: Any) throws -> Response
 }
 
 public extension RequestType {
@@ -39,7 +39,7 @@ public extension RequestType where Response == Void {
         return true
     }
 
-    public func responseFromResultObject(_ resultObject: Any) throws -> Response {
+    public func response(from resultObject: Any) throws -> Response {
         return ()
     }
 }

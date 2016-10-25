@@ -33,8 +33,8 @@ struct MathServiceRequest<Batch: BatchType>: APIKit.RequestType {
         return batch.requestObject
     }
 
-    func responseFromObject(object: AnyObject, URLResponse: NSHTTPURLResponse) throws -> Response {
-        return try batch.responsesFromObject(object)
+    func response(object: AnyObject, URLResponse: NSHTTPURLResponse) throws -> Response {
+        return try batch.responses(object)
     }
 }
 
@@ -57,7 +57,7 @@ struct Subtract: JSONRPCKit.RequestType {
         return [minuend, subtrahend]
     }
     
-    func responseFromResultObject(resultObject: AnyObject) throws -> Response {
+    func response(resultObject: AnyObject) throws -> Response {
         if let response = resultObject as? Response {
             return response
         } else {
@@ -80,7 +80,7 @@ struct Multiply: JSONRPCKit.RequestType {
         return [multiplicand, multiplier]
     }
     
-    func responseFromResultObject(resultObject: AnyObject) throws -> Response {
+    func response(resultObject: AnyObject) throws -> Response {
         if let response = resultObject as? Response {
             return response
         } else {
@@ -103,7 +103,7 @@ struct Divide: JSONRPCKit.RequestType {
         return [dividend, divisor]
     }
     
-    func responseFromResultObject(resultObject: AnyObject) throws -> Response {
+    func response(resultObject: AnyObject) throws -> Response {
         if let response = resultObject as? Response {
             return response
         } else {

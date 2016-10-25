@@ -59,7 +59,7 @@ class BatchElementTests: XCTestCase {
             ]
         ]
 
-        let response = try? batchElement.responseFromObject(responseObject)
+        let response = try? batchElement.response(from: responseObject)
         let dictionary = response as? [String: Any]
         XCTAssertEqual(dictionary?["key"] as? String, "value")
     }
@@ -85,7 +85,7 @@ class BatchElementTests: XCTestCase {
             ]
         ]
 
-        let response = try? batchElement.responseFromBatchObjects(responseArray)
+        let response = try? batchElement.response(from: responseArray)
         let dictionary = response as? [String: Any]
         XCTAssertEqual(dictionary?["key1"] as? String, "value1")
     }
@@ -107,7 +107,7 @@ class BatchElementTests: XCTestCase {
         ]
 
         do {
-            _ = try batchElement.responseFromObject(responseObject)
+            _ = try batchElement.response(from: responseObject)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
@@ -145,7 +145,7 @@ class BatchElementTests: XCTestCase {
         ]
 
         do {
-            _ = try batchElement.responseFromBatchObjects(responseArray)
+            _ = try batchElement.response(from: responseArray)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
@@ -170,7 +170,7 @@ class BatchElementTests: XCTestCase {
         ]
 
         do {
-            _ = try batchElement.responseFromObject(responseObject)
+            _ = try batchElement.response(from: responseObject)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
@@ -200,7 +200,7 @@ class BatchElementTests: XCTestCase {
         ]
 
         do {
-            _ = try batchElement.responseFromBatchObjects(responseArray)
+            _ = try batchElement.response(from: responseArray)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
@@ -225,7 +225,7 @@ class BatchElementTests: XCTestCase {
         ]
 
         do {
-            _ = try batchElement.responseFromObject(responseObject)
+            _ = try batchElement.response(from: responseObject)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
@@ -257,7 +257,7 @@ class BatchElementTests: XCTestCase {
         ]
 
         do {
-            _ = try batchElement.responseFromBatchObjects(responseArray)
+            _ = try batchElement.response(from: responseArray)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
@@ -282,7 +282,7 @@ class BatchElementTests: XCTestCase {
         ]
 
         do {
-            _ = try batchElement.responseFromObject(responseObject)
+            _ = try batchElement.response(from: responseObject)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
@@ -312,7 +312,7 @@ class BatchElementTests: XCTestCase {
         ]
 
         do {
-            _ = try batchElement.responseFromBatchObjects(responseArray)
+            _ = try batchElement.response(from: responseArray)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
@@ -335,7 +335,7 @@ class BatchElementTests: XCTestCase {
         ]
 
         do {
-            _ = try batchElement.responseFromObject(responseObject)
+            _ = try batchElement.response(from: responseObject)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
@@ -366,7 +366,7 @@ class BatchElementTests: XCTestCase {
         ]
 
         do {
-            _ = try batchElement.responseFromBatchObjects(responseArray)
+            _ = try batchElement.response(from: responseArray)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
@@ -389,7 +389,7 @@ class BatchElementTests: XCTestCase {
         ]
 
         do {
-            _ = try batchElement.responseFromObject(responseObject)
+            _ = try batchElement.response(from: responseObject)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
@@ -418,7 +418,7 @@ class BatchElementTests: XCTestCase {
         ]
 
         do {
-            _ = try batchElement.responseFromBatchObjects(responseArray)
+            _ = try batchElement.response(from: responseArray)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError

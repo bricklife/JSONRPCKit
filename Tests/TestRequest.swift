@@ -22,7 +22,7 @@ struct TestRequest: RequestType {
         self.extendedFields = extendedFields
     }
 
-    func responseFromResultObject(_ resultObject: Any) throws -> Any {
+    func response(from resultObject: Any) throws -> Any {
         return resultObject
     }
 }
@@ -44,7 +44,7 @@ struct TestParseErrorRequest: RequestType {
     let method: String
     let parameters: Any?
 
-    func responseFromResultObject(_ resultObject: Any) throws -> Any {
+    func response(from resultObject: Any) throws -> Any {
         throw ParseError()
     }
 }

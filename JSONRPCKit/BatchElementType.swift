@@ -17,17 +17,17 @@ public protocol BatchElementType {
     var id: Id? { get }
     var body: Any { get }
 
-    func responseFromObject(_ object: Any) throws -> Request.Response
-    func responseFromBatchObjects(_ objects: [Any]) throws -> Request.Response
+    func response(from: Any) throws -> Request.Response
+    func response(from: [Any]) throws -> Request.Response
 
-    func resultFromObject(_ object: Any) -> Result<Request.Response, JSONRPCError>
-    func resultFromBatchObjects(_ objects: [Any]) -> Result<Request.Response, JSONRPCError>
+    func result(from: Any) -> Result<Request.Response, JSONRPCError>
+    func result(from: [Any]) -> Result<Request.Response, JSONRPCError>
 }
 
 public extension BatchElementType {
     /// - Throws: JSONRPCError
-    public func responseFromObject(_ object: Any) throws -> Request.Response {
-        switch resultFromObject(object) {
+    public func response(from object: Any) throws -> Request.Response {
+        switch result(from: object) {
         case .success(let response):
             return response
 
@@ -37,8 +37,8 @@ public extension BatchElementType {
     }
 
     /// - Throws: JSONRPCError
-    public func responseFromBatchObjects(_ objects: [Any]) throws -> Request.Response {
-        switch resultFromBatchObjects(objects) {
+    public func response(from objects: [Any]) throws -> Request.Response {
+        switch result(from: objects) {
         case .success(let response):
             return response
 
@@ -47,7 +47,7 @@ public extension BatchElementType {
         }
     }
 
-    public func resultFromObject(_ object: Any) -> Result<Request.Response, JSONRPCError> {
+    public func result(from object: Any) -> Result<Request.Response, JSONRPCError> {
         guard let dictionary = object as? [String: Any] else {
             fatalError("FIXME")
         }
@@ -70,7 +70,7 @@ public extension BatchElementType {
 
         case (let resultObject?, nil):
             do {
-                return .success(try request.responseFromResultObject(resultObject))
+                return .success(try request.response(from: resultObject))
             } catch {
                 return .failure(.resultObjectParseError(error))
             }
@@ -80,7 +80,7 @@ public extension BatchElementType {
         }
     }
 
-    public func resultFromBatchObjects(_ objects: [Any]) -> Result<Request.Response, JSONRPCError> {
+    public func result(from objects: [Any]) -> Result<Request.Response, JSONRPCError> {
         let matchedObject = objects
             .flatMap { $0 as? [String: Any] }
             .filter { $0["id"].flatMap(Id.init) == id }
@@ -90,24 +90,24 @@ public extension BatchElementType {
             return .failure(.responseNotFound(requestId: id, object: objects))
         }
 
-        return resultFromObject(object)
+        return result(from: object)
     }
 }
 
 public extension BatchElementType where Request.Response == Void {
-    public func responseFromObject(_ object: Any) throws -> Request.Response {
+    public func response(_ object: Any) throws -> Request.Response {
         return ()
     }
 
-    public func responseFromBatchObjects(_ objects: [Any]) throws -> Request.Response {
+    public func response(_ objects: [Any]) throws -> Request.Response {
         return ()
     }
 
-    public func resultFromObject(_ object: Any) -> Result<Request.Response, JSONRPCError> {
+    public func result(_ object: Any) -> Result<Request.Response, JSONRPCError> {
         return .success()
     }
 
-    public func resultFromBatchObjects(_ objects: [Any]) -> Result<Request.Response, JSONRPCError> {
+    public func result(_ objects: [Any]) -> Result<Request.Response, JSONRPCError> {
         return .success()
     }
 }
