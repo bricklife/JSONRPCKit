@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct NumberIdGenerator: IdGeneratorType {
+public struct NumberIdGenerator: IdGenerator {
     
     fileprivate var currentId = 1
 

@@ -10,7 +10,7 @@ import UIKit
 import APIKit
 import JSONRPCKit
 
-public struct StringIdGenerator: IdGeneratorType {
+public struct StringIdGenerator: IdGenerator {
 
     private var currentId = 1
     

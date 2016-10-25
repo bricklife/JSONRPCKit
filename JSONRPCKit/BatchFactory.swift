@@ -11,11 +11,11 @@ import Dispatch
 
 public final class BatchFactory {
     public let version: String
-    public var idGenerator: IdGeneratorType
+    public var idGenerator: IdGenerator
 
     fileprivate let semaphore = DispatchSemaphore(value: 1)
 
-    public init(version: String = "2.0", idGenerator: IdGeneratorType = NumberIdGenerator()) {
+    public init(version: String = "2.0", idGenerator: IdGenerator = NumberIdGenerator()) {
         self.version = version
         self.idGenerator = idGenerator
     }
