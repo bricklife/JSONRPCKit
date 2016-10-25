@@ -21,7 +21,7 @@ public protocol Batch {
     static func responses(from results: Results) throws -> Responses
 }
 
-public struct Batch1<Request: RequestType>: Batch {
+public struct Batch1<Request: JSONRPCKit.Request>: Batch {
     public typealias Responses = Request.Response
     public typealias Results = Result<Request.Response, JSONRPCError>
 
@@ -44,7 +44,7 @@ public struct Batch1<Request: RequestType>: Batch {
     }
 }
 
-public struct Batch2<Request1: RequestType, Request2: RequestType>: Batch {
+public struct Batch2<Request1: Request, Request2: Request>: Batch {
     public typealias Responses = (Request1.Response, Request2.Response)
     public typealias Results = (Result<Request1.Response, JSONRPCError>, Result<Request2.Response, JSONRPCError>)
 
@@ -91,7 +91,7 @@ public struct Batch2<Request1: RequestType, Request2: RequestType>: Batch {
     }
 }
 
-public struct Batch3<Request1: RequestType, Request2: RequestType, Request3: RequestType>: Batch {
+public struct Batch3<Request1: Request, Request2: Request, Request3: Request>: Batch {
     public typealias Responses = (Request1.Response, Request2.Response, Request3.Response)
     public typealias Results = (Result<Request1.Response, JSONRPCError>, Result<Request2.Response, JSONRPCError>, Result<Request3.Response, JSONRPCError>)
 

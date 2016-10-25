@@ -20,7 +20,7 @@ public final class BatchFactory {
         self.idGenerator = idGenerator
     }
 
-    public func create<Request: RequestType>(_ request: Request) -> Batch1<Request> {
+    public func create<Request: JSONRPCKit.Request>(_ request: Request) -> Batch1<Request> {
         _ = semaphore.wait(timeout: DispatchTime.distantFuture)
         let batchElement = BatchElement(request: request, version: version, id: idGenerator.next())
         semaphore.signal()
@@ -28,7 +28,7 @@ public final class BatchFactory {
         return Batch1(batchElement: batchElement)
     }
 
-    public func create<Request1: RequestType, Request2: RequestType>(_ request1: Request1, _ request2: Request2) -> Batch2<Request1, Request2> {
+    public func create<Request1: Request, Request2: Request>(_ request1: Request1, _ request2: Request2) -> Batch2<Request1, Request2> {
         _ = semaphore.wait(timeout: DispatchTime.distantFuture)
         let batchElement1 = BatchElement(request: request1, version: version, id: idGenerator.next())
         let batchElement2 = BatchElement(request: request2, version: version, id: idGenerator.next())
@@ -37,7 +37,7 @@ public final class BatchFactory {
         return Batch2(batchElement1: batchElement1, batchElement2: batchElement2)
     }
 
-    public func create<Request1: RequestType, Request2: RequestType, Request3: RequestType>(_ request1: Request1, _ request2: Request2, _ request3: Request3) -> Batch3<Request1, Request2, Request3> {
+    public func create<Request1: Request, Request2: Request, Request3: Request>(_ request1: Request1, _ request2: Request2, _ request3: Request3) -> Batch3<Request1, Request2, Request3> {
         _ = semaphore.wait(timeout: DispatchTime.distantFuture)
         let batchElement1 = BatchElement(request: request1, version: version, id: idGenerator.next())
         let batchElement2 = BatchElement(request: request2, version: version, id: idGenerator.next())

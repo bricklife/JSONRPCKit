@@ -1,5 +1,5 @@
 //
-//  RequestType.swift
+//  Request.swift
 //  JSONRPCKit
 //
 //  Created by Shinichiro Oba on 2015/11/09.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol RequestType {
+public protocol Request {
     /// If `Response == Void`, request is treated as a notification.
     associatedtype Response
     
@@ -20,7 +20,7 @@ public protocol RequestType {
     func response(from resultObject: Any) throws -> Response
 }
 
-public extension RequestType {
+public extension Request {
     public var parameters: Any? {
         return nil
     }
@@ -34,7 +34,7 @@ public extension RequestType {
     }
 }
 
-public extension RequestType where Response == Void {
+public extension Request where Response == Void {
     public var isNotification: Bool {
         return true
     }

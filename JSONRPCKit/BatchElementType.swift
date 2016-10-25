@@ -10,7 +10,7 @@ import Foundation
 import Result
 
 internal protocol BatchElementProcotol {
-    associatedtype Request: RequestType
+    associatedtype Request: JSONRPCKit.Request
 
     var request: Request { get }
     var version: String { get }
@@ -112,7 +112,7 @@ internal extension BatchElementProcotol where Request.Response == Void {
     }
 }
 
-public struct BatchElement<Request: RequestType>: BatchElementProcotol {
+public struct BatchElement<Request: JSONRPCKit.Request>: BatchElementProcotol {
     public let request: Request
     public let version: String
     public let id: Id?

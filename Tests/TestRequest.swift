@@ -9,7 +9,7 @@
 import Foundation
 import JSONRPCKit
 
-struct TestRequest: RequestType {
+struct TestRequest: Request {
     typealias Response = Any
 
     let method: String
@@ -27,14 +27,14 @@ struct TestRequest: RequestType {
     }
 }
 
-struct TestNotificationRequest: RequestType {
+struct TestNotificationRequest: Request {
     typealias Response = Void
 
     let method: String
     let parameters: Any?
 }
 
-struct TestParseErrorRequest: RequestType {
+struct TestParseErrorRequest: Request {
     struct ParseError: Error {
 
     }
