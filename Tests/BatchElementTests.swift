@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import JSONRPCKit
+@testable import JSONRPCKit
 
 class BatchElementTests: XCTestCase {
 

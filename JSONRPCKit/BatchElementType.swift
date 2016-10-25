@@ -9,7 +9,7 @@
 import Foundation
 import Result
 
-public protocol BatchElementType {
+internal protocol BatchElementProcotol {
     associatedtype Request: RequestType
 
     var request: Request { get }
@@ -24,9 +24,9 @@ public protocol BatchElementType {
     func result(from: [Any]) -> Result<Request.Response, JSONRPCError>
 }
 
-public extension BatchElementType {
+internal extension BatchElementProcotol {
     /// - Throws: JSONRPCError
-    public func response(from object: Any) throws -> Request.Response {
+    internal func response(from object: Any) throws -> Request.Response {
         switch result(from: object) {
         case .success(let response):
             return response
@@ -37,7 +37,7 @@ public extension BatchElementType {
     }
 
     /// - Throws: JSONRPCError
-    public func response(from objects: [Any]) throws -> Request.Response {
+    internal func response(from objects: [Any]) throws -> Request.Response {
         switch result(from: objects) {
         case .success(let response):
             return response
@@ -47,7 +47,7 @@ public extension BatchElementType {
         }
     }
 
-    public func result(from object: Any) -> Result<Request.Response, JSONRPCError> {
+    internal func result(from object: Any) -> Result<Request.Response, JSONRPCError> {
         guard let dictionary = object as? [String: Any] else {
             fatalError("FIXME")
         }
@@ -80,7 +80,7 @@ public extension BatchElementType {
         }
     }
 
-    public func result(from objects: [Any]) -> Result<Request.Response, JSONRPCError> {
+    internal func result(from objects: [Any]) -> Result<Request.Response, JSONRPCError> {
         let matchedObject = objects
             .flatMap { $0 as? [String: Any] }
             .filter { $0["id"].flatMap(Id.init) == id }
@@ -94,25 +94,25 @@ public extension BatchElementType {
     }
 }
 
-public extension BatchElementType where Request.Response == Void {
-    public func response(_ object: Any) throws -> Request.Response {
+internal extension BatchElementProcotol where Request.Response == Void {
+    internal func response(_ object: Any) throws -> Request.Response {
         return ()
     }
 
-    public func response(_ objects: [Any]) throws -> Request.Response {
+    internal func response(_ objects: [Any]) throws -> Request.Response {
         return ()
     }
 
-    public func result(_ object: Any) -> Result<Request.Response, JSONRPCError> {
+    internal func result(_ object: Any) -> Result<Request.Response, JSONRPCError> {
         return .success()
     }
 
-    public func result(_ objects: [Any]) -> Result<Request.Response, JSONRPCError> {
+    internal func result(_ objects: [Any]) -> Result<Request.Response, JSONRPCError> {
         return .success()
     }
 }
 
-public struct BatchElement<Request: RequestType>: BatchElementType {
+public struct BatchElement<Request: RequestType>: BatchElementProcotol {
     public let request: Request
     public let version: String
     public let id: Id?
