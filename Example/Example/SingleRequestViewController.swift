@@ -10,16 +10,16 @@ import UIKit
 import APIKit
 import JSONRPCKit
 
-public struct StringIdGenerator: IdGeneratorType {
+public struct StringIdGenerator: IdGenerator {
 
-    private var currentId = 1
+    fileprivate var currentId = 1
     
     public mutating func next() -> Id {
         defer {
             currentId += 1
         }
         
-        return .String("id\(currentId)")
+        return .string("id\(currentId)")
     }
 }
 
@@ -31,7 +31,7 @@ class SingleRequestViewController: UIViewController {
 
     let batchFactory = BatchFactory()
 
-    func subtract(first: Int, _ second: Int) {
+    func subtract(_ first: Int, _ second: Int) {
         let divideRequest = Divide(
             dividend: first,
             divisor: second
@@ -40,20 +40,20 @@ class SingleRequestViewController: UIViewController {
         let batch = batchFactory.create(divideRequest)
         let httpRequest = MathServiceRequest(batch: batch)
 
-        Session.sendRequest(httpRequest) { [weak self] result in
+        Session.send(httpRequest) { [weak self] result in
             switch result {
-            case .Success(let answer):
+            case .success(let answer):
                 self?.subtractAnswerLabel.text = "\(answer)"
                 
-            case .Failure(let error):
+            case .failure(let error):
                 self?.subtractAnswerLabel.text = "?"
                 self?.showAlertWithError(error)
             }
         }
     }
 
-    @IBAction func didPush(sender: AnyObject) {
-        guard let first = Int(firstTextField.text!), second = Int(secondTextField.text!) else {
+    @IBAction func didPush(_ sender: AnyObject) {
+        guard let first = Int(firstTextField.text!), let second = Int(secondTextField.text!) else {
             subtractAnswerLabel.text = "?"
             return
         }

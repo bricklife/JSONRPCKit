@@ -9,29 +9,29 @@
 import Foundation
 
 public enum Id {
-    case Number(Int)
-    case String(Swift.String)
+    case number(Int)
+    case string(Swift.String)
 }
 
 extension Id {
     
-    public init?(value: AnyObject) {
+    public init?(value: Any) {
         switch value {
         case let number as Int:
-            self = .Number(number)
+            self = .number(number)
         case let string as Swift.String:
-            self = .String(string)
+            self = .string(string)
         default:
             return nil
         }
     }
     
-    public var value: AnyObject {
+    public var value: Any {
         switch self {
-        case Number(let number):
-            return number
-        case String(let string):
-            return string
+        case .number(let number):
+            return number as Any
+        case .string(let string):
+            return string as Any
         }
     }
 }
@@ -40,20 +40,20 @@ extension Id: Hashable {
     
     public var hashValue: Int {
         switch self {
-        case Number(let number):
+        case .number(let number):
             return number
-        case String(let string):
+        case .string(let string):
             return string.hashValue
         }
     }
 }
 
 public func ==(lhs: Id, rhs: Id) -> Bool {
-    if case let (.Number(left), .Number(right)) = (lhs, rhs) {
+    if case let (.number(left), .number(right)) = (lhs, rhs) {
         return left == right
     }
     
-    if case let (.String(left), .String(right)) = (lhs, rhs) {
+    if case let (.string(left), .string(right)) = (lhs, rhs) {
         return left == right
     }
     

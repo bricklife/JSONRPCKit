@@ -19,7 +19,7 @@ class BatchRequestViewController: UIViewController {
 
     let batchFactory = BatchFactory()
 
-    func subtractAndmultiply(first: Int, _ second: Int) {
+    func subtractAndmultiply(_ first: Int, _ second: Int) {
         let subtractRequest = Subtract(
             minuend: first,
             subtrahend: second
@@ -33,13 +33,13 @@ class BatchRequestViewController: UIViewController {
         let batch = batchFactory.create(subtractRequest, multiplyRequest)
         let httpRequest = MathServiceRequest(batch: batch)
 
-        Session.sendRequest(httpRequest) { [weak self] result in
+        Session.send(httpRequest) { [weak self] result in
             switch result {
-            case .Success(let subtractAnswer, let multiplyAnswer):
+            case .success(let subtractAnswer, let multiplyAnswer):
                 self?.subtractAnswerLabel.text = "\(subtractAnswer)"
                 self?.multiplyAnswerLabel.text = "\(multiplyAnswer)"
 
-            case .Failure(let error):
+            case .failure(let error):
                 self?.subtractAnswerLabel.text = "?"
                 self?.multiplyAnswerLabel.text = "?"
                 self?.showAlertWithError(error)
@@ -47,8 +47,8 @@ class BatchRequestViewController: UIViewController {
         }
     }
     
-    @IBAction func didPush(sender: AnyObject) {
-        guard let first = Int(firstTextField.text!), second = Int(secondTextField.text!) else {
+    @IBAction func didPush(_ sender: AnyObject) {
+        guard let first = Int(firstTextField.text!), let second = Int(secondTextField.text!) else {
             subtractAnswerLabel.text = "?"
             multiplyAnswerLabel.text = "?"
             return

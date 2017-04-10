@@ -1,5 +1,5 @@
 //
-//  IdGeneratorType.swift
+//  IdGenerator.swift
 //  JSONRPCKit
 //
 //  Created by Shinichiro Oba on 2015/11/11.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol IdGeneratorType {
+public protocol IdGenerator {
 
     mutating func next() -> Id
 }
