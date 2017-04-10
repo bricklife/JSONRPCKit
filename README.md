@@ -5,20 +5,20 @@ JSONRPCKit is a [JSON-RPC 2.0](http://www.jsonrpc.org/specification) library pur
 ```swift
 // Generating request JSON
 let batchFactory = BatchFactory(version: "2.0", idGenerator: NumberIdGenerator())
-let request = SubtractRequest(lhs: 42, rhs: 23)
+let request = Subtract(minuend: 42, subtrahend: 23)
 let batch = batchFactory.create(request)
 batch.requestObject // ["jsonrpc": "2.0", "method": "subtract", "params": [42, 23], "id": 1]
 
 // Parsing response JSON
-let responseObject: AnyObject = ["jsonrpc": "2.0", "result": 19, "id": 1]
-let response = try! batch.responsesFromObject(responseObject)
+let responseObject: Any = ["jsonrpc": "2.0", "result": 19, "id": 1]
+let response = try! batch.responses(from: responseObject)
 response // 19 (type of response is inferred from SubtractRequest.Response)
 ```
 
 
 ## Requirements
 
-- Swift 2.2 or 2.3
+- Swift 3.0 or later
 - iOS 8.0 or later
 
 ## Basic usage
@@ -29,39 +29,28 @@ response // 19 (type of response is inferred from SubtractRequest.Response)
 
 ### Defining request type
 
-First of all, define a request type that conforms to `RequestType`.
+First of all, define a request type that conforms to `Request`.
 
 ```swift
-struct CountCharactersRequest: RequestType {
-    typealias Response = CountCharactersResponse
+struct Subtract: JSONRPCKit.Request {
+    typealias Response = Int
 
-    let characters: String
+    let minuend: Int
+    let subtrahend: Int
 
     var method: String {
-        return "count_characters"
+        return "subtract"
     }
 
-    var parameters: AnyObject? {
-        return ["characters": characters]
+    var parameters: Any? {
+        return [minuend, subtrahend]
     }
 
-    func responseFromResultObject(resultObject: AnyObject) throws -> Response {
-        return try CountCharactersResponse(object: resultObject)
-    }
-}
-
-struct CountCharactersResponse {
-    let count: Int
-
-    init(object: AnyObject) throws {
-        enum DecodeError: ErrorType {
-            case MissingValueForKey(String)
-        }
-
-        if let count = object["count"] as? Int {
-            self.count = count
+    func response(from resultObject: Any) throws -> Response {
+        if let response = resultObject as? Response {
+            return response
         } else {
-            throw DecodeError.MissingValueForKey("count")
+            throw CastError(actualValue: resultObject, expectedType: Response.self)
         }
     }
 }
@@ -70,13 +59,13 @@ struct CountCharactersResponse {
 
 ### Generating request JSON
 
-To generate request JSON, pass `RequestType` instances to `BatchFactory` instance, which has common JSON-RPC version and identifier generator.
+To generate request JSON, pass `Request` instances to `BatchFactory` instance, which has common JSON-RPC version and identifier generator.
 When `BatchFactory` instance receives request(s), it generates identifier(s) for the request(s) and request JSON by combining id, version, method and parameters.
 
 ```swift
 let batchFactory = BatchFactory(version: "2.0", idGenerator: NumberIdGenerator())
-let request1 = CountCharactersRequest(characters: "tokyo")
-let request2 = CountCharactersRequest(characters: "california")
+let request1 = Subtract(minuend: 42, subtrahend: 23)
+let request2 = Subtract(minuend: 23, subtrahend: 42)
 let batch = batchFactory.create(request1, request2)
 ```
 
@@ -85,20 +74,22 @@ The request JSON is available in `batch.requestObject`. It looks like below:
 ```json
 [
   {
+    "method" : "subtract",
     "jsonrpc" : "2.0",
-    "method" : "count_characters",
     "id" : 1,
-    "params" : {
-      "characters" : "tokyo"
-    }
+    "params" : [
+      42,
+      23
+    ]
   },
   {
+    "method" : "subtract",
     "jsonrpc" : "2.0",
-    "method" : "count_characters",
     "id" : 2,
-    "params" : {
-      "characters" : "california"
-    }
+    "params" : [
+      23,
+      42
+    ]
   }
 ]
 ```
@@ -111,31 +102,29 @@ Suppose that following JSON is returned from server:
 ```json
 [
   {
+    "result" : 19,
     "jsonrpc" : "2.0",
     "id" : 1,
-    "result" : {
-      "count" : 5
-    }
+    "status" : 0
   },
   {
+    "result" : -19,
     "jsonrpc" : "2.0",
     "id" : 2,
-    "result" : {
-      "count" : 10
-    }
+    "status" : 0
   }
 ]
 ```
 
-To parse response object, execute `responsesFromObject(_:)` of `BatchType` instance.
-When `responsesFromObject(_:)` is called, `BatchType` finds corresponding response object by comparing request id and response id.
-After it find the response object, it executes `responsesFromObject(_:)` of `Response` to get `Request.Response` from the response object.
+To parse response object, execute `responses(from:)` of `Batch` instance.
+When `responses(from:)` is called, `Batch` finds corresponding response object by comparing request id and response id.
+After it find the response object, it executes `responses(from:)` of `Response` to get `Request.Response` from the response object.
 
 ```swift
 let responseObject = ...
-let (response1, response2) = try! batch.responsesFromObject(responseObject)
-print(response1) // CountCharactersResponse(count: 5)
-print(response2) // CountCharactersResponse(count: 10)
+let (response1, response2) = try! batch.responses(from: responseObject)
+print(response1) // 19
+print(response2) // -19
 ```
 
 ## JSON-RPC over HTTP by [APIKit](https://github.com/ishkawa/APIKit)
@@ -149,29 +138,29 @@ APIKit also has `RequestType` that represents HTTP request.
 ```swift
 import APIKit
 
-struct MyServiceRequest<Batch: BatchType>: APIKit.RequestType {
-    typealias Response = Batch.Responses
-
+struct MyServiceRequest<Batch: JSONRPCKit.Batch>: APIKit.Request {
     let batch: Batch
 
-    var baseURL: NSURL {
+    typealias Response = Batch.Responses
+
+    var baseURL: URL {
         return NSURL(string: "https://api.example.com/")!
     }
 
     var method: HTTPMethod {
-        return .POST
+        return .post
     }
 
     var path: String {
         return "/"
     }
 
-    var parameters: AnyObject? {
+    var parameters: Any? {
         return batch.requestObject
     }
 
-    func responseFromObject(object: AnyObject, URLResponse: NSHTTPURLResponse) throws -> Response {
-        return try batch.responsesFromObject(object)
+    func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Response {
+        return try batch.responses(from: object)
     }
 }
 ```
@@ -180,8 +169,8 @@ struct MyServiceRequest<Batch: BatchType>: APIKit.RequestType {
 
 ```swift
 let batchFactory = BatchFactory(version: "2.0", idGenerator: NumberIdGenerator())
-let request1 = CountCharactersRequest(message: "tokyo")
-let request2 = CountCharactersRequest(message: "california")
+let request1 = Subtract(minuend: 42, subtrahend: 23)
+let request2 = Subtract(minuend: 23, subtrahend: 42)
 let batch = batchFactory.create(request1, request2)
 let httpRequest = MyServiceRequest(batch: batch)
 
@@ -196,10 +185,6 @@ Session.sendRequest(httpRequest) { result in
     }
 }
 ```
-
-## Migrating from JSONRPCKit 0.x
-
-`git diff 0.6.0 develop/1.0 -- Example`
 
 ## License
 
