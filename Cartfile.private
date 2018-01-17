@@ -1,1 +1,1 @@
-github "ishkawa/APIKit"
+github "ishkawa/APIKit" ~> 3.2
