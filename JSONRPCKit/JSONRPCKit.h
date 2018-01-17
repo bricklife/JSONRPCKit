@@ -6,13 +6,11 @@
 //  Copyright © 2015年 Shinichiro Oba. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
 //! Project version number for JSONRPCKit.
-FOUNDATION_EXPORT double JSONRPCKitVersionNumber;
+extern double JSONRPCKitVersionNumber;
 
 //! Project version string for JSONRPCKit.
-FOUNDATION_EXPORT const unsigned char JSONRPCKitVersionString[];
+extern const unsigned char JSONRPCKitVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <JSONRPCKit/PublicHeader.h>
 

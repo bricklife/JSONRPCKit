@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CBB0C34D1BF0B1D6006A7D41"
                BuildableName = "JSONRPCKit.framework"
-               BlueprintName = "JSONRPCKit-iOS"
+               BlueprintName = "JSONRPCKit"
                ReferencedContainer = "container:JSONRPCKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,7 +45,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CBB0C34D1BF0B1D6006A7D41"
             BuildableName = "JSONRPCKit.framework"
-            BlueprintName = "JSONRPCKit-iOS"
+            BlueprintName = "JSONRPCKit"
             ReferencedContainer = "container:JSONRPCKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -68,7 +68,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CBB0C34D1BF0B1D6006A7D41"
             BuildableName = "JSONRPCKit.framework"
-            BlueprintName = "JSONRPCKit-iOS"
+            BlueprintName = "JSONRPCKit"
             ReferencedContainer = "container:JSONRPCKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -86,7 +86,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CBB0C34D1BF0B1D6006A7D41"
             BuildableName = "JSONRPCKit.framework"
-            BlueprintName = "JSONRPCKit-iOS"
+            BlueprintName = "JSONRPCKit"
             ReferencedContainer = "container:JSONRPCKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

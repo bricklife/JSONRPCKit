@@ -18,8 +18,11 @@ response // 19 (type of response is inferred from SubtractRequest.Response)
 
 ## Requirements
 
-- Swift 3.0 or later
+- Swift 4.0 or later
 - iOS 8.0 or later
+- macOS 10.9 or later
+- watchOS 2.0 or later
+- tvOS 9.0 or later
 
 ## Basic usage
 
