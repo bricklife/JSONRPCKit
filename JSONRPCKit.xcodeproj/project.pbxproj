@@ -40,7 +40,7 @@
 		7FC654F61D48B6CB004C390C /* Batch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Batch.swift; sourceTree = "<group>"; };
 		7FC654F71D48B6CB004C390C /* BatchElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchElement.swift; sourceTree = "<group>"; };
 		7FC654FA1D49DF27004C390C /* BatchFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchFactory.swift; sourceTree = "<group>"; };
-		7FC655001D49EA19004C390C /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FC655001D49EA19004C390C /* JSONRPCKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JSONRPCKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FC655041D49EA19004C390C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7FC6550B1D49FA20004C390C /* TestRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestRequest.swift; sourceTree = "<group>"; };
 		CB31EFB91CF6E8FE00DD13DD /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Result.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,7 +75,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7FC655011D49EA19004C390C /* Tests */ = {
+		7FC655011D49EA19004C390C /* JSONRPCKitTests */ = {
 			isa = PBXGroup;
 			children = (
 				7FC6550B1D49FA20004C390C /* TestRequest.swift */,
@@ -83,7 +83,8 @@
 				7F359B771D4B1B0500032E8D /* BatchFactoryTests.swift */,
 				7FC655041D49EA19004C390C /* Info.plist */,
 			);
-			path = Tests;
+			name = JSONRPCKitTests;
+			path = Tests/JSONRPCKitTests;
 			sourceTree = "<group>";
 		};
 		CB63E2391CE22F7E00E22B5C /* Frameworks */ = {
@@ -98,7 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				CBB0C3501BF0B1D6006A7D41 /* JSONRPCKit */,
-				7FC655011D49EA19004C390C /* Tests */,
+				7FC655011D49EA19004C390C /* JSONRPCKitTests */,
 				CBB0C34F1BF0B1D6006A7D41 /* Products */,
 				CB63E2391CE22F7E00E22B5C /* Frameworks */,
 			);
@@ -108,7 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				CBB0C34E1BF0B1D6006A7D41 /* JSONRPCKit.framework */,
-				7FC655001D49EA19004C390C /* Tests.xctest */,
+				7FC655001D49EA19004C390C /* JSONRPCKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -144,9 +145,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		7FC654FF1D49EA19004C390C /* Tests */ = {
+		7FC654FF1D49EA19004C390C /* JSONRPCKitTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7FC655081D49EA19004C390C /* Build configuration list for PBXNativeTarget "Tests" */;
+			buildConfigurationList = 7FC655081D49EA19004C390C /* Build configuration list for PBXNativeTarget "JSONRPCKitTests" */;
 			buildPhases = (
 				7FC654FC1D49EA19004C390C /* Sources */,
 				7FC654FD1D49EA19004C390C /* Frameworks */,
@@ -157,9 +158,9 @@
 			dependencies = (
 				7FC655071D49EA19004C390C /* PBXTargetDependency */,
 			);
-			name = Tests;
+			name = JSONRPCKitTests;
 			productName = Tests;
-			productReference = 7FC655001D49EA19004C390C /* Tests.xctest */;
+			productReference = 7FC655001D49EA19004C390C /* JSONRPCKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		CBB0C34D1BF0B1D6006A7D41 /* JSONRPCKit */ = {
@@ -214,7 +215,7 @@
 			projectRoot = "";
 			targets = (
 				CBB0C34D1BF0B1D6006A7D41 /* JSONRPCKit */,
-				7FC654FF1D49EA19004C390C /* Tests */,
+				7FC654FF1D49EA19004C390C /* JSONRPCKitTests */,
 			);
 		};
 /* End PBXProject section */
@@ -277,7 +278,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
-				INFOPLIST_FILE = Tests/Info.plist;
+				INFOPLIST_FILE = Tests/JSONRPCKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-.Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -289,7 +290,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
-				INFOPLIST_FILE = Tests/Info.plist;
+				INFOPLIST_FILE = Tests/JSONRPCKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-.Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -455,7 +456,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7FC655081D49EA19004C390C /* Build configuration list for PBXNativeTarget "Tests" */ = {
+		7FC655081D49EA19004C390C /* Build configuration list for PBXNativeTarget "JSONRPCKitTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7FC655091D49EA19004C390C /* Debug */,
