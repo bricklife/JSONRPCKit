@@ -1,5 +1,6 @@
 # JSONRPCKit
 
+[![Build Status](https://travis-ci.org/bricklife/JSONRPCKit.svg?branch=master)](https://travis-ci.org/bricklife/JSONRPCKit)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![CocoaPods](https://img.shields.io/cocoapods/v/JSONRPCKit.svg)](https://cocoapods.org/)
 
