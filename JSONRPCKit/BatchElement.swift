@@ -104,11 +104,11 @@ internal extension BatchElementProcotol where Request.Response == Void {
     }
 
     internal func result(_ object: Any) -> Result<Request.Response, JSONRPCError> {
-        return .success()
+        return .success(())
     }
 
     internal func result(_ objects: [Any]) -> Result<Request.Response, JSONRPCError> {
-        return .success()
+        return .success(())
     }
 }
 
