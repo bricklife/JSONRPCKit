@@ -120,27 +120,23 @@ public struct BatchElement<Request: JSONRPCKit.Request>: BatchElementProcotol {
 
     public init(request: Request, version: String, id: Id) {
         let id: Id? = request.isNotification ? nil : id
+        
         var body: [String: Any] = [
-            "jsonrpc": version as Any,
-            "method": request.method as Any,
+            "jsonrpc": version,
+            "method": request.method,
         ]
-
-        if let id = id {
-            body["id"] = id.value
-        }
-
-        if let parameters = request.parameters {
-            body["params"] = parameters
-        }
-
-        request.extendedFields?.forEach { key, value in
+        
+        body["id"] = id?.value
+        body["params"] = request.parameters
+        
+        request.extendedFields?.forEach { (key, value) in
             body[key] = value
         }
 
         self.request = request
         self.version = version
         self.id = id
-        self.body = body as Any
+        self.body = body
     }
 }
 

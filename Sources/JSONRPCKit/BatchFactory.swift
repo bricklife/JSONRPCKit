@@ -13,7 +13,7 @@ public final class BatchFactory {
     public let version: String
     public var idGenerator: IdGenerator
 
-    fileprivate let semaphore = DispatchSemaphore(value: 1)
+    private let semaphore = DispatchSemaphore(value: 1)
 
     public init(version: String = "2.0", idGenerator: IdGenerator = NumberIdGenerator()) {
         self.version = version
