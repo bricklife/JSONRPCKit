@@ -430,4 +430,22 @@ class BatchElementTests: XCTestCase {
         }
     }
 
+    static var allTests = [
+        ("testRequestObject", testRequestObject),
+        ("testNotificationRequestObject", testNotificationRequestObject),
+        ("testResponseFromObject", testResponseFromObject),
+        ("testResponseFromArray", testResponseFromArray),
+        ("testResponseFromObjectResponseError", testResponseFromObjectResponseError),
+        ("testResponseFromArrayResponseError", testResponseFromArrayResponseError),
+        ("testResponseFromObjectresultObjectParseError", testResponseFromObjectresultObjectParseError),
+        ("testResponseFromArrayresultObjectParseError", testResponseFromArrayresultObjectParseError),
+        ("testResponseFromObjectErrorObjectParseError", testResponseFromObjectErrorObjectParseError),
+        ("testResponseFromArrayErrorObjectParseError", testResponseFromArrayErrorObjectParseError),
+        ("testResponseFromObjectunsupportedVersion", testResponseFromObjectunsupportedVersion),
+        ("testResponseFromArrayunsupportedVersion", testResponseFromArrayunsupportedVersion),
+        ("testResponseFromObjectresponseNotFound", testResponseFromObjectresponseNotFound),
+        ("testResponseFromArrayresponseNotFound", testResponseFromArrayresponseNotFound),
+        ("testResponseFromObjectmissingBothResultAndError", testResponseFromObjectmissingBothResultAndError),
+        ("testResponseFromArraymissingBothResultAndError", testResponseFromArraymissingBothResultAndError),
+    ]
 }
