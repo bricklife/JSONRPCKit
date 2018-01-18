@@ -10,7 +10,7 @@ import Foundation
 
 public struct NumberIdGenerator: IdGenerator {
     
-    fileprivate var currentId = 1
+    private var currentId = 1
 
     public init() {}
 

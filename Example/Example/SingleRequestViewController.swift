@@ -12,7 +12,7 @@ import JSONRPCKit
 
 public struct StringIdGenerator: IdGenerator {
 
-    fileprivate var currentId = 1
+    private var currentId = 1
     
     public mutating func next() -> Id {
         defer {
@@ -29,7 +29,7 @@ class SingleRequestViewController: UIViewController {
     @IBOutlet weak var secondTextField: UITextField!
     @IBOutlet weak var subtractAnswerLabel: UILabel!
 
-    let batchFactory = BatchFactory()
+    let batchFactory = BatchFactory(idGenerator: StringIdGenerator())
 
     func subtract(_ first: Int, _ second: Int) {
         let divideRequest = Divide(

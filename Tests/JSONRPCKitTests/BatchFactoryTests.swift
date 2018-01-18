@@ -89,4 +89,13 @@ class BatchFactoryTests: XCTestCase {
         let nextId = batchFactory.idGenerator.next().value as? Int
         XCTAssertEqual(nextId, 10000)
     }
+
+    static var allTests = [
+        ("test1", test1),
+        ("test2", test2),
+        ("test3", test3),
+        ("test4", test4),
+        ("test5", test5),
+        ("testThreadSafety", testThreadSafety),
+    ]
 }

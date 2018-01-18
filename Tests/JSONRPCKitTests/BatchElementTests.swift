@@ -30,21 +30,18 @@ class BatchElementTests: XCTestCase {
     }
 
     func testNotificationRequestObject() {
-        let request = TestNotificationRequest(method: "method", parameters: ["key": "value"])
+        let request = TestNotificationRequest(method: "method", parameters: nil)
         let batchElement = BatchElement(request: request, version: "2.0", id: Id.number(1))
 
         XCTAssertNil(batchElement.id)
         XCTAssertEqual(batchElement.version, "2.0")
 
         let requestObject = batchElement.body as? [String: Any]
-        XCTAssertEqual(requestObject?.keys.count, 3)
+        XCTAssertEqual(requestObject?.keys.count, 2)
         XCTAssertEqual(requestObject?["jsonrpc"] as? String, "2.0")
         XCTAssertEqual(requestObject?["method"] as? String, "method")
         XCTAssertNil(requestObject?["id"])
-
-        let parameters = requestObject?["params"] as? [String: Any]
-        XCTAssertEqual(parameters?.keys.count, 1)
-        XCTAssertEqual(parameters?["key"] as? String, "value")
+        XCTAssertNil(requestObject?["params"])
     }
 
     func testResponseFromObject() {
@@ -111,7 +108,7 @@ class BatchElementTests: XCTestCase {
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
-            if case .responseError(let code, let message, let data as [String: AnyObject])? = error {
+            if case .responseError(let code, let message, let data as [String: Any])? = error {
                 XCTAssertEqual(code, 123)
                 XCTAssertEqual(message, "abc")
                 XCTAssertEqual(data["key"] as? String, "value")
@@ -149,7 +146,7 @@ class BatchElementTests: XCTestCase {
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
-            if case .responseError(let code, let message, let data as [String: AnyObject])? = error {
+            if case .responseError(let code, let message, let data as [String: Any])? = error {
                 XCTAssertEqual(code, 123)
                 XCTAssertEqual(message, "abc")
                 XCTAssertEqual(data["key"] as? String, "value")
@@ -430,4 +427,22 @@ class BatchElementTests: XCTestCase {
         }
     }
 
+    static var allTests = [
+        ("testRequestObject", testRequestObject),
+        ("testNotificationRequestObject", testNotificationRequestObject),
+        ("testResponseFromObject", testResponseFromObject),
+        ("testResponseFromArray", testResponseFromArray),
+        ("testResponseFromObjectResponseError", testResponseFromObjectResponseError),
+        ("testResponseFromArrayResponseError", testResponseFromArrayResponseError),
+        ("testResponseFromObjectresultObjectParseError", testResponseFromObjectresultObjectParseError),
+        ("testResponseFromArrayresultObjectParseError", testResponseFromArrayresultObjectParseError),
+        ("testResponseFromObjectErrorObjectParseError", testResponseFromObjectErrorObjectParseError),
+        ("testResponseFromArrayErrorObjectParseError", testResponseFromArrayErrorObjectParseError),
+        ("testResponseFromObjectunsupportedVersion", testResponseFromObjectunsupportedVersion),
+        ("testResponseFromArrayunsupportedVersion", testResponseFromArrayunsupportedVersion),
+        ("testResponseFromObjectresponseNotFound", testResponseFromObjectresponseNotFound),
+        ("testResponseFromArrayresponseNotFound", testResponseFromArrayresponseNotFound),
+        ("testResponseFromObjectmissingBothResultAndError", testResponseFromObjectmissingBothResultAndError),
+        ("testResponseFromArraymissingBothResultAndError", testResponseFromArraymissingBothResultAndError),
+    ]
 }
