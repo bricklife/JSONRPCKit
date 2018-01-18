@@ -12,7 +12,7 @@ let package = Package(
         .package(url: "https://github.com/antitypical/Result.git", from: "3.2.0"),
     ],
     targets: [
-        .target(name: "JSONRPCKit", dependencies: ["Result"], path: "JSONRPCKit"),
+        .target(name: "JSONRPCKit", dependencies: ["Result"]),
         .testTarget(name: "JSONRPCKitTests", dependencies: ["JSONRPCKit"]),
     ],
     swiftLanguageVersions: [4]
