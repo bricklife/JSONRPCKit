@@ -4,7 +4,7 @@
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![CocoaPods](https://img.shields.io/cocoapods/v/JSONRPCKit.svg)](https://cocoapods.org/)
 
-JSONRPCKit is a [JSON-RPC 2.0](http://www.jsonrpc.org/specification) library purely written in Swift.
+JSONRPCKit is a type-safe [JSON-RPC 2.0](http://www.jsonrpc.org/specification) library purely written in Swift.
 
 ```swift
 // Generating request JSON
@@ -19,14 +19,15 @@ let response = try! batch.responses(from: responseObject)
 response // 19 (type of response is inferred from SubtractRequest.Response)
 ```
 
-
 ## Requirements
 
-- Swift 4.0 or later
+- Swift 4.0 / Xcode 9.0 or later
+    - If you use Swift 3.1 (Xcode 8.3), you can use [2.0.3](https://github.com/bricklife/JSONRPCKit/tree/2.0.3) instead.
 - iOS 8.0 or later
 - macOS 10.9 or later
 - watchOS 2.0 or later
 - tvOS 9.0 or later
+- [Linux](https://swift.org/download/#linux) is also supported
 
 ## Basic usage
 
