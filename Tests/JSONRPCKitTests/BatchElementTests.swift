@@ -108,7 +108,7 @@ class BatchElementTests: XCTestCase {
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
-            if case .responseError(let code, let message, let data as [String: AnyObject])? = error {
+            if case .responseError(let code, let message, let data as [String: Any])? = error {
                 XCTAssertEqual(code, 123)
                 XCTAssertEqual(message, "abc")
                 XCTAssertEqual(data["key"] as? String, "value")
@@ -146,7 +146,7 @@ class BatchElementTests: XCTestCase {
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
-            if case .responseError(let code, let message, let data as [String: AnyObject])? = error {
+            if case .responseError(let code, let message, let data as [String: Any])? = error {
                 XCTAssertEqual(code, 123)
                 XCTAssertEqual(message, "abc")
                 XCTAssertEqual(data["key"] as? String, "value")
