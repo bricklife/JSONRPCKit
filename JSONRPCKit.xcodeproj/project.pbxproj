@@ -12,7 +12,6 @@
 		7FC654F81D48B6CB004C390C /* Batch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC654F61D48B6CB004C390C /* Batch.swift */; };
 		7FC654F91D48B6CB004C390C /* BatchElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC654F71D48B6CB004C390C /* BatchElement.swift */; };
 		7FC654FB1D49DF27004C390C /* BatchFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC654FA1D49DF27004C390C /* BatchFactory.swift */; };
-		7FC655051D49EA19004C390C /* JSONRPCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB0C34E1BF0B1D6006A7D41 /* JSONRPCKit.framework */; };
 		7FC6550C1D49FA20004C390C /* TestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC6550B1D49FA20004C390C /* TestRequest.swift */; };
 		7FD0A33D1D4B4024007C9EAB /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB31EFB91CF6E8FE00DD13DD /* Result.framework */; };
 		CB31EFBA1CF6E8FE00DD13DD /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB31EFB91CF6E8FE00DD13DD /* Result.framework */; };
@@ -60,7 +59,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FD0A33D1D4B4024007C9EAB /* Result.framework in Frameworks */,
-				7FC655051D49EA19004C390C /* JSONRPCKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,7 +292,10 @@
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				INFOPLIST_FILE = Tests/JSONRPCKitTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=appletv*]" = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=iphone*]" = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-.Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -306,7 +307,9 @@
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				INFOPLIST_FILE = Tests/JSONRPCKitTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=appletv*]" = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=iphone*]" = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-.Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
