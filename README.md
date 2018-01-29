@@ -152,7 +152,7 @@ struct MyServiceRequest<Batch: JSONRPCKit.Batch>: APIKit.Request {
     typealias Response = Batch.Responses
 
     var baseURL: URL {
-        return NSURL(string: "https://api.example.com/")!
+        return URL(string: "https://api.example.com/")!
     }
 
     var method: HTTPMethod {
