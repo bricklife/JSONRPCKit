@@ -9,42 +9,17 @@
 import Foundation
 import JSONRPCKit
 
-struct TestRequest: Request {
-    typealias Response = Any
+struct TestRequestStringDict: Request {
+    typealias Response = Dictionary<String, String>
 
-    let method: String
-    let parameters: Any?
-    let extendedFields: [String : Any]?
-
-    init(method: String, parameters: Any?, extendedFields: [String: Any]? = nil) {
-        self.method = method
-        self.parameters = parameters
-        self.extendedFields = extendedFields
-    }
-
-    func response(from resultObject: Any) throws -> Any {
-        return resultObject
-    }
+    var method: String
+    var parameters: Encodable?
 }
+
 
 struct TestNotificationRequest: Request {
-    typealias Response = Void
+    typealias Response = NoReply
 
     let method: String
-    let parameters: Any?
-}
-
-struct TestParseErrorRequest: Request {
-    struct ParseError: Error {
-
-    }
-
-    typealias Response = Any
-
-    let method: String
-    let parameters: Any?
-
-    func response(from resultObject: Any) throws -> Any {
-        throw ParseError()
-    }
+    let parameters: Encodable?
 }

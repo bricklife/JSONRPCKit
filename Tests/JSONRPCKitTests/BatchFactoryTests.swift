@@ -10,6 +10,19 @@ import XCTest
 import JSONRPCKit
 import Dispatch
 
+private struct TestRequest: Request {
+    typealias Response = Int
+
+    var method: String
+    var parameters: Encodable?
+
+    init(method: String, parameters: Encodable?) {
+        self.method = method
+        self.parameters = parameters
+    }
+
+}
+
 class BatchFactoryTests: XCTestCase {
     var batchFactory: BatchFactory!
     
@@ -72,6 +85,59 @@ class BatchFactoryTests: XCTestCase {
         XCTAssertEqual(batch.batchElement3.id?.value as? Int, 3)
         XCTAssertEqual(batch.batchElement4.id?.value as? Int, 4)
         XCTAssertEqual(batch.batchElement5.id?.value as? Int, 5)
+    }
+
+    func test5Response() {
+        let request1 = TestRequest(method: "method1", parameters: ["key1": "value1"])
+        let request2 = TestRequest(method: "method2", parameters: ["key2": "value2"])
+        let request3 = TestRequest(method: "method3", parameters: ["key3": "value3"])
+        let request4 = TestRequest(method: "method4", parameters: ["key4": "value4"])
+        let request5 = TestRequest(method: "method5", parameters: ["key5": "value5"])
+        let batch = batchFactory.create(request1, request2, request3, request4, request5)
+
+        XCTAssertEqual(batch.batchElement1.id?.value as? Int, 1)
+        XCTAssertEqual(batch.batchElement2.id?.value as? Int, 2)
+        XCTAssertEqual(batch.batchElement3.id?.value as? Int, 3)
+        XCTAssertEqual(batch.batchElement4.id?.value as? Int, 4)
+        XCTAssertEqual(batch.batchElement5.id?.value as? Int, 5)
+
+        let responseArray =
+        """
+        [
+            {
+                "id": 2,
+                "jsonrpc": "2.0",
+                "result": 2,
+            },
+            {
+                "id": 3,
+                "jsonrpc": "2.0",
+                "result": 3,
+            },
+            {
+                "id": 1,
+                "jsonrpc": "2.0",
+                "result": 1,
+            },
+            {
+                "id": 5,
+                "jsonrpc": "2.0",
+                "result": 5,
+            },
+            {
+                "id": 4,
+                "jsonrpc": "2.0",
+                "result": 4,
+            }
+        ]
+        """
+        let responses = try? batch.responses(from: responseArray.data(using: .utf8)!)
+
+        XCTAssertEqual(responses?.0, 1)
+        XCTAssertEqual(responses?.1, 2)
+        XCTAssertEqual(responses?.2, 3)
+        XCTAssertEqual(responses?.3, 4)
+        XCTAssertEqual(responses?.4, 5)
     }
 
     func testThreadSafety() {

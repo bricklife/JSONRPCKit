@@ -9,6 +9,21 @@
 import XCTest
 @testable import JSONRPCKit
 
+private struct TestRequest: Request {
+    typealias Response = Int
+
+    var method: String
+    var parameters: Encodable?
+    var extendedFields: Encodable?
+
+    init(method: String, parameters: Encodable?, extendedFields: Encodable? = .none) {
+        self.method = method
+        self.parameters = parameters
+        self.extendedFields = extendedFields
+    }
+
+}
+
 class BatchElementTests: XCTestCase {
 
     func testRequestObject() {
@@ -17,7 +32,12 @@ class BatchElementTests: XCTestCase {
         XCTAssertEqual(batchElement.id, Id.number(1))
         XCTAssertEqual(batchElement.version, "2.0")
 
-        let requestObject = batchElement.body as? [String: Any]
+        let encoder = JSONEncoder()
+        let data = try! encoder.encode(batchElement)
+        let requestObject = try? JSONSerialization.jsonObject(with: data, options: []) as? [String : Any] ?? [:]
+        let theJSONText = String(data: data, encoding: .utf8)
+        print(theJSONText ?? "")
+
         XCTAssertEqual(requestObject?.keys.count, 5)
         XCTAssertEqual(requestObject?["jsonrpc"] as? String, "2.0")
         XCTAssertEqual(requestObject?["id"] as? Int, 1)
@@ -36,7 +56,10 @@ class BatchElementTests: XCTestCase {
         XCTAssertNil(batchElement.id)
         XCTAssertEqual(batchElement.version, "2.0")
 
-        let requestObject = batchElement.body as? [String: Any]
+        let encoder = JSONEncoder()
+        let data = try! encoder.encode(batchElement)
+        let requestObject = try? JSONSerialization.jsonObject(with: data, options: []) as? [String : Any] ?? [:]
+
         XCTAssertEqual(requestObject?.keys.count, 2)
         XCTAssertEqual(requestObject?["jsonrpc"] as? String, "2.0")
         XCTAssertEqual(requestObject?["method"] as? String, "method")
@@ -45,73 +68,85 @@ class BatchElementTests: XCTestCase {
     }
 
     func testResponseFromObject() {
-        let request = TestRequest(method: "method", parameters: nil)
+        let request = TestRequestStringDict(method: "method", parameters: nil)
         let batchElement = BatchElement(request: request, version: "2.0", id: Id.number(1))
 
-        let responseObject: Any = [
+
+
+        let responseObject: String =
+        """
+        {
             "id": 1,
             "jsonrpc": "2.0",
-            "result": [
+            "result": {
                 "key": "value",
-            ]
-        ]
+            }
+        }
+        """
 
-        let response = try? batchElement.response(from: responseObject)
-        let dictionary = response as? [String: Any]
-        XCTAssertEqual(dictionary?["key"] as? String, "value")
+        let response = try? batchElement.response(from: responseObject.data(using: .utf8)!)
+        XCTAssertEqual(response?["key"], "value")
     }
 
     func testResponseFromArray() {
-        let request = TestRequest(method: "method", parameters: nil)
+        let request = TestRequestStringDict(method: "method", parameters: nil)
         let batchElement = BatchElement(request: request, version: "2.0", id: Id.number(1))
 
-        let responseArray: [Any] = [
-            [
+        let responseArray =
+        """
+        [
+            {
                 "id": 1,
                 "jsonrpc": "2.0",
-                "result": [
+                "result": {
                     "key1": "value1",
-                ]
-            ],
-            [
+                }
+            },
+            {
                 "id": 2,
                 "jsonrpc": "2.0",
-                "result": [
+                "result": {
                     "key2": "value2",
-                ]
-            ]
+                }
+            }
         ]
+        """
 
-        let response = try? batchElement.response(from: responseArray)
-        let dictionary = response as? [String: Any]
-        XCTAssertEqual(dictionary?["key1"] as? String, "value1")
+        let response = try? batchElement.response(fromArray: responseArray.data(using: .utf8)!)
+        XCTAssertEqual(response?["key1"], "value1")
     }
 
     func testResponseFromObjectResponseError() {
-        let request = TestRequest(method: "method", parameters: nil)
+        let request = TestRequestStringDict(method: "method", parameters: nil)
         let batchElement = BatchElement(request: request, version: "2.0", id: Id.number(1))
 
-        let responseObject: Any = [
+        let responseObject =
+        """
+        {
             "id": 1,
             "jsonrpc": "2.0",
-            "error": [
+            "error": {
                 "code": 123,
                 "message": "abc",
-                "data": [
+                "data": {
                     "key": "value",
-                ]
-            ]
-        ]
+                }
+            }
+        }
+        """
 
         do {
-            _ = try batchElement.response(from: responseObject)
+            _ = try batchElement.response(from: responseObject.data(using: .utf8)!)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
-            if case .responseError(let code, let message, let data as [String: Any])? = error {
+            if case .responseError(let code, let message, let data)? = error {
                 XCTAssertEqual(code, 123)
                 XCTAssertEqual(message, "abc")
-                XCTAssertEqual(data["key"] as? String, "value")
+
+                let container = try? data.singleValueContainer()
+                let dataDict = try? container?.decode(Dictionary<String, String>.self)
+                XCTAssertEqual(dataDict??["key"], "value")
             } else {
                 XCTFail()
             }
@@ -119,37 +154,42 @@ class BatchElementTests: XCTestCase {
     }
 
     func testResponseFromArrayResponseError() {
-        let request = TestRequest(method: "method", parameters: nil)
+        let request = TestRequestStringDict(method: "method", parameters: nil)
         let batchElement = BatchElement(request: request, version: "2.0", id: Id.number(1))
 
-        let responseArray: [Any] = [
-            [
+        let responseArray =
+        """
+        [
+            {
                 "id": 1,
                 "jsonrpc": "2.0",
-                "error": [
+                "error": {
                     "code": 123,
                     "message": "abc",
-                    "data": [
+                    "data": {
                         "key": "value",
-                    ]
-                ]
-            ],
-            [
+                    }
+                }
+            },
+            {
                 "id": 2,
                 "jsonrpc": "2.0",
-                "result": [:],
-            ]
+                "result": {},
+            }
         ]
+        """
 
         do {
-            _ = try batchElement.response(from: responseArray)
+            _ = try batchElement.response(fromArray: responseArray.data(using: .utf8)!)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
-            if case .responseError(let code, let message, let data as [String: Any])? = error {
+            if case .responseError(let code, let message, let data)? = error {
                 XCTAssertEqual(code, 123)
                 XCTAssertEqual(message, "abc")
-                XCTAssertEqual(data["key"] as? String, "value")
+                let container = try? data.singleValueContainer()
+                let dataDict = try? container?.decode(Dictionary<String, String>.self)
+                XCTAssertEqual(dataDict??["key"], "value")
             } else {
                 XCTFail()
             }
@@ -157,72 +197,83 @@ class BatchElementTests: XCTestCase {
     }
 
     func testResponseFromObjectresultObjectParseError() {
-        let request = TestParseErrorRequest(method: "method", parameters: nil)
+
+
+        let request = TestRequestStringDict(method: "method", parameters: nil)
         let batchElement = BatchElement(request: request, version: "2.0", id: Id.number(1))
 
-        let responseObject: Any = [
+        let responseObject =
+        """
+        {
             "id": 1,
             "jsonrpc": "2.0",
-            "result": [:],
-        ]
+            "result": 1,
+        }
+        """
 
         do {
-            _ = try batchElement.response(from: responseObject)
+            _ = try batchElement.response(from: responseObject.data(using: .utf8)!)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
-            if case .resultObjectParseError(let error)? = error {
-                XCTAssert(error is TestParseErrorRequest.ParseError)
-            } else {
-                XCTFail()
+            guard case .resultObjectParseError(let e)? = error,
+                case DecodingError.typeMismatch = e else {
+                    XCTFail("Wrong error type!")
+                    return
             }
         }
     }
 
     func testResponseFromArrayresultObjectParseError() {
-        let request = TestParseErrorRequest(method: "method", parameters: nil)
+        let request = TestRequestStringDict(method: "method", parameters: nil)
         let batchElement = BatchElement(request: request, version: "2.0", id: Id.number(1))
 
-        let responseArray: [Any] = [
-            [
+        let responseObject =
+        """
+        [
+            {
                 "id": 1,
                 "jsonrpc": "2.0",
-                "result": [:]
-            ],
-            [
+                "result": 1
+            },
+            {
                 "id": 2,
                 "jsonrpc": "2.0",
-                "result": [:],
-            ]
+                "result": 2,
+            }
         ]
+        """
 
         do {
-            _ = try batchElement.response(from: responseArray)
+            _ = try batchElement.response(fromArray: responseObject.data(using: .utf8)!)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
-            if case .resultObjectParseError(let error)? = error {
-                XCTAssert(error is TestParseErrorRequest.ParseError)
-            } else {
-                XCTFail()
+            guard case .resultObjectParseError(let e)? = error,
+                case DecodingError.typeMismatch = e else {
+                    XCTFail("Wrong error type!")
+                    return
             }
         }
     }
 
     func testResponseFromObjectErrorObjectParseError() {
-        let request = TestRequest(method: "method", parameters: nil)
+        let request = TestRequestStringDict(method: "method", parameters: nil)
         let batchElement = BatchElement(request: request, version: "2.0", id: Id.number(1))
 
-        let responseObject: Any = [
+        let responseObject =
+        """
+        {
             "id": 1,
             "jsonrpc": "2.0",
-            "error": [
+            "error": {
                 "message": "abc",
-            ]
-        ]
+            }
+        }
+        """
 
         do {
-            _ = try batchElement.response(from: responseObject)
+            _ = try batchElement.response(from: responseObject.data(using: .utf8)!)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
@@ -238,23 +289,26 @@ class BatchElementTests: XCTestCase {
         let request = TestRequest(method: "method", parameters: nil)
         let batchElement = BatchElement(request: request, version: "2.0", id: Id.number(1))
 
-        let responseArray: [Any] = [
-            [
+        let responseArray =
+        """
+        [
+            {
                 "id": 1,
                 "jsonrpc": "2.0",
-                "error": [
+                "error": {
                     "message": "abc",
-                ]
-            ],
-            [
+                }
+            },
+            {
                 "id": 2,
                 "jsonrpc": "2.0",
-                "result": [:],
-            ]
+                "result": 123,
+            }
         ]
+        """
 
         do {
-            _ = try batchElement.response(from: responseArray)
+            _ = try batchElement.response(fromArray: responseArray.data(using: .utf8)!)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
@@ -267,19 +321,21 @@ class BatchElementTests: XCTestCase {
     }
 
     func testResponseFromObjectunsupportedVersion() {
-        let request = TestRequest(method: "method", parameters: nil)
+        let request = TestRequestStringDict(method: "method", parameters: nil)
         let batchElement = BatchElement(request: request, version: "2.0", id: Id.number(1))
 
-        let responseObject: Any = [
+        let responseObject =
+        """
+        {
             "id": 1,
             "jsonrpc": "1.0",
-            "result": [
+            "result": {
                 "key": "value",
-            ]
-        ]
-
+            }
+        }
+        """
         do {
-            _ = try batchElement.response(from: responseObject)
+            _ = try batchElement.response(from: responseObject.data(using: .utf8)!)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
@@ -292,24 +348,26 @@ class BatchElementTests: XCTestCase {
     }
 
     func testResponseFromArrayunsupportedVersion() {
-        let request = TestRequest(method: "method", parameters: nil)
-        let batchElement = BatchElement(request: request, version: "2.0", id: Id.number(1))
+        let request = TestRequestStringDict(method: "method", parameters: nil)
+        let batchElement = BatchElement(request: request, version: "2.0", id: Id.number(2))
 
-        let responseArray: [Any] = [
-            [
+        let responseArray =
+        """
+        [
+            {
                 "id": 1,
-                "jsonrpc": "1.0",
-                "result": [:],
-            ],
-            [
-                "id": 2,
                 "jsonrpc": "2.0",
-                "result": [:],
-            ]
+                "result": {},
+            },
+            {
+                "id": 2,
+                "jsonrpc": "1.0",
+                "result": {},
+            }
         ]
-
+        """
         do {
-            _ = try batchElement.response(from: responseArray)
+            _ = try batchElement.response(fromArray: responseArray.data(using: .utf8)!)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
@@ -322,23 +380,25 @@ class BatchElementTests: XCTestCase {
     }
 
     func testResponseFromObjectresponseNotFound() {
-        let request = TestRequest(method: "method", parameters: nil)
+        let request = TestRequestStringDict(method: "method", parameters: nil)
         let batchElement = BatchElement(request: request, version: "2.0", id: Id.number(1))
 
-        let responseObject: Any = [
+        let responseObject =
+        """
+        {
             "id": 2,
             "jsonrpc": "2.0",
-            "result": [:]
-        ]
+            "result": {}
+        }
+        """
 
         do {
-            _ = try batchElement.response(from: responseObject)
+            _ = try batchElement.response(from: responseObject.data(using: .utf8)!)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
-            if case .responseNotFound(let id, let object as [String: Any])? = error {
+            if case .responseNotFound(let id)? = error {
                 XCTAssertEqual(id, batchElement.id)
-                XCTAssertEqual(object["id"] as? Int, 2)
             } else {
                 XCTFail()
             }
@@ -346,30 +406,32 @@ class BatchElementTests: XCTestCase {
     }
 
     func testResponseFromArrayresponseNotFound() {
-        let request = TestRequest(method: "method", parameters: nil)
+        let request = TestRequestStringDict(method: "method", parameters: nil)
         let batchElement = BatchElement(request: request, version: "2.0", id: Id.number(1))
 
-        let responseArray: [Any] = [
-            [
+        let responseArray =
+        """
+        [
+            {
                 "id": 2,
                 "jsonrpc": "2.0",
-                "result": [:],
-            ],
-            [
+                "result": {},
+            },
+            {
                 "id": 3,
                 "jsonrpc": "2.0",
-                "result": [:],
-            ]
+                "result": {},
+            }
         ]
+        """
 
         do {
-            _ = try batchElement.response(from: responseArray)
+            _ = try batchElement.response(fromArray: responseArray.data(using: .utf8)!)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
-            if case .responseNotFound(let id, let object as [[String: Any]])? = error {
+            if case .responseNotFound(let id)? = error {
                 XCTAssertEqual(id, batchElement.id)
-                XCTAssertEqual(object[0]["id"] as? Int, 2)
             } else {
                 XCTFail()
             }
@@ -377,16 +439,19 @@ class BatchElementTests: XCTestCase {
     }
 
     func testResponseFromObjectmissingBothResultAndError() {
-        let request = TestRequest(method: "method", parameters: nil)
+        let request = TestRequestStringDict(method: "method", parameters: nil)
         let batchElement = BatchElement(request: request, version: "2.0", id: Id.number(1))
 
-        let responseObject: Any = [
+        let responseObject =
+        """
+        {
             "id": 1,
             "jsonrpc": "2.0",
-        ]
+        }
+        """
 
         do {
-            _ = try batchElement.response(from: responseObject)
+            _ = try batchElement.response(from: responseObject.data(using: .utf8)!)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
@@ -399,23 +464,26 @@ class BatchElementTests: XCTestCase {
     }
 
     func testResponseFromArraymissingBothResultAndError() {
-        let request = TestRequest(method: "method", parameters: nil)
+        let request = TestRequestStringDict(method: "method", parameters: nil)
         let batchElement = BatchElement(request: request, version: "2.0", id: Id.number(1))
 
-        let responseArray: [Any] = [
-            [
+        let responseArray =
+        """
+        [
+            {
                 "id": 1,
                 "jsonrpc": "2.0",
-            ],
-            [
+            },
+            {
                 "id": 2,
                 "jsonrpc": "2.0",
-                "result": [:],
-            ]
+                "result": {},
+            }
         ]
+        """
 
         do {
-            _ = try batchElement.response(from: responseArray)
+            _ = try batchElement.response(fromArray: responseArray.data(using: .utf8)!)
             XCTFail()
         } catch {
             let error = error as? JSONRPCError
