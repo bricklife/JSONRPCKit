@@ -8,10 +8,12 @@
 
 import Foundation
 
+/// An empty reply to signify notification.
+/// Could be changed to Never in swift 4.2 when Never starts to conform to Codable
 public struct NoReply: Decodable {}
 
 public protocol Request {
-    /// If `Response == Void`, request is treated as a notification.
+    /// If `Response == NoReply`, request is treated as a notification.
     associatedtype Response: Decodable
     
     var method: String { get }

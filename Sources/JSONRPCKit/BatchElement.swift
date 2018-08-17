@@ -179,7 +179,23 @@ private struct JSONRPCErrorResponse: Decodable {
 }
 
 internal extension BatchElementProcotol where Request.Response == NoReply {
+    /// - Throws: JSONRPCError
+    internal func response(from data: Data) throws -> Request.Response {
+        return NoReply()
+    }
 
+    /// - Throws: JSONRPCError
+    internal func response(fromArray data: Data) throws -> Request.Response {
+        return NoReply()
+    }
+
+    internal func result(from data: Data) -> Result<Request.Response, JSONRPCError> {
+        return .success(NoReply())
+    }
+
+    internal func result(fromArray data: Data) -> Result<Request.Response, JSONRPCError> {
+        return .success(NoReply())
+    }
 }
 
 public struct BatchElement<Request: JSONRPCKit.Request>: BatchElementProcotol {
