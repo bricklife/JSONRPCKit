@@ -30,11 +30,16 @@ struct MathServiceRequest<Batch: JSONRPCKit.Batch>: APIKit.Request {
     }
 
     var parameters: Any? {
-        return batch.requestObject
+        let encoder = JSONEncoder()
+        guard let data = try? encoder.encode(batch) else {
+            return nil
+        }
+        return try? JSONSerialization.jsonObject(with: data, options: [])
     }
 
     func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Response {
-        return try batch.responses(from: object)
+        let jsonData = try JSONSerialization.data(withJSONObject:object)
+        return try batch.responses(from: jsonData)
     }
 }
 
@@ -53,16 +58,8 @@ struct Subtract: JSONRPCKit.Request {
         return "subtract"
     }
 
-    var parameters: Any? {
+    var parameters: Encodable? {
         return [minuend, subtrahend]
-    }
-
-    func response(from resultObject: Any) throws -> Response {
-        if let response = resultObject as? Response {
-            return response
-        } else {
-            throw CastError(actualValue: resultObject, expectedType: Response.self)
-        }
     }
 }
 
@@ -76,17 +73,10 @@ struct Multiply: JSONRPCKit.Request {
         return "multiply"
     }
     
-    var parameters: Any? {
+    var parameters: Encodable? {
         return [multiplicand, multiplier]
     }
-    
-    func response(from resultObject: Any) throws -> Response {
-        if let response = resultObject as? Response {
-            return response
-        } else {
-            throw CastError(actualValue: resultObject, expectedType: Response.self)
-        }
-    }
+
 }
 
 struct Divide: JSONRPCKit.Request {
@@ -99,15 +89,7 @@ struct Divide: JSONRPCKit.Request {
         return "divide"
     }
     
-    var parameters: Any? {
+    var parameters: Encodable? {
         return [dividend, divisor]
-    }
-    
-    func response(from resultObject: Any) throws -> Response {
-        if let response = resultObject as? Response {
-            return response
-        } else {
-            throw CastError(actualValue: resultObject, expectedType: Response.self)
-        }
     }
 }
