@@ -12,7 +12,7 @@ import Result
 internal protocol BatchElementProcotol: Encodable {
     associatedtype Request: JSONRPCKit.Request
 
-    var decoder: JSONDecoder { get set }
+    var decoder: DecoderType { get set }
     var request: Request { get }
     var version: String { get }
     var id: Id? { get }
@@ -199,7 +199,7 @@ internal extension BatchElementProcotol where Request.Response == NoReply {
 }
 
 public struct BatchElement<Request: JSONRPCKit.Request>: BatchElementProcotol {
-    var decoder: JSONDecoder = JSONDecoder()
+    var decoder: DecoderType = JSONDecoder()
 
     public let request: Request
     public let version: String
