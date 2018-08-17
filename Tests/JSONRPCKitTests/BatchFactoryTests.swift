@@ -39,6 +39,34 @@ class BatchFactoryTests: XCTestCase {
         XCTAssertEqual(batch.batchElement.id?.value as? Int, 1)
     }
 
+    func testEncode() {
+        let request = TestRequest(method: "method", parameters: ["key": "value"])
+        let request2 = TestRequest(method: "method2", parameters: ["key2": "value2"])
+
+        let batch = batchFactory.create(request, request2)
+
+        let encoder = JSONEncoder()
+        guard let data = try? encoder.encode(batch) else {
+            XCTFail()
+            return
+        }
+        let jsonString = String(data: data, encoding: .utf8)
+        XCTAssertEqual(jsonString, "[{\"id\":1,\"jsonrpc\":\"2.0\",\"method\":\"method\",\"params\":{\"key\":\"value\"}},{\"id\":2,\"jsonrpc\":\"2.0\",\"method\":\"method2\",\"params\":{\"key2\":\"value2\"}}]")
+    }
+
+    func testEncode2() {
+        let request = TestRequest(method: "method", parameters: ["key": "value"])
+        let batch = batchFactory.create(request)
+
+        let encoder = JSONEncoder()
+        guard let data = try? encoder.encode(batch) else {
+            XCTFail()
+            return
+        }
+        let jsonString = String(data: data, encoding: .utf8)
+        XCTAssertEqual(jsonString, "{\"id\":1,\"jsonrpc\":\"2.0\",\"method\":\"method\",\"params\":{\"key\":\"value\"}}")
+    }
+
     func test2() {
         let request1 = TestRequest(method: "method1", parameters: ["key1": "value1"])
         let request2 = TestRequest(method: "method2", parameters: ["key2": "value2"])
