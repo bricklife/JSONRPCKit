@@ -8,39 +8,23 @@
 
 import Foundation
 
+/// Errors that the JSONRPCKit throws
+///
+/// - responseError: Response had an error message with it. Data is a Decoder. Use singleValueContainer() to decode it if you want.
+/// - responseNotFound: Response was not found
+/// - responseParseError: Response could not be parsed. Decoding error is contained
+/// - resultObjectParseError: Result object could not be parsed.
+/// - errorObjectParseError: Error object could not be parsed.
+/// - unsupportedVersion: Version is unsupported
+/// - missingBothResultAndError: Result and Error are missing.
 public enum JSONRPCError: Error {
-    case responseError(code: Int, message: String, data: Any?)
-    case responseNotFound(requestId: Id?, object: Any)
+    case responseError(code: Int, message: String, data: Decoder)
+    case responseNotFound(requestId: Id?)
+    case responseParseError(Error)
     case resultObjectParseError(Error)
     case errorObjectParseError(Error)
     case unsupportedVersion(String?)
-    case unexpectedTypeObject(Any)
-    case missingBothResultAndError(Any)
-    case nonArrayResponse(Any)
-
-    public init(errorObject: Any) {
-        enum ParseError: Error {
-            case nonDictionaryObject(object: Any)
-            case missingKey(key: String, errorObject: Any)
-        }
-
-        do {
-            guard let dictionary = errorObject as? [String: Any] else {
-                throw ParseError.nonDictionaryObject(object: errorObject)
-            }
-            
-            guard let code = dictionary["code"] as? Int else {
-                throw ParseError.missingKey(key: "code", errorObject: errorObject)
-            }
-
-            guard let message = dictionary["message"] as? String else {
-                throw ParseError.missingKey(key: "message", errorObject: errorObject)
-            }
-
-            self = .responseError(code: code, message: message, data: dictionary["data"])
-        } catch {
-            self = .errorObjectParseError(error)
-        }
-    }
+    case missingBothResultAndError
 }
+
 

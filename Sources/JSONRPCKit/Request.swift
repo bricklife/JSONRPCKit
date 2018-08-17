@@ -8,16 +8,17 @@
 
 import Foundation
 
+public struct NoReply: Decodable {}
+
 public protocol Request {
     /// If `Response == Void`, request is treated as a notification.
-    associatedtype Response
+    associatedtype Response: Decodable
     
     var method: String { get }
-    var parameters: Any? { get }
-    var extendedFields: [String: Any]? { get }
+    var parameters: Encodable? { get }
+    var extendedFields: Encodable? { get }
     var isNotification: Bool { get }
     
-    func response(from resultObject: Any) throws -> Response
 }
 
 public extension Request {
@@ -25,7 +26,7 @@ public extension Request {
         return nil
     }
 
-    public var extendedFields: [String: Any]? {
+    public var extendedFields: Encodable? {
         return nil
     }
 
@@ -34,12 +35,8 @@ public extension Request {
     }
 }
 
-public extension Request where Response == Void {
+public extension Request where Response == NoReply {
     public var isNotification: Bool {
         return true
-    }
-
-    public func response(from resultObject: Any) throws -> Response {
-        return ()
     }
 }

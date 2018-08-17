@@ -48,6 +48,27 @@ extension Id: Hashable {
     }
 }
 
+extension Id: Codable {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let value = try? container.decode(Int.self) {
+            self = .number(value)
+        } else {
+            self = .string(try container.decode(String.self))
+        }
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case .number(let value):
+            try container.encode(value)
+        case .string(let value):
+            try container.encode(value)
+        }
+    }
+}
+
 public func ==(lhs: Id, rhs: Id) -> Bool {
     if case let (.number(left), .number(right)) = (lhs, rhs) {
         return left == right
