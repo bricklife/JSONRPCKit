@@ -39,7 +39,7 @@ class BatchFactoryTests: XCTestCase {
         XCTAssertEqual(batch.batchElement.id?.value as? Int, 1)
     }
 
-    func testEncode() {
+    func testEncode1() {
         let request = TestRequest(method: "method", parameters: ["key": "value"])
         let request2 = TestRequest(method: "method2", parameters: ["key2": "value2"])
 
@@ -186,10 +186,13 @@ class BatchFactoryTests: XCTestCase {
 
     static var allTests = [
         ("test1", test1),
+        ("testEncode1", testEncode1),
+        ("testEncode2", testEncode2),
         ("test2", test2),
         ("test3", test3),
         ("test4", test4),
         ("test5", test5),
+        ("test5Response", test5Response),
         ("testThreadSafety", testThreadSafety),
     ]
 }

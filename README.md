@@ -62,6 +62,21 @@ struct Subtract: JSONRPCKit.Request {
 }
 ```
 
+##### Tip
+If your parameters are not the same type 
+ 
+```swift
+    var parameters: Encodable? {
+        return [42, "Answer to the question"]
+    }
+```
+you can use the included type erasure wrapper `AnyEncodable`:
+
+```swift
+    var parameters: Encodable? {
+        return [AnyEncodable(42), AnyEncodable("Answer to the question")]
+    }
+```
 
 ### Generating request JSON
 
