@@ -14,8 +14,6 @@ public protocol DecoderType {
 }
 
 extension JSONDecoder: DecoderType { }
-extension PropertyListDecoder: DecoderType { }
-
 
 public protocol Batch: Encodable {
     associatedtype Responses
