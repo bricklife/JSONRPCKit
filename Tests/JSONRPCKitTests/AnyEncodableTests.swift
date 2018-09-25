@@ -47,14 +47,14 @@ class AnyEncodableTests: XCTestCase {
 
         let encoder = JSONEncoder()
         let formatter = DateFormatter()
-        formatter.dateStyle = .short
+        formatter.dateFormat = "yyyy-MM-dd"
         formatter.locale = Locale(identifier: "fi_FI")
         encoder.dateEncodingStrategy = .formatted(formatter)
 
         let data = try? encoder.encode(array)
 
         let json = String(data: data ?? Data(), encoding: .utf8)
-        XCTAssertEqual(json, "[\"1.1.1970\",\"date\"]")
+        XCTAssertEqual(json, "[\"1970-01-01\",\"date\"]")
     }
 
     static var allTests = [

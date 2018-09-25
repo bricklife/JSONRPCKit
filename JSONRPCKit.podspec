@@ -1,8 +1,8 @@
 Pod::Spec.new do |s|
   s.name     = "JSONRPCKit"
-  s.version  = "3.0.0"
+  s.version  = "4.0.0"
   s.summary  = "JSONRPCKit is a JSON-RPC 2.0 library purely written in Swift."
-  s.homepage = "https://github.com/bricklife/JSONRPCKit"
+  s.homepage = "https://github.com/ollitapa/JSONRPCKit"
 
   s.author = {
       "Shinichiro Oba" => "ooba@bricklife.com"
@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
 
   s.source_files = "Sources/JSONRPCKit/*.{swift,h,m}"
   s.source = {
-      :git => "https://github.com/bricklife/JSONRPCKit.git",
+      :git => "https://github.com/ollitapa/JSONRPCKit.git",
       :tag => "#{s.version}",
   }
 
@@ -28,6 +28,6 @@ Pod::Spec.new do |s|
       THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     LICENSE
   }
-  s.dependency "Result", "~> 3.2.0"
+  s.dependency "Result", "~> 4.0.0"
 
 end
