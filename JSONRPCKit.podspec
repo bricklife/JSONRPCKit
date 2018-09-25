@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
   s.name     = "JSONRPCKit"
   s.version  = "4.0.0"
   s.summary  = "JSONRPCKit is a JSON-RPC 2.0 library purely written in Swift."
-  s.homepage = "https://github.com/bricklife/JSONRPCKit"
+  s.homepage = "https://github.com/ollitapa/JSONRPCKit"
 
   s.author = {
       "Shinichiro Oba" => "ooba@bricklife.com"
@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
 
   s.source_files = "Sources/JSONRPCKit/*.{swift,h,m}"
   s.source = {
-      :git => "https://github.com/bricklife/JSONRPCKit.git",
+      :git => "https://github.com/ollitapa/JSONRPCKit.git",
       :tag => "#{s.version}",
   }
 
