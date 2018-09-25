@@ -51,7 +51,14 @@ class BatchFactoryTests: XCTestCase {
             return
         }
         let jsonString = String(data: data, encoding: .utf8)
-        XCTAssertEqual(jsonString, "[{\"id\":1,\"jsonrpc\":\"2.0\",\"method\":\"method\",\"params\":{\"key\":\"value\"}},{\"id\":2,\"jsonrpc\":\"2.0\",\"method\":\"method2\",\"params\":{\"key2\":\"value2\"}}]")
+
+        XCTAssertTrue(jsonString?.contains("\"id\":1") ?? false)
+        XCTAssertTrue(jsonString?.contains("\"jsonrpc\":\"2.0\"") ?? false)
+        XCTAssertTrue(jsonString?.contains("\"method\":\"method\"") ?? false)
+        XCTAssertTrue(jsonString?.contains("\"params\":{\"key\":\"value\"}") ?? false)
+        XCTAssertTrue(jsonString?.contains("\"id\":2") ?? false)
+        XCTAssertTrue(jsonString?.contains("\"method\":\"method2\"") ?? false)
+        XCTAssertTrue(jsonString?.contains("\"params\":{\"key2\":\"value2\"}") ?? false)
     }
 
     func testEncode2() {
@@ -64,7 +71,10 @@ class BatchFactoryTests: XCTestCase {
             return
         }
         let jsonString = String(data: data, encoding: .utf8)
-        XCTAssertEqual(jsonString, "{\"id\":1,\"jsonrpc\":\"2.0\",\"method\":\"method\",\"params\":{\"key\":\"value\"}}")
+        XCTAssertTrue(jsonString?.contains("\"id\":1") ?? false)
+        XCTAssertTrue(jsonString?.contains("\"jsonrpc\":\"2.0\"") ?? false)
+        XCTAssertTrue(jsonString?.contains("\"method\":\"method\"") ?? false)
+        XCTAssertTrue(jsonString?.contains("\"params\":{\"key\":\"value\"}") ?? false)
     }
 
     func test2() {
