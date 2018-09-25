@@ -19,6 +19,7 @@ matrix:
         - xcodebuild build-for-testing test-without-building -workspace JSONRPCKit.xcworkspace -scheme JSONRPCKit -sdk iphonesimulator -destination "name=iPhone SE" | xcpretty -c
         - xcodebuild build-for-testing test-without-building -workspace JSONRPCKit.xcworkspace -scheme JSONRPCKit -sdk appletvsimulator -destination "name=Apple TV 1080p" | xcpretty -c
         - xcodebuild build -workspace JSONRPCKit.xcworkspace -scheme JSONRPCKit -sdk watchsimulator | xcpretty -c
+        - gem install cocoapods --pre
         - pod lib lint
     - os: osx
       osx_image: xcode10
