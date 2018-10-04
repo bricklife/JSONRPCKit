@@ -17,11 +17,30 @@ matrix:
         - set -o pipefail
         - xcodebuild build-for-testing test-without-building -workspace JSONRPCKit.xcworkspace -scheme JSONRPCKit | xcpretty -c
         - xcodebuild build-for-testing test-without-building -workspace JSONRPCKit.xcworkspace -scheme JSONRPCKit -sdk iphonesimulator -destination "name=iPhone SE" | xcpretty -c
-        - xcodebuild build-for-testing test-without-building -workspace JSONRPCKit.xcworkspace -scheme JSONRPCKit -sdk appletvsimulator -destination "name=Apple TV 1080p" | xcpretty -c
+        - xcodebuild build-for-testing test-without-building -workspace JSONRPCKit.xcworkspace -scheme JSONRPCKit -sdk appletvsimulator -destination "name=Apple TV 4K (at 1080p)" | xcpretty -c
         - xcodebuild build -workspace JSONRPCKit.xcworkspace -scheme JSONRPCKit -sdk watchsimulator | xcpretty -c
-        - pod lib lint
+    - os: osx
+      osx_image: xcode10
+      language: objective-c
+      env:
+        - JOB=Xcode
+      script:
+        - set -o pipefail
+        - xcodebuild build-for-testing test-without-building -workspace JSONRPCKit.xcworkspace -scheme JSONRPCKit | xcpretty -c
+        - xcodebuild build-for-testing test-without-building -workspace JSONRPCKit.xcworkspace -scheme JSONRPCKit -sdk iphonesimulator -destination "name=iPhone SE" | xcpretty -c
+        - xcodebuild build-for-testing test-without-building -workspace JSONRPCKit.xcworkspace -scheme JSONRPCKit -sdk appletvsimulator -destination "name=Apple TV 4K (at 1080p)" | xcpretty -c
+        - xcodebuild build -workspace JSONRPCKit.xcworkspace -scheme JSONRPCKit -sdk watchsimulator | xcpretty -c
     - os: osx
       osx_image: xcode9
+      language: generic
+      env:
+        - JOB=SPM
+      script:
+        - swift --version
+        - swift build
+        - swift test
+    - os: osx
+      osx_image: xcode10
       language: generic
       env:
         - JOB=SPM
@@ -34,6 +53,19 @@ matrix:
       env:
         - JOB=Linux
         - SWIFT_VERSION=4.0.3
+      script:
+        - swift --version
+        - swift build
+        - swift test
+      sudo: required
+      dist: trusty
+      install:
+        - eval "$(curl -sL https://gist.githubusercontent.com/kylef/5c0475ff02b7c7671d2a/raw/9f442512a46d7a2af7b850d65a7e9bd31edfb09b/swiftenv-install.sh)"
+    - os: linux
+      language: generic
+      env:
+        - JOB=Linux
+        - SWIFT_VERSION=4.2
       script:
         - swift --version
         - swift build

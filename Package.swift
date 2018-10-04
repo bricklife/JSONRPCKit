@@ -9,7 +9,7 @@ let package = Package(
         .library(name: "JSONRPCKit", targets: ["JSONRPCKit"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/antitypical/Result.git", from: "3.2.0"),
+        .package(url: "https://github.com/antitypical/Result.git", from: "4.0.0"),
     ],
     targets: [
         .target(name: "JSONRPCKit", dependencies: ["Result"]),
