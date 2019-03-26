@@ -37,15 +37,7 @@ extension Id {
 }
 
 extension Id: Hashable {
-    
-    public var hashValue: Int {
-        switch self {
-        case .number(let number):
-            return number
-        case .string(let string):
-            return string.hashValue
-        }
-    }
+
 }
 
 extension Id: Codable {
