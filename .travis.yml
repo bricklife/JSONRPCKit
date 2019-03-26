@@ -9,7 +9,7 @@ branches:
 matrix:
   include:
     - os: osx
-      osx_image: xcode10
+      osx_image: xcode10.2
       language: objective-c
       env:
         - JOB=Xcode
@@ -22,7 +22,7 @@ matrix:
         - gem install cocoapods --pre
         - pod lib lint
     - os: osx
-      osx_image: xcode10
+      osx_image: xcode10.2
       language: generic
       env:
         - JOB=SPM
@@ -34,7 +34,7 @@ matrix:
       language: generic
       env:
         - JOB=Linux
-        - SWIFT_VERSION=4.2
+        - SWIFT_VERSION=5.0
       script:
         - swift --version
         - swift build
