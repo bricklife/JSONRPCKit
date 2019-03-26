@@ -146,7 +146,7 @@ class BatchElementTests: XCTestCase {
 
                 let container = try? data.singleValueContainer()
                 let dataDict = try? container?.decode(Dictionary<String, String>.self)
-                XCTAssertEqual(dataDict??["key"], "value")
+                XCTAssertEqual(dataDict?["key"], "value")
             } else {
                 XCTFail()
             }
@@ -189,7 +189,7 @@ class BatchElementTests: XCTestCase {
                 XCTAssertEqual(message, "abc")
                 let container = try? data.singleValueContainer()
                 let dataDict = try? container?.decode(Dictionary<String, String>.self)
-                XCTAssertEqual(dataDict??["key"], "value")
+                XCTAssertEqual(dataDict?["key"], "value")
             } else {
                 XCTFail()
             }

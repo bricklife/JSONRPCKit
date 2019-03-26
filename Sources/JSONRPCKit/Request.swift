@@ -24,21 +24,21 @@ public protocol Request {
 }
 
 public extension Request {
-    public var parameters: Any? {
+    var parameters: Any? {
         return nil
     }
 
-    public var extendedFields: Encodable? {
+    var extendedFields: Encodable? {
         return nil
     }
 
-    public var isNotification: Bool {
+    var isNotification: Bool {
         return false
     }
 }
 
 public extension Request where Response == NoReply {
-    public var isNotification: Bool {
+    var isNotification: Bool {
         return true
     }
 }

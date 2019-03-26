@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Result
 
 internal protocol BatchElementProcotol: Encodable {
     associatedtype Request: JSONRPCKit.Request
@@ -20,7 +19,7 @@ internal protocol BatchElementProcotol: Encodable {
 
 internal extension BatchElementProcotol {
     /// - Throws: JSONRPCError
-    internal func response(from data: Data) throws -> Request.Response {
+    func response(from data: Data) throws -> Request.Response {
         switch result(from: data) {
         case .success(let response):
             return response
@@ -30,7 +29,7 @@ internal extension BatchElementProcotol {
     }
 
     /// - Throws: JSONRPCError
-    internal func response(fromArray data: Data) throws -> Request.Response {
+    func response(fromArray data: Data) throws -> Request.Response {
         switch result(fromArray: data) {
         case .success(let response):
             return response
@@ -39,7 +38,7 @@ internal extension BatchElementProcotol {
         }
     }
 
-    internal func result(from data: Data) -> Result<Request.Response, JSONRPCError> {
+    func result(from data: Data) -> Result<Request.Response, JSONRPCError> {
 
         var response: JSONRPCResponseResult<Request.Response>
         do {
@@ -53,7 +52,7 @@ internal extension BatchElementProcotol {
         return result(from: response)
     }
 
-    internal func result(fromArray data: Data) -> Result<Request.Response, JSONRPCError> {
+    func result(fromArray data: Data) -> Result<Request.Response, JSONRPCError> {
 
         let decoder = JSONDecoder()
 
@@ -180,20 +179,20 @@ private struct JSONRPCErrorResponse: Decodable {
 
 internal extension BatchElementProcotol where Request.Response == NoReply {
     /// - Throws: JSONRPCError
-    internal func response(from data: Data) throws -> Request.Response {
+    func response(from data: Data) throws -> Request.Response {
         return NoReply()
     }
 
     /// - Throws: JSONRPCError
-    internal func response(fromArray data: Data) throws -> Request.Response {
+    func response(fromArray data: Data) throws -> Request.Response {
         return NoReply()
     }
 
-    internal func result(from data: Data) -> Result<Request.Response, JSONRPCError> {
+    func result(from data: Data) -> Result<Request.Response, JSONRPCError> {
         return .success(NoReply())
     }
 
-    internal func result(fromArray data: Data) -> Result<Request.Response, JSONRPCError> {
+    func result(fromArray data: Data) -> Result<Request.Response, JSONRPCError> {
         return .success(NoReply())
     }
 }

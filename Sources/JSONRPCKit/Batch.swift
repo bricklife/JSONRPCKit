@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Result
 
 public protocol DecoderType {
     func decode<T: Decodable >(_ type: T.Type, from data: Data) throws -> T
@@ -51,7 +50,7 @@ public struct Batch1<Request: JSONRPCKit.Request>: Batch {
     }
 
     public static func responses(from results: Results) throws -> Responses {
-        return try results.dematerialize()
+        return try results.get()
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -95,8 +94,8 @@ public struct Batch2<Request1: Request, Request2: Request>: Batch {
 
     public static func responses(from results: Results) throws -> Responses {
         return (
-            try results.0.dematerialize(),
-            try results.1.dematerialize()
+            try results.0.get(),
+            try results.1.get()
         )
     }
 
@@ -147,9 +146,9 @@ public struct Batch3<Request1: Request, Request2: Request, Request3: Request>: B
 
     public static func responses(from results: Results) throws -> Responses {
         return (
-            try results.0.dematerialize(),
-            try results.1.dematerialize(),
-            try results.2.dematerialize()
+            try results.0.get(),
+            try results.1.get(),
+            try results.2.get()
         )
     }
 
@@ -206,10 +205,10 @@ public struct Batch4<Request1: Request, Request2: Request, Request3: Request, Re
 
     public static func responses(from results: Results) throws -> Responses {
         return (
-            try results.0.dematerialize(),
-            try results.1.dematerialize(),
-            try results.2.dematerialize(),
-            try results.3.dematerialize()
+            try results.0.get(),
+            try results.1.get(),
+            try results.2.get(),
+            try results.3.get()
         )
     }
 
@@ -273,11 +272,11 @@ public struct Batch5<Request1: Request, Request2: Request, Request3: Request, Re
 
     public static func responses(from results: Results) throws -> Responses {
         return (
-            try results.0.dematerialize(),
-            try results.1.dematerialize(),
-            try results.2.dematerialize(),
-            try results.3.dematerialize(),
-            try results.4.dematerialize()
+            try results.0.get(),
+            try results.1.get(),
+            try results.2.get(),
+            try results.3.get(),
+            try results.4.get()
         )
     }
 
@@ -347,12 +346,12 @@ public struct Batch6<Request1: Request, Request2: Request, Request3: Request, Re
 
     public static func responses(from results: Results) throws -> Responses {
         return (
-            try results.0.dematerialize(),
-            try results.1.dematerialize(),
-            try results.2.dematerialize(),
-            try results.3.dematerialize(),
-            try results.4.dematerialize(),
-            try results.5.dematerialize()
+            try results.0.get(),
+            try results.1.get(),
+            try results.2.get(),
+            try results.3.get(),
+            try results.4.get(),
+            try results.5.get()
         )
     }
 
