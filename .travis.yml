@@ -8,28 +8,6 @@ branches:
 
 matrix:
   include:
-    - os: osx
-      osx_image: xcode10.2
-      language: objective-c
-      env:
-        - JOB=Xcode
-      script:
-        - set -o pipefail
-        - xcodebuild build-for-testing test-without-building -workspace JSONRPCKit.xcworkspace -scheme JSONRPCKit | xcpretty -c
-        - xcodebuild build-for-testing test-without-building -workspace JSONRPCKit.xcworkspace -scheme JSONRPCKit -sdk iphonesimulator -destination "name=iPhone SE" | xcpretty -c
-        - xcodebuild build-for-testing test-without-building -workspace JSONRPCKit.xcworkspace -scheme JSONRPCKit -sdk appletvsimulator -destination "name=Apple TV" | xcpretty -c
-        - xcodebuild build -workspace JSONRPCKit.xcworkspace -scheme JSONRPCKit -sdk watchsimulator | xcpretty -c
-        - gem install cocoapods --pre
-        - pod lib lint
-    - os: osx
-      osx_image: xcode10.2
-      language: generic
-      env:
-        - JOB=SPM
-      script:
-        - swift --version
-        - swift build
-        - swift test
     - os: linux
       language: generic
       env:
