@@ -36,3 +36,5 @@ Example/Carthage/Build
 .build
 
 *.DS_Store
+
+JSONRPCKit\.framework\.zip
