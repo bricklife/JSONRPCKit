@@ -38,12 +38,12 @@ extension Id {
 
 extension Id: Hashable {
     
-    public var hashValue: Int {
+    public func hash(into hasher: inout Hasher) {
         switch self {
         case .number(let number):
-            return number
+            hasher.combine(number)
         case .string(let string):
-            return string.hashValue
+            hasher.combine(string)
         }
     }
 }

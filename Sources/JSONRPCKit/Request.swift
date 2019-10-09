@@ -21,25 +21,25 @@ public protocol Request {
 }
 
 public extension Request {
-    public var parameters: Any? {
+    var parameters: Any? {
         return nil
     }
 
-    public var extendedFields: [String: Any]? {
+    var extendedFields: [String: Any]? {
         return nil
     }
 
-    public var isNotification: Bool {
+    var isNotification: Bool {
         return false
     }
 }
 
 public extension Request where Response == Void {
-    public var isNotification: Bool {
+    var isNotification: Bool {
         return true
     }
 
-    public func response(from resultObject: Any) throws -> Response {
+    func response(from resultObject: Any) throws -> Response {
         return ()
     }
 }
