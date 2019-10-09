@@ -15,6 +15,8 @@ matrix:
         - JOB=Xcode
       script:
         - set -o pipefail
+        - brew install carthage
+        - carthage update --no-use-binaries --platform ios
         - xcodebuild build-for-testing test-without-building -workspace JSONRPCKit.xcworkspace -scheme JSONRPCKit | xcpretty -c
         - xcodebuild build-for-testing test-without-building -workspace JSONRPCKit.xcworkspace -scheme JSONRPCKit -sdk iphonesimulator -destination "name=iPhone SE" | xcpretty -c
         - xcodebuild build-for-testing test-without-building -workspace JSONRPCKit.xcworkspace -scheme JSONRPCKit -sdk appletvsimulator -destination "name=Apple TV 1080p" | xcpretty -c
