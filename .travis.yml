@@ -15,11 +15,10 @@ matrix:
         - JOB=Xcode
       script:
         - set -o pipefail
-        - brew install carthage
         - carthage update --no-use-binaries --platform ios
         - xcodebuild build-for-testing test-without-building -workspace JSONRPCKit.xcworkspace -scheme JSONRPCKit | xcpretty -c
-        - xcodebuild build-for-testing test-without-building -workspace JSONRPCKit.xcworkspace -scheme JSONRPCKit -sdk iphonesimulator -destination "name=iPhone SE" | xcpretty -c
-        - xcodebuild build-for-testing test-without-building -workspace JSONRPCKit.xcworkspace -scheme JSONRPCKit -sdk appletvsimulator -destination "name=Apple TV 1080p" | xcpretty -c
+        - xcodebuild build-for-testing test-without-building -workspace JSONRPCKit.xcworkspace -scheme JSONRPCKit -sdk iphonesimulator -destination "platform:iOS Simulator, id:6BDC8C76-0150-4996-9EF0-0AD5E06B45B8, OS:12.2, name:iPhone X" | xcpretty -c
+        - xcodebuild build-for-testing test-without-building -workspace JSONRPCKit.xcworkspace -scheme JSONRPCKit -sdk appletvsimulator -destination "platform:tvOS Simulator, id:DF9803E1-42F1-40EC-9BB5-076173CD4E1E, OS:10.2, name:Apple TV 1080p" | xcpretty -c
         - xcodebuild build -workspace JSONRPCKit.xcworkspace -scheme JSONRPCKit -sdk watchsimulator | xcpretty -c
         - pod lib lint
     - os: osx
@@ -28,6 +27,7 @@ matrix:
       env:
         - JOB=SPM
       script:
+        - carthage update --no-use-binaries --platform ios
         - swift --version
         - swift build
         - swift test
