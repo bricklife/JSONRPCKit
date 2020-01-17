@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'JSONRPCKit'
-  s.version  = '4.1.0'
+  s.version  = '4.1.5'
   s.summary  = 'JSONRPCKit is a JSON-RPC 2.0 library purely written in Swift.'
   s.homepage = 'https://github.com/ollitapa/JSONRPCKit'
 
