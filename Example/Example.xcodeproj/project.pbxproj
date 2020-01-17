@@ -3,14 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		7FD0A3431D4B5E80007C9EAB /* UIViewController+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0A3421D4B5E80007C9EAB /* UIViewController+Error.swift */; };
-		B5E877B3224A3E4200334CB7 /* APIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5E877B2224A3E4200334CB7 /* APIKit.framework */; };
+		B586C47B23D1B328004E39E5 /* JSONRPCKit in Frameworks */ = {isa = PBXBuildFile; productRef = B586C47A23D1B328004E39E5 /* JSONRPCKit */; };
+		B59B7AB823D1B1F10084399A /* APIKit in Frameworks */ = {isa = PBXBuildFile; productRef = B59B7AB723D1B1F10084399A /* APIKit */; };
 		B5E877B7224A43B500334CB7 /* Example.md in Resources */ = {isa = PBXBuildFile; fileRef = B5E877B6224A43B500334CB7 /* Example.md */; };
-		B5E877B9224A447500334CB7 /* JSONRPCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5E877B8224A447500334CB7 /* JSONRPCKit.framework */; };
 		CB63E2471CE2309100E22B5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB63E2461CE2309100E22B5C /* AppDelegate.swift */; };
 		CB63E24C1CE2309100E22B5C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB63E24A1CE2309100E22B5C /* Main.storyboard */; };
 		CB63E24E1CE2309100E22B5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB63E24D1CE2309100E22B5C /* Assets.xcassets */; };
@@ -20,24 +20,10 @@
 		CB63E25D1CE230E300E22B5C /* BatchRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB63E25A1CE230E300E22B5C /* BatchRequestViewController.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		CB31EFAF1CF6E84400DD13DD /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		7FD0A3421D4B5E80007C9EAB /* UIViewController+Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Error.swift"; sourceTree = "<group>"; };
-		B5E877B2224A3E4200334CB7 /* APIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = APIKit.framework; path = Carthage/Build/iOS/APIKit.framework; sourceTree = "<group>"; };
+		B586C47923D1B2F2004E39E5 /* JSONRPCKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = JSONRPCKit; path = ..; sourceTree = "<group>"; };
 		B5E877B6224A43B500334CB7 /* Example.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = Example.md; path = Example/Example.md; sourceTree = "<group>"; };
-		B5E877B8224A447500334CB7 /* JSONRPCKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = JSONRPCKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB63E2431CE2309100E22B5C /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB63E2461CE2309100E22B5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CB63E24B1CE2309100E22B5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -54,8 +40,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5E877B3224A3E4200334CB7 /* APIKit.framework in Frameworks */,
-				B5E877B9224A447500334CB7 /* JSONRPCKit.framework in Frameworks */,
+				B59B7AB823D1B1F10084399A /* APIKit in Frameworks */,
+				B586C47B23D1B328004E39E5 /* JSONRPCKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +51,7 @@
 		CB63E23A1CE2309100E22B5C = {
 			isa = PBXGroup;
 			children = (
+				B586C47923D1B2F2004E39E5 /* JSONRPCKit */,
 				B5E877B6224A43B500334CB7 /* Example.md */,
 				CB63E2451CE2309100E22B5C /* Example */,
 				CB63E2441CE2309100E22B5C /* Products */,
@@ -99,8 +86,6 @@
 		CB63E26E1CE232C700E22B5C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B5E877B2224A3E4200334CB7 /* APIKit.framework */,
-				B5E877B8224A447500334CB7 /* JSONRPCKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -115,14 +100,16 @@
 				CB63E23F1CE2309100E22B5C /* Sources */,
 				CB63E2401CE2309100E22B5C /* Frameworks */,
 				CB63E2411CE2309100E22B5C /* Resources */,
-				CB31EFAF1CF6E84400DD13DD /* Embed Frameworks */,
-				B5E877B4224A406A00334CB7 /* Carthage */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Example;
+			packageProductDependencies = (
+				B59B7AB723D1B1F10084399A /* APIKit */,
+				B586C47A23D1B328004E39E5 /* JSONRPCKit */,
+			);
 			productName = Example;
 			productReference = CB63E2431CE2309100E22B5C /* Example.app */;
 			productType = "com.apple.product-type.application";
@@ -152,6 +139,9 @@
 				Base,
 			);
 			mainGroup = CB63E23A1CE2309100E22B5C;
+			packageReferences = (
+				B59B7AB623D1B1F10084399A /* XCRemoteSwiftPackageReference "APIKit" */,
+			);
 			productRefGroup = CB63E2441CE2309100E22B5C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -174,31 +164,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		B5E877B4224A406A00334CB7 /* Carthage */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/APIKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
-			);
-			name = Carthage;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/APIKit.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Result.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CB63E23F1CE2309100E22B5C /* Sources */ = {
@@ -338,7 +303,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -349,12 +315,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Example/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bricklife.ios.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -364,12 +330,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Example/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bricklife.ios.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -397,6 +363,29 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B59B7AB623D1B1F10084399A /* XCRemoteSwiftPackageReference "APIKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ishkawa/APIKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B586C47A23D1B328004E39E5 /* JSONRPCKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = JSONRPCKit;
+		};
+		B59B7AB723D1B1F10084399A /* APIKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B59B7AB623D1B1F10084399A /* XCRemoteSwiftPackageReference "APIKit" */;
+			productName = APIKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CB63E23B1CE2309100E22B5C /* Project object */;
 }

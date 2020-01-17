@@ -9,7 +9,6 @@
 import Foundation
 
 /// An empty reply to signify notification.
-/// Could be changed to Never in swift 4.2 when Never starts to conform to Codable
 public struct NoReply: Decodable {}
 
 public protocol Request {
